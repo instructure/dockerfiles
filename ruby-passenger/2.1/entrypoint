@@ -1,0 +1,4 @@
+#!/bin/bash
+
+erb /usr/src/nginx/nginx.conf.erb > /usr/src/nginx/nginx.conf
+exec sudo -E /usr/sbin/nginx -c /usr/src/nginx/nginx.conf
