@@ -10,19 +10,27 @@ RUN  addgroup --gid 9999 docker \
 ## Upgrade all packages
 ## Install common tools
 ENV DEBIAN_FRONTEND=noninteractive
-RUN  apt-get update \
-  && apt-get install -y --no-install-recommends \
-	     apt-transport-https \
-	     ca-certificates \
-	     software-properties-common \
-	     language-pack-en \
-	     locales \
-  && apt-get install -y --no-install-recommends \
-	     curl \
-	     psmisc \
-	     git \
-	     build-essential \
-             python
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    apt-transport-https \
+    ca-certificates \
+    software-properties-common \
+    language-pack-en \
+    locales \
+ && apt-get install -y --no-install-recommends \
+    curl \
+    psmisc \
+    git \
+    build-essential \
+    python \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
+
+## Security updates
+## Remove after ubuntu:trusty gets updated (usn-2815-1)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libpng12-0 \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
 
 ## Add monitoring checks
 RUN mkdir -p /monitoring/sensu/
@@ -34,4 +42,6 @@ RUN locale-gen en_US.UTF-8
 ENV LANG       en_US.UTF-8
 ENV LC_ALL     en_US.UTF-8
 RUN dpkg-reconfigure locales
+
+# Switch to the 'docker' user
 USER docker
