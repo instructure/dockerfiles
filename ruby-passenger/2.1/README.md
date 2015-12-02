@@ -38,14 +38,23 @@ The passenger default is 0. We set a default of 1. You may override this with th
 `PASSENGER_MIN_INSTANCES` variable.
 
 ## main.d (/usr/src/nginx/main.d/*.conf)
-Occasionally you may need to whitelist some ENV variables with NGINX. This
-can now be done by installing a file to `/usr/src/nginx/main.d/`
-Example: env.conf
+Additional global configuration settings can be included in the
+`/usr/src/nginx/main.d/` directory.
+
+### Environment Variables
+One such global configuration that is included by default is a set of
+whitelisted environment variables. As Nginx doesn't pass any non-whitelisted
+environment variables to Passenger, environment variables must be whitelisted
+explicitly. A default set is included in the `/usr/src/nginx/main.d/env.conf`
+file (i.e. `PATH`, `GEM_HOME`, `SECRET_KEY_BASE`, etc).
+
+This file may be overwritten or additional environment variables may be
+included in a separate global configuration file.
+
+Example: `extra_env.conf`:
 ```
-env SECRET_TOKEN;
 env ENCRYPTION_KEY;
-env RAILS_ENV;
-env PASSENGER_APP_ENV;
+env OTHER_VAR
 ```
 
 ## conf.d (/usr/src/nginx/conf.d/*.conf;)

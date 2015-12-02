@@ -3,7 +3,7 @@ MAINTAINER Instructure
 
 USER root
 
-#Install Instructure Nginx with Passenger from official repository
+#Install Nginx with Passenger from official repository
 RUN  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CAC40B2F7 \
   && apt-get install -y apt-transport-https ca-certificates \
   && sh -c 'echo deb https://oss-binaries.phusionpassenger.com/apt/passenger trusty main > /etc/apt/sources.list.d/passenger.list' \
@@ -12,8 +12,8 @@ RUN  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CA
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+COPY main.d/* /usr/src/nginx/main.d/
 RUN  echo 'docker ALL=(ALL) NOPASSWD: SETENV: /usr/sbin/nginx' >> /etc/sudoers \
-  && mkdir -p /usr/src/nginx/main.d \
   && mkdir -p /usr/src/nginx/conf.d \
   && mkdir -p /usr/src/nginx/location.d \
   && chown docker:docker /usr/src/nginx
