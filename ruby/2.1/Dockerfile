@@ -37,7 +37,7 @@ RUN  apt-get update \
   && rm -rf /var/lib/apt/lists/*
 USER docker
 RUN echo 'gem: --no-rdoc --no-ri' >> /home/docker/.gemrc
-ENV GEM_HOME /home/docker/bundle
+ENV GEM_HOME /home/docker/.gem/ruby/2.1.0
 ENV PATH $GEM_HOME/bin:$PATH
 RUN  gem install bundler -v $BUNDLER_VERSION \
   && bundle config --global path "$GEM_HOME" \
