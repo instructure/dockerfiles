@@ -1,4 +1,4 @@
-worker_processes <%= ENV.fetch('NGINX_WORKER_COUNT', (ENV.fetch('RAILS_ENV') == 'production' ? 15 : 1)) %>;
+worker_processes <%= ENV.fetch('NGINX_WORKER_COUNT', (ENV.fetch('RAILS_ENV', 'production') == 'production' ? 15 : 1)) %>;
 pid /run/nginx.pid;
 daemon off;
 user docker;
