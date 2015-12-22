@@ -71,12 +71,12 @@ http {
         real_ip_recursive on;
 
     location / {
-        # TODO: This if needs to be removed, but we need to allow time for everyone to transition to using port 81 for HTTP and 80 for HTTPS
+        # TODO: These if statements need to be removed, but we need to allow time for everyone to transition to using port 81 for HTTP and 80 for HTTPS
+        if ($host = $remote_addr) {
+            return  301 https://<%= ENV.fetch('APP_URL', 'app') %>$request_uri;
+        }
         if ($http_x_forwarded_proto != 'https') {
-            if ($host = $remote_addr) {
-                return     301 https://<%= ENV.fetch('APP_URL', 'app') %>$request_uri;
-            }
-            return       301 https://$host$request_uri;
+            return  301 https://$host$request_uri;
         }
 
         passenger_enabled on;
