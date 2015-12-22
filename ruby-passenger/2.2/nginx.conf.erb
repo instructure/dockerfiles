@@ -1,4 +1,9 @@
-worker_processes <%= ENV.fetch('NGINX_WORKER_COUNT', (ENV.fetch('RAILS_ENV', 'production') == 'production' ? 15 : 1)) %>;
+<%
+  APP_URL = ENV.fetch('APP_URL', 'app')
+  CG_ENVIRONMENT = ENV.fetch('CG_ENVIRONMENT', 'local')
+  RAILS_ENV = ENV.fetch('RAILS_ENV', 'production')
+%>
+worker_processes <%= ENV.fetch('NGINX_WORKER_COUNT', (RAILS_ENV == 'production' ? 15 : 1)) %>;
 pid /run/nginx.pid;
 daemon off;
 user docker;
@@ -19,7 +24,7 @@ http {
     passenger_show_version_in_header off;
     passenger_root /usr/lib/ruby/vendor_ruby/phusion_passenger/locations.ini;
     passenger_ruby /usr/bin/ruby;
-    passenger_app_env <%= ENV.fetch('RAILS_ENV', 'production') %>;
+    passenger_app_env <%= RAILS_ENV %>;
     passenger_max_pool_size <%= ENV.fetch('PASSENGER_MAX_POOL_SIZE', '6') %>;
     passenger_min_instances <%= ENV.fetch('PASSENGER_MIN_INSTANCES', '1') %>;
 
@@ -38,22 +43,12 @@ http {
     sendfile        on;
     keepalive_timeout  65;
 
-<% if ENV.fetch('CG_ENVIRONMENT', 'local') == 'local' %>
-    server {
-        listen       80;
-        server_name  localhost;
-        root <%= ENV.fetch('APP_ROOT_PATH', '/usr/src/app/public') %>;
-        passenger_enabled on;
-        include      /usr/src/nginx/location.d/*.conf;
-    }
-
-<% else %>
     server {
         listen       81;
         server_name  redirect;
         access_log   off;
         if ($host = $remote_addr) {
-            return   301 https://<%= ENV.fetch('APP_URL', 'app') %>$request_uri;
+            return   301 https://<%= APP_URL %>$request_uri;
         }
         return       301 https://$host$request_uri;
     }
@@ -63,32 +58,40 @@ http {
         server_name  localhost;
         root <%= ENV.fetch('APP_ROOT_PATH', '/usr/src/app/public') %>;
 
-        add_header Strict-Transport-Security "max-age=31536000" always;
+        <% if CG_ENVIRONMENT != 'local' %>
+            add_header Strict-Transport-Security "max-age=31536000" always;
 
-        set_real_ip_from 10.0.0.0/8;
-        real_ip_header X-Forwarded-For;
-        real_ip_recursive on;
+            set_real_ip_from 10.0.0.0/8;
+            real_ip_header X-Forwarded-For;
+            real_ip_recursive on;
+        <% end %>
 
         location / {
-            # TODO: These if statements need to be removed, but we need to allow time for everyone to transition to using port 81 for HTTP and 80 for HTTPS
-            if ($host = $remote_addr) {
-                return   301 https://<%= ENV.fetch('APP_URL', 'app') %>$request_uri;
-            }
-            if ($http_x_forwarded_proto != 'https') {
-                return   301 https://$host$request_uri;
-            }
+            <% if CG_ENVIRONMENT != 'local' %>
+                # TODO: These if statements need to be removed, but we need to allow time for everyone to transition to using port 81 for HTTP and 80 for HTTPS
+                if ($host = $remote_addr) {
+                    return   301 https://<%= APP_URL %>$request_uri;
+                }
+                if ($http_x_forwarded_proto != 'https') {
+                    return   301 https://$host$request_uri;
+                }
+            <% end %>
 
             passenger_enabled on;
 
             # Occasionally you may need to add some additonial option to your location block, you can add files here to do so.
             include      /usr/src/nginx/location.d/*.conf;
         }
-        location <%= ENV.fetch('CG_INSTANCE_POOL_HEALTH_CHECK_PATH') %> {
-            passenger_enabled on;
-        }
+
+        <% if CG_ENVIRONMENT != 'local' %>
+            # Match the health check path separately to prevent interference with the health check
+            location <%= ENV.fetch('CG_INSTANCE_POOL_HEALTH_CHECK_PATH') %> {
+                passenger_enabled on;
+            }
+        <% end %>
+
         location ~ /\.git {
             deny all;
         }
     }
-<% end %>
 }
