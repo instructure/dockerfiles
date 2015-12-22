@@ -3,7 +3,7 @@ pid /run/nginx.pid;
 daemon off;
 user docker;
 
-#Add files to white list env variables
+# Add files to white list env variables
 include /usr/src/nginx/main.d/*.conf;
 
 events {
@@ -30,9 +30,10 @@ http {
     client_max_body_size <%= ENV.fetch('NGINX_MAX_UPLOAD_SIZE', '10m') %>;
 
     include       /etc/nginx/mime.types;
-#Add files here to add additional nginx options
-    include      /usr/src/nginx/conf.d/*.conf;
     default_type  application/octet-stream;
+
+    # Add files here to add additional nginx options
+    include      /usr/src/nginx/conf.d/*.conf;
 
     sendfile        on;
     keepalive_timeout  65;
@@ -52,7 +53,7 @@ http {
         server_name  redirect;
         access_log   off;
         if ($host = $remote_addr) {
-          return     301 https://<%= ENV.fetch('APP_URL', 'app') %>$request_uri;
+            return   301 https://<%= ENV.fetch('APP_URL', 'app') %>$request_uri;
         }
         return       301 https://$host$request_uri;
     }
@@ -68,25 +69,26 @@ http {
         real_ip_header X-Forwarded-For;
         real_ip_recursive on;
 
-    location / {
-        # TODO: These if statements need to be removed, but we need to allow time for everyone to transition to using port 81 for HTTP and 80 for HTTPS
-        if ($host = $remote_addr) {
-            return  301 https://<%= ENV.fetch('APP_URL', 'app') %>$request_uri;
+        location / {
+            # TODO: These if statements need to be removed, but we need to allow time for everyone to transition to using port 81 for HTTP and 80 for HTTPS
+            if ($host = $remote_addr) {
+                return   301 https://<%= ENV.fetch('APP_URL', 'app') %>$request_uri;
+            }
+            if ($http_x_forwarded_proto != 'https') {
+                return   301 https://$host$request_uri;
+            }
+
+            passenger_enabled on;
+
+            # Occasionally you may need to add some additonial option to your location block, you can add files here to do so.
+            include      /usr/src/nginx/location.d/*.conf;
         }
-        if ($http_x_forwarded_proto != 'https') {
-            return  301 https://$host$request_uri;
+        location <%= ENV.fetch('CG_INSTANCE_POOL_HEALTH_CHECK_PATH') %> {
+            passenger_enabled on;
         }
-        
-        passenger_enabled on;
-#Occasionally you may need to add some additonial option to your location block, you can add files here to do so.
-        include      /usr/src/nginx/location.d/*.conf;
+        location ~ /\.git {
+            deny all;
+        }
     }
-    location <%= ENV.fetch('CG_INSTANCE_POOL_HEALTH_CHECK_PATH') %> {
-        passenger_enabled on;
-    }
-    location ~ /\.git {
-        deny all;
-    }
-  }
 <% end %>
 }
