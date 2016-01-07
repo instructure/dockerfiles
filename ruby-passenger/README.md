@@ -3,7 +3,7 @@ This container is designed to be a starting point for development and
 deployment of ruby based web apps.
 
 ## Quick start (for simple apps without background processing)
-1. Choose your ruby version (currently 2.1 and 2.2 are available)
+1. Choose your ruby version (currently 2.1, 2.2, and 2.3 are available)
 2. Set your container to be `FROM` `instructure/ruby-passenger:<ruby version>`
 3. Copy app and assets to `/usr/src/app` (nginx will serve static assets from public)
 making sure to change the ownership of these files to docker:docker (`RUN chown -R docker:docker /usr/src/app`)
@@ -84,7 +84,7 @@ Occasionally you may need to change the root path. This currently defaults to
 `/usr/src/app/public` this can be overriden by the `APP_ROOT_PATH` variable.
 
 ## sample Dockerfile
- 	FROM instructure/ruby-passenger:2.1
+	FROM instructure/ruby-passenger:2.1
 
 	USER root
 	RUN apt-get update && apt-get install -y postgresql-client
