@@ -42,5 +42,5 @@ ENV PATH $GEM_HOME/bin:$PATH
 RUN  gem install bundler -v $BUNDLER_VERSION \
   && bundle config --global path "$GEM_HOME" \
   && bundle config --global bin "$GEM_HOME/bin"
-ENV BUNDLE_APP_CONFIG $GEM_HOME
+ENV BUNDLE_APP_CONFIG /home/docker/.bundle
 WORKDIR /usr/src/app
