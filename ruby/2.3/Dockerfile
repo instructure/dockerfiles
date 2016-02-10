@@ -36,11 +36,9 @@ RUN  apt-get update \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 USER docker
-RUN echo 'gem: --no-rdoc --no-ri' >> /home/docker/.gemrc
-ENV GEM_HOME /home/docker/.gem/ruby/2.3.0
+RUN echo 'gem: --no-document' >> /home/docker/.gemrc
+ENV GEM_HOME /home/docker/.gem/ruby/$RUBY_MAJOR.0
 ENV PATH $GEM_HOME/bin:$PATH
-RUN  gem install bundler -v $BUNDLER_VERSION \
-  && bundle config --global path "$GEM_HOME" \
-  && bundle config --global bin "$GEM_HOME/bin"
+RUN gem install bundler -v $BUNDLER_VERSION
 ENV BUNDLE_APP_CONFIG /home/docker/.bundle
 WORKDIR /usr/src/app
