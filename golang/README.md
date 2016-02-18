@@ -9,9 +9,8 @@ you'll run into problems finding dependencies. Specifically, don't use
 ## example
 
 ```
-FROM instructure/golang:1.5.3
+FROM instructure/golang:1.6
 
-ENV GO15VENDOREXPERIMENT 1
 RUN mkdir -p $SRCPATH/myapp
 WORKDIR $SRCPATH/myapp
 
