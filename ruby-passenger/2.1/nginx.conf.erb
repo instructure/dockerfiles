@@ -3,6 +3,10 @@
   APP_DOMAIN = ENV.fetch('APP_DOMAIN', ENV.fetch('APP_URL', 'app.invalid'))
   CG_ENVIRONMENT = ENV.fetch('CG_ENVIRONMENT', 'local')
   RAILS_ENV = ENV.fetch('RAILS_ENV', 'production')
+
+  LEGACY_PORTS = ENV.fetch('LEGACY_PORTS', '1') == '1'
+  HTTP_PORT = LEGACY_PORTS ? 81 : 8080
+  HTTPS_PORT = LEGACY_PORTS ? 80 : 8443
 %>
 worker_processes <%= ENV.fetch('NGINX_WORKER_COUNT', (RAILS_ENV == 'production' ? 15 : 1)) %>;
 pid /run/nginx.pid;
@@ -45,7 +49,7 @@ http {
     keepalive_timeout  65;
 
     server {
-        listen       81;
+        listen       <%= HTTP_PORT %>;
         server_name  redirect;
         access_log   off;
         if ($host = $remote_addr) {
@@ -55,7 +59,7 @@ http {
     }
 
     server {
-        listen       80;
+        listen       <%= HTTPS_PORT %>;
         server_name  <%= APP_DOMAIN %>;
         root <%= ENV.fetch('APP_ROOT_PATH', '/usr/src/app/public') %>;
 
