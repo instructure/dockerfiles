@@ -1,0 +1,9 @@
+Host gerrit
+  HostName gerrit.instructure.com
+  User hudson
+  Port 29418
+
+Host gerrit.instructure.com
+  HostName gerrit.instructure.com
+  User hudson
+  Port 29418
