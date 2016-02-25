@@ -3,11 +3,33 @@
 Dockerfile for building Instructure's Android apps with
 Jenkins and Google's [Cloud Test Lab](https://developers.google.com/cloud-test-lab/).
 
+# Configure
+
+Note that you will have to modify the following to work with your projects.
+
+File | Description
+---:|:---
+`config`         | must be replaced with your own ssh config
+`known_hosts`    | must be replaced with your own known_hosts
+`build_image.sh` | must be modified unless you're using repo + gradle with debug builds
+
+ENV | Description
+---:|:---
+`ANDROID_PROJECT_NAME` | Android project name
+`REPO_INIT`   | SSH URL to the git repo containing the repo xml file
+`IDRSA`       | SSH key to connect to Jenkins
+`GCLOUDKEY`   | JSON key to connect to Google cloud
+`GCLOUDUSER`  | Google cloud user account
+`EXECUTOR_ID` | Suffix to use on the jenkins build node (typically a number)
+
+
 ## Build
 
 ```
 docker build \
  --build-arg IDRSA="$DOCKER_HUDSON_IDRSA" \
+ --build-arg REPO_INIT="$REPO_INIT" \
+ --build-arg ANDROID_PROJECT_NAME="$ANDROID_PROJECT_NAME" \
  android/
 ```
 

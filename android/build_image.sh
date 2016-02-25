@@ -15,7 +15,7 @@ fi
 
 if [ -z "$IDRSA" ]; then
     echo >&2 'error: missing required IDRSA build argument'
-    echo >&2 '       -e IDRSA=...'
+    echo >&2 '       --build-arg IDRSA==...'
     exit 1
 else
     echo "$IDRSA" > "$SSH_KEY"
@@ -23,20 +23,35 @@ else
     chmod 600 $SSH_KEY
 fi
 
+if [ -z "$REPO_INIT" ]; then
+    echo >&2 'error: missing required REPO_INIT build argument'
+    echo >&2 '       --build-arg REPO_INIT==...'
+    exit 1
+fi
+
+if [ -z "$ANDROID_PROJECT_NAME" ]; then
+    echo >&2 'error: missing required ANDROID_PROJECT_NAME build argument'
+    echo >&2 '       --build-arg ANDROID_PROJECT_NAME==...'
+    exit 1
+fi
+
 # Install repo
 mkdir ~/bin
 curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
 chmod a+x ~/bin/repo
 
-# Build candroid
-CANDROID_REPOS=/tmp/candroid_repos
-mkdir $CANDROID_REPOS
-cd $CANDROID_REPOS
-repo init -u ssh://hudson@gerrit.instructure.com:29418/android-repo -m default.xml
+# Build android
+ANDROID_REPOS=/tmp/android_repos
+mkdir $ANDROID_REPOS
+cd $ANDROID_REPOS
+repo init -u $REPO_INIT
 repo sync -d
-cd candroid
-./gradlew :candroid:clean :candroid:assembleDebug :candroid:assembleDebugAndroidTest -PskipAdb --stacktrace
-rm -rf $CANDROID_REPOS
+cd $ANDROID_PROJECT_NAME
+./gradlew :$ANDROID_PROJECT_NAME:clean \
+          :$ANDROID_PROJECT_NAME:assembleDebug \
+          :$ANDROID_PROJECT_NAME:assembleDebugAndroidTest \
+          --no-daemon -PskipAdb --stacktrace
+rm -rf $ANDROID_REPOS
 
 # Remove ssh key so it's not saved in the image
 rm -rf $SSH_KEY

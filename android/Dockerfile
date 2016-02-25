@@ -4,11 +4,13 @@ MAINTAINER Instructure
 USER root
 ENV DEBIAN_FRONTEND noninteractive
 ARG IDRSA
+ARG ANDROID_PROJECT_NAME
+ARG REPO_INIT
 
 # Install ssh client, Java, and Android SDK 32 bit deps
 #
 # Android deps:      libc6-i386 lib32stdc++6 lib32gcc1 lib32ncurses5 lib32z1
-# Google cloud deps: wget unzip python openssh-client python-openssl
+# Google cloud deps: unzip python openssh-client python-openssl
 # supervisord:       python-pip
 #
 # https://github.com/dockerfile/java/blob/master/oracle-java8/Dockerfile
