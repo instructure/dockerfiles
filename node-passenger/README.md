@@ -18,7 +18,7 @@ development and test, set the NODE_ENV env var in your `Dockerfile` or
 other related vars in passenger.
 
 ## nginx worker process count (NGINX_WORKER_COUNT)
-The default number of wokers (1) in this container is well suited for use
+The default number of workers (1) in this container is well suited for use
 in development environments, this will likely be insufficient in production
 environments. To increase the number of workers set `NGINX_WORKER_COUNT` in
 the environment before calling the entrypoint script.
@@ -49,7 +49,7 @@ env PASSENGER_APP_ENV;
 ```
 
 ## conf.d (/usr/src/nginx/conf.d/*.conf;)
-You may want to add some additional NGINX paremeters. This can now
+You may want to add some additional NGINX parameters. This can now
 be done by adding a file to `/usr/src/nginx/conf.d/`
 Example: web.conf
 
@@ -83,7 +83,7 @@ When deploying with CloudGate `CG_ENVIRONMENT` will be set and both SSL and `X-F
 
 ## application root path (APP_ROOT_PATH)
 Occasionally you may need to change the root path. This currently defaults to
-`/usr/src/app/public` this can be overriden by the `APP_ROOT_PATH` variable.
+`/usr/src/app/public` this can be overridden by the `APP_ROOT_PATH` variable.
 
 ## sample Dockerfile
 
