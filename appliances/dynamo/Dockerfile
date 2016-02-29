@@ -14,4 +14,4 @@ VOLUME $DATADIR
 
 COPY entrypoint.sh /home/docker/entrypoint.sh
 
-ENTRYPOINT ["/home/docker/entryppoint.sh", "-dbPath /opt/dynamo/"]
+ENTRYPOINT ["/home/docker/entrypoint.sh", "-dbPath /opt/dynamo/"]
