@@ -3,6 +3,9 @@ MAINTAINER Instructure
 
 USER root
 
+ENV NODE_VERSION 5.7.0
+ENV NPM_VERSION 3.7.5
+
 # verify gpg and sha256: http://nodejs.org/dist/v0.10.30/SHASUMS256.txt.asc
 # gpg: aka "Timothy J Fontaine (Work) <tj.fontaine@joyent.com>"
 # gpg: aka "Julien Gilli <jgilli@fastmail.fm>"
@@ -25,9 +28,6 @@ RUN  set -ex \
      ; do \
        gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
      done
-
-ENV NODE_VERSION 4.2.1
-ENV NPM_VERSION 3.3.9
 
 RUN mkdir -p /usr/src/app && chown docker:docker /usr/src/app
 WORKDIR /usr/src/app
