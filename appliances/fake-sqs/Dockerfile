@@ -1,7 +1,7 @@
 FROM instructure/ruby:2.1
 
 USER root
-COPY entrypoint.sh /usr/src/app
+COPY entrypoint.sh /usr/src/app/
 
 RUN chmod +x /usr/src/app/entrypoint.sh && \
     chown -R docker:docker /usr/src/app
