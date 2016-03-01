@@ -27,7 +27,8 @@ COPY passenger_check /monitoring/sensu/
 RUN chmod +x /monitoring/sensu/passenger_metrics.rb /monitoring/sensu/passenger_check
 
 USER docker
-RUN gem install sensu-plugin nokogiri
+RUN gem install sensu-plugin nokogiri \
+  && passenger-config build-native-support
 COPY nginx.conf.erb /usr/src/nginx/nginx.conf.erb
 COPY entrypoint /usr/src/entrypoint
 

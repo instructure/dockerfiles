@@ -60,6 +60,7 @@ RUN  curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux
   && npm cache clear
 
 USER docker
+RUN passenger-config build-native-support
 COPY nginx.conf.erb /usr/src/nginx/nginx.conf.erb
 COPY entrypoint /usr/src/entrypoint
 
