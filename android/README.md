@@ -18,7 +18,7 @@ ENV | Description
 `ANDROID_PROJECT_NAME` | Android project name
 `REPO_INIT`   | SSH URL to the git repo containing the repo xml file
 `IDRSA`       | SSH key to connect to Jenkins
-`GCLOUDKEY`   | JSON key to connect to Google cloud
+`GCLOUDKEY`   | base64 encoded Google Cloud JSON key
 `GCLOUDUSER`  | Google cloud user account
 `EXECUTOR_ID` | Suffix to use on the jenkins build node (typically a number)
 
@@ -53,6 +53,43 @@ docker run -e IDRSA="$DOCKER_HUDSON_IDRSA" \
  -e GCLOUDUSER="$GCLOUDUSER" \
  -e EXECUTOR_ID="$EXECUTOR_ID" \
  -ti 87669bda639e /bin/bash
+```
+
+## Formats
+
+The IDRSA and GCLOUDKEY data are pulled from environment variables and then formatted
+so they can be embedded in YAML.
+
+IDRSA format:
+
+```
+-----BEGIN RSA PRIVATE KEY-----\n aaa\n bbb\n ccc\n ddd\n eee\n -----END RSA PRIVATE KEY-----
+```
+
+GCLOUDKEY format:
+
+```
+aaa\n bbb\n ccc\n ddd==
+```
+
+Preprocessing code:
+
+```ruby
+def _pad string, indent
+  lines = string.split("\n")
+  result = []
+  indent = ' ' * indent
+  lines.each { |line| result << indent + line + '\n' }
+  result.join("\n").strip[0..-3] # remove '\n' from last line
+end
+
+def idrsa_yml
+  _pad ENV['DOCKER_HUDSON_IDRSA'], 11
+end
+
+def gcloudkey_yml
+  _pad Base64.encode64(ENV['GCLOUDKEY']), 15
+end
 ```
 
 ## Overview

@@ -10,6 +10,11 @@ if [ -z "$IDRSA" ]; then
     echo >&2 '       -e IDRSA=...'
     exit 1
 else
+    # aa\n bb =>
+    # a
+    # b
+    IDRSA="${IDRSA//\\n /
+}"
     echo "$IDRSA" > "$HOME/.ssh/id_rsa"
     unset IDRSA
 fi
@@ -20,7 +25,9 @@ if [ -z "$GCLOUDKEY" ]; then
     echo >&2 '       -e GCLOUDKEY=...'
     exit 1
 else
-    echo "$GCLOUDKEY" > "$HOME/.ssh/gcloudkey.json"
+    GCLOUDKEY="${GCLOUDKEY//\\n /
+}"
+    echo "$GCLOUDKEY" | base64 -d  > "$HOME/.ssh/gcloudkey.json"
     unset GCLOUDKEY
 fi
 
