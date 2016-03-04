@@ -2,7 +2,4 @@
 set -e
 
 erb /usr/src/nginx/nginx.conf.erb > /usr/src/nginx/nginx.conf
-for file in /usr/src/nginx/*.d/*.erb; do
-  erb $file > ${file%.*}
-done
 exec sudo -E /usr/sbin/nginx -c /usr/src/nginx/nginx.conf
