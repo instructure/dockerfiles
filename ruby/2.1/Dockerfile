@@ -35,10 +35,12 @@ RUN  apt-get update \
              zlib1g-dev \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
+
+RUN gem install -i /var/lib/gems/$RUBY_MAJOR.0 bundler -v $BUNDLER_VERSION
+ENV BUNDLE_APP_CONFIG /home/docker/.bundle
+
 USER docker
 RUN echo 'gem: --no-document' >> /home/docker/.gemrc
 ENV GEM_HOME /home/docker/.gem/ruby/$RUBY_MAJOR.0
 ENV PATH $GEM_HOME/bin:$PATH
-RUN gem install bundler -v $BUNDLER_VERSION
-ENV BUNDLE_APP_CONFIG /home/docker/.bundle
 WORKDIR /usr/src/app
