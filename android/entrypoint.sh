@@ -11,8 +11,8 @@ if [ -z "$IDRSA" ]; then
     exit 1
 else
     # aa\n bb =>
-    # a
-    # b
+    # aa
+    # bb
     IDRSA="${IDRSA//\\n /
 }"
     echo "$IDRSA" > "$HOME/.ssh/id_rsa"
