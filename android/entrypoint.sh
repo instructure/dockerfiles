@@ -47,11 +47,17 @@ gcloud config set project "$GCLOUDPROJECT"
 # force auto update to new config format by setting a property
 gcloud config set component_manager/disable_update_check True
 
-# Executor id (usually a number: 1, 2, 3 etc.)
+# Pull instance ID from EC2 meta-data.
+INSTANCE_ID=$(curl -fs http://169.254.169.254/latest/meta-data/instance-id/)
+if [ $? == 0 ]; then
+    export EXECUTOR_ID="$INSTANCE_ID"
+else
+    export EXECUTOR_ID="unknown_instance"
+fi
+
 # Access as "%(ENV_EXECUTOR_ID)s" in supervisord config
 if [ -z "$EXECUTOR_ID" ]; then
-    echo >&2 'error: missing required EXECUTOR_ID environment variable.'
-    echo >&2 '       -e EXECUTOR_ID=...'
+    echo >&2 'error: EXECUTOR_ID not set!'
     exit 1
 fi
 
