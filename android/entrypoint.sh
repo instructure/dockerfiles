@@ -15,7 +15,9 @@ else
     # bb
     IDRSA="${IDRSA//\\n /
 }"
-    echo "$IDRSA" > "$HOME/.ssh/id_rsa"
+    SSH_KEY="$HOME/.ssh/id_rsa"
+    echo "$IDRSA" > "$SSH_KEY"
+    chmod 600 "$SSH_KEY"
     unset IDRSA
 fi
 
