@@ -42,20 +42,11 @@ Additional global configuration settings can be included in the
 `/usr/src/nginx/main.d/` directory.
 
 ### Environment Variables
-One such global configuration that is included by default is a set of
-whitelisted environment variables. As Nginx doesn't pass any non-whitelisted
-environment variables to Passenger, environment variables must be whitelisted
-explicitly. A default set is included in the `/usr/src/nginx/main.d/env.conf`
-file (i.e. `PATH`, `GEM_HOME`, `SECRET_KEY_BASE`, etc).
-
-This file may be overwritten or additional environment variables may be
-included in a separate global configuration file.
-
-Example: `extra_env.conf`:
-```
-env ENCRYPTION_KEY;
-env OTHER_VAR
-```
+One such global configuration that is included by default is an auto-whitelist
+of environment variables passed into the container. This is because Nginx will
+only pass environment variables that are explicitly whitelisted to Passenger.
+If you wish to use an explicit whitelist instead, remove or replace the
+`/usr/src/nginx/main.d/env.conf.erb` file in your derived image.
 
 ## conf.d (/usr/src/nginx/conf.d/*.conf;)
 You may want to add some additional NGINX paremeters. This can now

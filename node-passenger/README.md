@@ -33,20 +33,16 @@ be a valid string that the `client_max_body_size` directive will accept.
 The passenger default is 6. You may override this with the
 `PASSENGER_MAX_POOL_SIZE` variable.
 
-## Passenger min instances (PASSENGER_MIN_INSTANCES)
-The passenger default is 0. We set a default of 1. You may override this with the
-`PASSENGER_MIN_INSTANCES` variable.
-
 ## main.d (/usr/src/nginx/main.d/*.conf)
-Occasionally you may need to whitelist some ENV variables with NGINX. This
-can now be done by installing a file to `/usr/src/nginx/main.d/`
-Example: env.conf
-```
-env SECRET_TOKEN;
-env ENCRYPTION_KEY;
-env RAILS_ENV;
-env PASSENGER_APP_ENV;
-```
+Additional global configuration settings can be included in the
+`/usr/src/nginx/main.d/` directory.
+
+### Environment Variables
+One such global configuration that is included by default is an auto-whitelist
+of environment variables passed into the container. This is because Nginx will
+only pass environment variables that are explicitly whitelisted to Passenger.
+If you wish to use an explicit whitelist instead, remove or replace the
+`/usr/src/nginx/main.d/env.conf.erb` file in your derived image.
 
 ## conf.d (/usr/src/nginx/conf.d/*.conf;)
 You may want to add some additional NGINX parameters. This can now
