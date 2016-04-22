@@ -12,14 +12,7 @@ RUN  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CA
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-COPY main.d/* /usr/src/nginx/main.d/
-RUN  echo 'docker ALL=(ALL) NOPASSWD: SETENV: /usr/sbin/nginx' >> /etc/sudoers \
-  && mkdir -p /usr/src/nginx/conf.d \
-  && mkdir -p /usr/src/nginx/location.d \
-  && chown docker:docker /usr/src/nginx
-
-RUN  ln -sf /dev/stdout /var/log/nginx/access.log \
-  && ln -sf /dev/stderr /var/log/nginx/error.log
+RUN echo 'docker ALL=(ALL) NOPASSWD: SETENV: /usr/sbin/nginx' >> /etc/sudoers
 
 #Sensu check
 COPY passenger_metrics.rb /monitoring/sensu/
@@ -30,8 +23,21 @@ RUN gem install -i /var/lib/gems/$RUBY_MAJOR.0 nokogiri sensu-plugin
 
 USER docker
 RUN passenger-config build-native-support
-COPY nginx.conf.erb /usr/src/nginx/nginx.conf.erb
+
+# Nginx Configuration
+USER root
+
 COPY entrypoint /usr/src/entrypoint
+COPY nginx.conf.erb /usr/src/nginx/nginx.conf.erb
+COPY main.d/* /usr/src/nginx/main.d/
+RUN mkdir -p /usr/src/nginx/conf.d \
+ && mkdir -p /usr/src/nginx/location.d \
+ && mkdir -p /usr/src/nginx/main.d \
+ && ln -sf /dev/stdout /var/log/nginx/access.log \
+ && ln -sf /dev/stderr /var/log/nginx/error.log \
+ && chown docker:docker -R /usr/src/nginx
+
+USER docker
 
 EXPOSE 80
 CMD ["/usr/src/entrypoint"]

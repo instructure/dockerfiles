@@ -1,10 +1,9 @@
 #!/bin/bash
 set -e
 
-erb /usr/src/nginx/nginx.conf.erb > /usr/src/nginx/nginx.conf
-for file in /usr/src/nginx/*.d/*.erb; do
+for file in /usr/src/nginx/{,**/}*.erb; do
   if [ -a "$file" ]; then
-    erb "$file" > "${file%.*}"
+    erb -T- "$file" > "${file%.*}"
   fi
 done
 exec sudo -E /usr/sbin/nginx -c /usr/src/nginx/nginx.conf
