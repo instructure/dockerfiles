@@ -29,7 +29,7 @@ RUN  set -ex \
 RUN mkdir -p /usr/src/app && chown docker:docker /usr/src/app
 WORKDIR /usr/src/app
 
-ENV NODE_VERSION 4.3.1
+ENV NODE_VERSION 4.3.2
 ENV NPM_VERSION 3.7.5
 
 RUN  curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.gz" \
