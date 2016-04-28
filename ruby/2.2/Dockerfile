@@ -40,7 +40,8 @@ RUN gem install -i /var/lib/gems/$RUBY_MAJOR.0 bundler -v $BUNDLER_VERSION
 ENV BUNDLE_APP_CONFIG /home/docker/.bundle
 
 USER docker
-RUN echo 'gem: --no-document' >> /home/docker/.gemrc
+RUN echo 'gem: --no-document' >> /home/docker/.gemrc \
+ && mkdir -p /home/docker/.gem/ruby/$RUBY_MAJOR.0/{build_info,cache,doc,extensions,gems,specifications}
 ENV GEM_HOME /home/docker/.gem/ruby/$RUBY_MAJOR.0
 ENV PATH $GEM_HOME/bin:$PATH
 WORKDIR /usr/src/app
