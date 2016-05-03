@@ -36,6 +36,9 @@ RUN  apt-get update \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
+# https://imagetragick.com/ mitigation
+COPY etc/ImageMagick/policy.xml /etc/ImageMagick/policy.xml
+
 RUN gem install -i /var/lib/gems/$RUBY_MAJOR.0 bundler -v $BUNDLER_VERSION
 ENV BUNDLE_APP_CONFIG /home/docker/.bundle
 
