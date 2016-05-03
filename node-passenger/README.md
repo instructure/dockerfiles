@@ -3,7 +3,7 @@ This container is designed to be a starting point for development and
 deployment of node based web apps.
 
 ## Quick start (for simple apps without background processing)
-1. Choose your node version (4, 4.3, 5.7)
+1. Choose your node version (4, 4.3, 5.7, 6)
 2. Set your container to be `FROM` `instructure/node-passenger:<node version>`
 3. Copy app and assets to `/usr/src/app` (nginx will serve static assets from public)
 making sure to change the ownership of these files to docker:docker (`RUN chown -R docker:docker /usr/src/app`)
@@ -84,7 +84,7 @@ Occasionally you may need to change the root path. This currently defaults to
 ## sample Dockerfile
 
 ```
-FROM instructure/node-passenger:4
+FROM instructure/node-passenger:6
 
 USER root
 ENV APP_HOME /usr/src/app
