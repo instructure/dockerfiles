@@ -37,7 +37,17 @@ RUN  apt-get update \
   && rm -rf /var/lib/apt/lists/*
 
 # https://imagetragick.com/ mitigation
-COPY etc/ImageMagick/policy.xml /etc/ImageMagick/policy.xml
+RUN sed -i '/<\/policymap>/i\
+  <!-- ImageTragick Mitigation -->\n\
+  <policy domain="coder" rights="none" pattern="EPHEMERAL" />\n\
+  <policy domain="coder" rights="none" pattern="URL" />\n\
+  <policy domain="coder" rights="none" pattern="HTTPS" />\n\
+  <policy domain="coder" rights="none" pattern="MVG" />\n\
+  <policy domain="coder" rights="none" pattern="MSL" />\n\
+  <policy domain="coder" rights="none" pattern="TEXT" />\n\
+  <policy domain="coder" rights="none" pattern="SHOW" />\n\
+  <policy domain="coder" rights="none" pattern="WIN" />\n\
+  <policy domain="coder" rights="none" pattern="PLT" />' /etc/ImageMagick/policy.xml
 
 RUN gem install -i /var/lib/gems/$RUBY_MAJOR.0 bundler -v $BUNDLER_VERSION
 ENV BUNDLE_APP_CONFIG /home/docker/.bundle
