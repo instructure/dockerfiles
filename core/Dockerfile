@@ -25,13 +25,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
 
-## Security updates
-## Remove after ubuntu:trusty gets updated (usn-2815-1)
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    libpng12-0 \
- && apt-get clean \
- && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
-
 ## Add monitoring checks
 RUN mkdir -p /monitoring/sensu/
 COPY monitoring/sensu.sh /monitoring/sensu.sh
