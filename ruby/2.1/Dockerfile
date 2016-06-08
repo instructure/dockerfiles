@@ -2,7 +2,7 @@ FROM instructure/core:latest
 MAINTAINER Instructure
 
 ENV RUBY_MAJOR 2.1
-ENV BUNDLER_VERSION 1.11.2
+ENV BUNDLER_VERSION 1.12.5
 
 USER root
 RUN mkdir -p /usr/src/app
