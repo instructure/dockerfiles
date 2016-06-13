@@ -54,7 +54,12 @@ ENV BUNDLE_APP_CONFIG /home/docker/.bundle
 
 USER docker
 RUN echo 'gem: --no-document' >> /home/docker/.gemrc \
- && mkdir -p /home/docker/.gem/ruby/$RUBY_MAJOR.0/{build_info,cache,doc,extensions,gems,specifications}
+ && mkdir -p /home/docker/.gem/ruby/$RUBY_MAJOR.0/build_info \
+             /home/docker/.gem/ruby/$RUBY_MAJOR.0/cache \
+             /home/docker/.gem/ruby/$RUBY_MAJOR.0/doc \
+             /home/docker/.gem/ruby/$RUBY_MAJOR.0/extensions \
+             /home/docker/.gem/ruby/$RUBY_MAJOR.0/gems \
+             /home/docker/.gem/ruby/$RUBY_MAJOR.0/specifications
 ENV GEM_HOME /home/docker/.gem/ruby/$RUBY_MAJOR.0
 ENV PATH $GEM_HOME/bin:$PATH
 WORKDIR /usr/src/app
