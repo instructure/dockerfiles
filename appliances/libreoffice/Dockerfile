@@ -1,4 +1,4 @@
-FROM ubuntu:15.10
+FROM ubuntu:16.10
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -12,11 +12,13 @@ RUN apt-get clean           \
  && apt-get update          \
  && apt-get install -y      \
     ghostscript             \
-    libreoffice-writer      \
-    ure                     \
-    libreoffice-java-common \
-    libreoffice-core        \
-    libreoffice-common      \
+    libxinerama1            \
+    libdbus-glib-1-2        \
+    libcairo2               \
+    libcups2                \
+    libgl1-mesa-dri         \
+    libgl1-mesa-glx         \
+    libsm6                  \
     fonts-opensymbol        \
     hyphen-fr               \
     hyphen-de               \
@@ -26,7 +28,6 @@ RUN apt-get clean           \
     fonts-dejavu            \
     fonts-dejavu-core       \
     fonts-dejavu-extra      \
-    fonts-droid             \
     fonts-dustin            \
     fonts-f500              \
     fonts-fanwood           \
@@ -37,8 +38,20 @@ RUN apt-get clean           \
     fonts-sil-gentium       \
     fonts-texgyre           \
     fonts-tlwg-purisa       \
+    curl                    \
     --no-install-recommends \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN mkdir /tmp/lo \
+  && cd /tmp/lo \
+  && curl -L -k https://download.documentfoundation.org/libreoffice/stable/5.2.0/deb/x86_64/LibreOffice_5.2.0_Linux_x86-64_deb.tar.gz | tar xz --strip-components=1 \
+  && cd DEBS \
+  && dpkg -i *.deb \
+  && rm -fr /tmp/lo
+
+# for compat with canvadocs converter, which hardcodes path to soffice
+RUN ln -s /opt/libreoffice5.2/program/soffice /usr/bin/soffice
+ENV PATH $PATH:/opt/libreoffice5.2/program
 
 USER docker
