@@ -6,6 +6,6 @@ for use testing and developing against Amazon's DynamoDB.
 
 To use it, run the container and connect to port 8000:
 
-    docker run -d --name mydynamo -p 8000:8000 instructure/dynamo
+    docker run -d --name mydynamo -p 8000:8000 instructure/dynamodb
     AWS_ENDPOINT=http://localhost:8000 AWS_ACCESS_KEY_ID=x AWS_SECRET_ACCESS_KEY=x aws dynamo create-table ...
 
