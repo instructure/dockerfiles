@@ -29,8 +29,8 @@ RUN  set -ex \
 RUN mkdir -p /usr/src/app && chown docker:docker /usr/src/app
 WORKDIR /usr/src/app
 
-ENV NODE_VERSION 6.9.0
-ENV NPM_VERSION 3.10.8
+ENV NODE_VERSION 4.4.3
+ENV NPM_VERSION 3.8.7
 
 RUN  curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.gz" \
   && curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
