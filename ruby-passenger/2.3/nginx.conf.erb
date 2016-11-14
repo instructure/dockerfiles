@@ -9,7 +9,7 @@
   HTTP_PORT = LEGACY_PORTS ? 81 : 8080
   HTTPS_PORT = LEGACY_PORTS ? 80 : 8443
 %>
-worker_processes <%= ENV.fetch('NGINX_WORKER_COUNT', (RAILS_ENV == 'production' ? 15 : 1)) %>;
+worker_processes <%= ENV.fetch('NGINX_WORKER_COUNT', (RAILS_ENV == 'production' ? 'auto' : 1)) %>;
 pid /run/nginx.pid;
 daemon off;
 user docker;
