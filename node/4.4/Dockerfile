@@ -41,4 +41,6 @@ RUN  curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux
   && npm install -g npm@"$NPM_VERSION" \
   && npm cache clear
 
+COPY npm-private /usr/local/bin
+
 USER docker
