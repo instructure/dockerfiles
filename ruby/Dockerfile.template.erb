@@ -1,12 +1,9 @@
-# GENERATED FILE, DO NOT MODIFY!
-# To update this file please edit the relevant template (ruby/Dockerflie.template.erb)
-# and run the generation task `rake generate:ruby`
-
+<%= generated_message %>
 FROM instructure/core:latest
 MAINTAINER Instructure
 
-ENV RUBY_MAJOR 2.1
-ENV BUNDLER_VERSION 1.12.5
+ENV RUBY_MAJOR <%= ruby_version %>
+ENV BUNDLER_VERSION <%= bundler_version %>
 
 USER root
 RUN mkdir -p /usr/src/app

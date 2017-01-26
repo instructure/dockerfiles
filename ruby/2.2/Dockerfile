@@ -1,3 +1,7 @@
+# GENERATED FILE, DO NOT MODIFY!
+# To update this file please edit the relevant template (ruby/Dockerflie.template.erb)
+# and run the generation task `rake generate:ruby`
+
 FROM instructure/core:latest
 MAINTAINER Instructure
 
@@ -64,3 +68,4 @@ RUN echo 'gem: --no-document' >> /home/docker/.gemrc \
 ENV GEM_HOME /home/docker/.gem/ruby/$RUBY_MAJOR.0
 ENV PATH $GEM_HOME/bin:$PATH
 WORKDIR /usr/src/app
+

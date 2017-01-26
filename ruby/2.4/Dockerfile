@@ -5,7 +5,7 @@
 FROM instructure/core:latest
 MAINTAINER Instructure
 
-ENV RUBY_MAJOR 2.1
+ENV RUBY_MAJOR 2.4
 ENV BUNDLER_VERSION 1.12.5
 
 USER root

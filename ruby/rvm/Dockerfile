@@ -54,5 +54,6 @@ RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3 \
     && /bin/bash -l -c "rvm install 2.1" \
     && /bin/bash -l -c "rvm install 2.2" \
     && /bin/bash -l -c "rvm install 2.3" \
+    && /bin/bash -l -c "rvm install 2.4" \
 
 WORKDIR /usr/src/app
