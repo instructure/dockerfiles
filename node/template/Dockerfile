@@ -1,12 +1,9 @@
-# GENERATED FILE, DO NOT MODIFY!
-# To update this file please edit the relevant template and run the generation
-# task `rake generate:node`
-
+<%= generation_message %>
 FROM instructure/core:latest
 MAINTAINER Instructure
 
-ENV NODE_VERSION 6.8.0
-ENV NPM_VERSION 3.10.8
+ENV NODE_VERSION <%= full_version %>
+ENV NPM_VERSION <%= npm_version %>
 
 USER root
 

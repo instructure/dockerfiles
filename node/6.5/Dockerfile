@@ -1,5 +1,12 @@
+# GENERATED FILE, DO NOT MODIFY!
+# To update this file please edit the relevant template and run the generation
+# task `rake generate:node`
+
 FROM instructure/core:latest
 MAINTAINER Instructure
+
+ENV NODE_VERSION 6.5.0
+ENV NPM_VERSION 3.10.3
 
 USER root
 
@@ -28,9 +35,6 @@ RUN  set -ex \
 
 RUN mkdir -p /usr/src/app && chown docker:docker /usr/src/app
 WORKDIR /usr/src/app
-
-ENV NODE_VERSION 6.5.0
-ENV NPM_VERSION 3.10.3
 
 RUN  curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.gz" \
   && curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
