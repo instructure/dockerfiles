@@ -5,6 +5,11 @@ got `instructure/ruby-passenger` for that) you're in the right place.
 Batteries (finicky C libs, see Dockerfile for full listing) are
 included, so drop your app in (we suggest /usr/src/app) and start hacking.
 
+# Making changes
+Aside from the RVM image all of these files are generated using a Rake task
+(generate:ruby) from the Dockerfile in the template directory. If you need to
+make changes, make them to the template and then run the generation task.
+
 # RVM
 Included in this directory is a Dockerfile that installs RVM and all three
 supported ruby versions. This setup is intended for use in CI environments

@@ -1,8 +1,5 @@
-# GENERATED FILE, DO NOT MODIFY!
-# To update this file please edit the relevant template and run the generation
-# task `rake generate:ruby-passenger`
-
-FROM instructure/ruby:2.2
+<%= generation_message %>
+FROM instructure/ruby:<%= version %>
 MAINTAINER Instructure
 
 USER root

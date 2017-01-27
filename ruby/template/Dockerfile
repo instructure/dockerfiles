@@ -1,8 +1,8 @@
-<%= generated_message %>
+<%= generation_message %>
 FROM instructure/core:latest
 MAINTAINER Instructure
 
-ENV RUBY_MAJOR <%= ruby_version %>
+ENV RUBY_MAJOR <%= version %>
 ENV BUNDLER_VERSION <%= bundler_version %>
 
 USER root

@@ -89,3 +89,9 @@ Occasionally you may need to change the root path. This currently defaults to
 	WORKDIR /usr/src/app
 	RUN chown -R docker:docker /usr/src/app
 	USER docker
+
+# Making changes
+All of the Dockerfiles in this directory are generated using a Rake task
+(generate:ruby-passenger), this task also copies all of the source files
+from the `template` directory. Make changes to any of these files, run the Rake
+task and the updates will propagate to the sub folders for each version.

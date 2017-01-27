@@ -1,6 +1,6 @@
 # GENERATED FILE, DO NOT MODIFY!
-# To update this file please edit the relevant template (ruby/Dockerflie.template.erb)
-# and run the generation task `rake generate:ruby`
+# To update this file please edit the relevant template and run the generation
+# task `rake generate:ruby`
 
 FROM instructure/core:latest
 MAINTAINER Instructure

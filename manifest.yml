@@ -1,0 +1,24 @@
+# Example language specification
+
+# foobar:
+#   template_files:
+#     - Dockerfile # automatically added if not included
+#     - .env
+#   defaults:
+#     sqlite_version: 3
+#   versions:
+#     '3':
+#       sqlite_version: 2 # overrides the 3 from defaults above
+#     '4':
+
+ruby:
+  defaults:
+    bundler_version: 1.12.5
+  versions: &RUBY_VERSIONS
+    '2.1': {}
+    '2.2': {}
+    '2.3': {}
+    '2.4': {}
+
+ruby-passenger:
+  versions: *RUBY_VERSIONS
