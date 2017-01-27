@@ -2,7 +2,7 @@
 # To update this file please edit the relevant template and run the generation
 # task `rake generate:ruby-node-pg`
 
-FROM instructure/ruby-passenger:2.1
+FROM instructure/ruby-passenger:2.4
 MAINTAINER Instructure
 
 USER root

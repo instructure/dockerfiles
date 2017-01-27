@@ -22,3 +22,6 @@ ruby:
 
 ruby-passenger:
   versions: *RUBY_VERSIONS
+
+ruby-node-pg:
+  versions: *RUBY_VERSIONS
