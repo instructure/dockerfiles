@@ -1,3 +1,7 @@
+# GENERATED FILE, DO NOT MODIFY!
+# To update this file please edit the relevant template and run the generation
+# task `rake generate:golang`
+
 FROM instructure/core:latest
 MAINTAINER Instructure
 

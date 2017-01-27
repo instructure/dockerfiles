@@ -11,6 +11,18 @@
 #       sqlite_version: 2 # overrides the 3 from defaults above
 #     '4':
 
+golang:
+  versions:
+    '1.5':
+      full_version: '1.5.4'
+      package_sha: 'a3358721210787dc1e06f5ea1460ae0564f22a0fbd91be9dcd947fb1d19b9560'
+    '1.6':
+      full_version: '1.6.4'
+      package_sha: 'b58bf5cede40b21812dfa031258db18fc39746cc0972bc26dae0393acc377aaf'
+    '1.7':
+      full_version: '1.7.4'
+      package_sha: '47fda42e46b4c3ec93fa5d4d4cc6a748aa3f9411a2a2b7e08e3a6d80d753ec8b'
+
 ruby:
   defaults:
     bundler_version: 1.12.5

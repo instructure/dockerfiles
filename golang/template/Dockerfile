@@ -1,15 +1,12 @@
-# GENERATED FILE, DO NOT MODIFY!
-# To update this file please edit the relevant template and run the generation
-# task `rake generate:golang`
-
+<%= generation_message %>
 FROM instructure/core:latest
 MAINTAINER Instructure
 
 USER root
 
-ENV GOLANG_VERSION 1.6.4
+ENV GOLANG_VERSION <%= full_version %>
 ENV GOLANG_DOWNLOAD_URL https://storage.googleapis.com/golang/go$GOLANG_VERSION.linux-amd64.tar.gz
-ENV GOLANG_DOWNLOAD_SHA256 b58bf5cede40b21812dfa031258db18fc39746cc0972bc26dae0393acc377aaf
+ENV GOLANG_DOWNLOAD_SHA256 <%= package_sha %>
 
 RUN curl -fsSL "$GOLANG_DOWNLOAD_URL" -o golang.tar.gz \
 	&& echo "$GOLANG_DOWNLOAD_SHA256  golang.tar.gz" | sha256sum -c - \
