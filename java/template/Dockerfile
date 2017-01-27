@@ -1,10 +1,7 @@
-# GENERATED FILE, DO NOT MODIFY!
-# To update this file please edit the relevant template and run the generation
-# task `rake generate:java`
-
+<%= generation_message %>
 FROM instructure/core
 
-ENV JAVA_VERSION=7
+ENV JAVA_VERSION=<%= version %>
 
 USER root
 
