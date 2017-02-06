@@ -82,3 +82,12 @@ ruby-passenger:
 
 ruby-node-pg:
   versions: *RUBY_VERSIONS
+
+appliances/libreoffice:
+  versions:
+    '5.2':
+      full_version: '5.2.5'
+      short_version: '5.2'
+    '5.3':
+      full_version: '5.3.0'
+      short_version: '5.3'
