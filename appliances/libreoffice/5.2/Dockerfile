@@ -45,7 +45,7 @@ RUN apt-get clean           \
 
 RUN mkdir /tmp/lo \
   && cd /tmp/lo \
-  && curl -L -k https://download.documentfoundation.org/libreoffice/stable/5.2.0/deb/x86_64/LibreOffice_5.2.0_Linux_x86-64_deb.tar.gz | tar xz --strip-components=1 \
+  && curl -L -k https://download.documentfoundation.org/libreoffice/stable/5.2.5/deb/x86_64/LibreOffice_5.2.5_Linux_x86-64_deb.tar.gz | tar xz --strip-components=1 \
   && cd DEBS \
   && dpkg -i *.deb \
   && rm -fr /tmp/lo
