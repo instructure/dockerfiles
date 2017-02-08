@@ -81,7 +81,25 @@ ruby-passenger:
   versions: *RUBY_VERSIONS
 
 ruby-node-pg:
-  versions: *RUBY_VERSIONS
+  versions:
+    '2.1':
+      ruby_version: '2.1'
+      node_version: '4.x'
+    '2.2':
+      ruby_version: '2.2'
+      node_version: '4.x'
+    '2.3':
+      ruby_version: '2.3'
+      node_version: '4.x'
+    '2.4':
+      ruby_version: '2.4'
+      node_version: '4.x'
+    'r2.3n6.x':
+      ruby_version: '2.3'
+      node_version: '6.x'
+    'r2.4n6.x':
+      ruby_version: '2.4'
+      node_version: '6.x'
 
 appliances/libreoffice:
   versions:
