@@ -57,6 +57,10 @@ node:
     '6.9':
       full_version: '6.9.0'
       npm_version: '3.10.8'
+    '7.5-yarn':
+      full_version: '7.5.0'
+      npm_version: '4.2.0'
+      yarn_version: '0.19.1-1'
 
 node-passenger:
   versions:
