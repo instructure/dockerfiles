@@ -4,6 +4,8 @@ MAINTAINER Instructure
 
 ENV NODE_VERSION <%= full_version %>
 ENV NPM_VERSION <%= npm_version %>
+<% @use_yarn = !(yarn_version.nil? || yarn_version.empty?) -%>
+<%= "ENV YARN_VERSION #{yarn_version}\n" if @use_yarn -%>
 
 USER root
 
@@ -44,4 +46,15 @@ RUN  curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux
 
 COPY npm-private /usr/local/bin
 
+<% if @use_yarn -%>
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+  && echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list \
+  && apt-get update \
+  && apt-get install -y --no-install-recommends yarn="$YARN_VERSION" \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
+
+COPY yarn-private /usr/local/bin
+
+<% end -%>
 USER docker

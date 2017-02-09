@@ -5,7 +5,7 @@ class Template
   attr_reader :path, :erb
   def initialize(template_path)
     @path = template_path
-    @erb = ERB.new(File.read(template_path))
+    @erb = ERB.new(File.read(template_path), nil, '-')
   end
 
   def filename
