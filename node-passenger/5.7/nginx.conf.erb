@@ -18,7 +18,7 @@ user docker;
 include /usr/src/nginx/main.d/*.conf;
 
 events {
-    worker_connections  1024;
+    worker_connections <%= ENV.fetch('NGINX_WORKER_CONNECTIONS', '1024') %>;
 }
 
 http {
