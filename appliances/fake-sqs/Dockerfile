@@ -1,4 +1,4 @@
-FROM instructure/ruby:2.1
+FROM instructure/ruby:2.4
 
 USER root
 COPY entrypoint.sh /usr/src/app/
