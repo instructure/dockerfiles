@@ -27,9 +27,17 @@ golang:
       package_sha: '53ab94104ee3923e228a2cb2116e5e462ad3ebaeea06ff04463479d7f12d27ca'
 
 java:
+  defaults:
+    flavor: 'jdk'
   versions:
     '7': {}
     '8': {}
+    '8-jre':
+      java_version: 8
+      update: 121
+      build: 13
+      flavor: 'jre'
+      checksum: 'e9e7ea248e2c4826b92b3f075a80e441'
 
 node:
   versions:
