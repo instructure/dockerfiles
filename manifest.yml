@@ -117,6 +117,15 @@ ruby-node-pg:
       ruby_version: '2.4'
       node_version: '6.x'
 
+spark:
+  versions:
+    '1.6-hadoop2.6':
+      spark_version: '1.6.3'
+      hadoop_version: '2.6.5'
+    '2.1-hadoop2.7':
+      spark_version: '2.1.0'
+      hadoop_version: '2.7.3'
+
 appliances/libreoffice:
   versions:
     '5.2':
