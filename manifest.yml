@@ -60,7 +60,7 @@ node:
     '7.5-yarn':
       full_version: '7.5.0'
       npm_version: '4.2.0'
-      yarn_version: '0.19.1-1'
+      yarn_version: '0.20.3-1'
 
 node-passenger:
   versions:
