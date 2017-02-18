@@ -6,8 +6,8 @@
   NODE_ENV = ENV.fetch('NODE_ENV', 'production')
 
   LEGACY_PORTS = ENV.fetch('LEGACY_PORTS', '1') == '1'
-  HTTP_PORT = LEGACY_PORTS ? 81 : 8080
-  HTTPS_PORT = LEGACY_PORTS ? 80 : 8443
+  HTTP_PORT = ENV.fetch('CG_HTTP_PORT', LEGACY_PORTS ? 81 : 8080)
+  HTTPS_PORT = ENV.fetch('CG_HTTPS_PORT', LEGACY_PORTS ? 80 : 8443)
 %>
 worker_processes <%= ENV.fetch('NGINX_WORKER_COUNT', (NODE_ENV == 'production' ? 'auto' : 1)) %>;
 pid /run/nginx.pid;
