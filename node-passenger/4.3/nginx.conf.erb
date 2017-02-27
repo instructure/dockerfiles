@@ -6,8 +6,9 @@
   NODE_ENV = ENV.fetch('NODE_ENV', 'production')
 
   LEGACY_PORTS = ENV.fetch('LEGACY_PORTS', '1') == '1'
-  HTTP_PORT = ENV.fetch('CG_HTTP_PORT', LEGACY_PORTS ? 81 : 8080)
-  HTTPS_PORT = ENV.fetch('CG_HTTPS_PORT', LEGACY_PORTS ? 80 : 8443)
+  HTTP_PORT = ENV.fetch('CG_HTTP_PORT', LEGACY_PORTS ? '81' : '8080')
+  HTTPS_PORT = ENV.fetch('CG_HTTPS_PORT', LEGACY_PORTS ? '80' : '8443')
+  HTTP_PORT = nil if HTTP_PORT == HTTPS_PORT
 %>
 worker_processes <%= ENV.fetch('NGINX_WORKER_COUNT', (NODE_ENV == 'production' ? 'auto' : 1)) %>;
 pid /run/nginx.pid;
@@ -51,15 +52,17 @@ http {
     sendfile        on;
     keepalive_timeout  65;
 
-    server {
-        listen       <%= HTTP_PORT %>;
-        server_name  redirect;
-        access_log   off;
-        if ($host = $remote_addr) {
-            return   301 https://<%= APP_DOMAIN %>$request_uri;
+    <% if HTTP_PORT %>
+        server {
+            listen       <%= HTTP_PORT %>;
+            server_name  redirect;
+            access_log   off;
+            if ($host = $remote_addr) {
+                return   301 https://<%= APP_DOMAIN %>$request_uri;
+            }
+            return       301 https://$host$request_uri;
         }
-        return       301 https://$host$request_uri;
-    }
+    <% end %>
 
     server {
         listen       <%= HTTPS_PORT %>;
