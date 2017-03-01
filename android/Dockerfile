@@ -76,7 +76,7 @@ ENV TINI_VERSION v0.9.0
 USER root
 RUN curl -o /usr/local/bin/tini -fsSL https://github.com/krallin/tini/releases/download/"$TINI_VERSION"/tini \
  && curl -o /usr/local/bin/tini.asc -fsSL https://github.com/krallin/tini/releases/download/"$TINI_VERSION"/tini.asc \
- && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys 0527A9B7 \
+ && gpg --keyserver keyserver.ubuntu.com --recv-keys 0527A9B7 \
  && gpg --verify /usr/local/bin/tini.asc \
  && rm /usr/local/bin/tini.asc \
  && chmod a+x /usr/local/bin/tini

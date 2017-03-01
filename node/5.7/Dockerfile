@@ -30,7 +30,7 @@ RUN  set -ex \
        DD8F2338BAE7501E3DD5AC78C273792F7D83545D \
        C4F0DFFF4E8C1A8236409D08E73BC641CC11F4C8 \
      ; do \
-       gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
+       gpg --keyserver keyserver.ubuntu.com --recv-keys "$key"; \
      done
 
 RUN mkdir -p /usr/src/app && chown docker:docker /usr/src/app
