@@ -7,8 +7,12 @@
 
   LEGACY_PORTS = ENV.fetch('LEGACY_PORTS', '1') == '1'
   HTTP_PORT = ENV.fetch('CG_HTTP_PORT', LEGACY_PORTS ? '81' : '8080')
+  HTTP_PORT = nil if HTTP_PORT.empty?
   HTTPS_PORT = ENV.fetch('CG_HTTPS_PORT', LEGACY_PORTS ? '80' : '8443')
-  HTTP_PORT = nil if HTTP_PORT == HTTPS_PORT
+  HTTPS_PORT = nil if HTTPS_PORT.empty?
+
+  APP_PORT = HTTPS_PORT || HTTP_PORT
+  REDIRECT_PORT = HTTP_PORT if HTTP_PORT != HTTPS_PORT
 %>
 worker_processes <%= ENV.fetch('NGINX_WORKER_COUNT', (NODE_ENV == 'production' ? 'auto' : 1)) %>;
 pid /run/nginx.pid;
@@ -35,7 +39,7 @@ http {
     passenger_app_env <%= NODE_ENV %>;
     passenger_max_pool_size <%= ENV.fetch('PASSENGER_MAX_POOL_SIZE', '6') %>;
     passenger_min_instances <%= ENV.fetch('PASSENGER_MIN_INSTANCES', '1') %>;
-    passenger_pre_start <%= URI.parse("http://#{APP_DOMAIN}:#{HTTPS_PORT}").merge(ENV.fetch('CG_INSTANCE_POOL_HEALTH_CHECK_PATH', '/')) %>;
+    passenger_pre_start <%= URI.parse("http://#{APP_DOMAIN}:#{APP_PORT}").merge(ENV.fetch('CG_INSTANCE_POOL_HEALTH_CHECK_PATH', '/')) %>;
 
     more_clear_headers 'X-Powered-By';
     server_tokens off;
@@ -52,9 +56,9 @@ http {
     sendfile        on;
     keepalive_timeout  65;
 
-    <% if HTTP_PORT %>
+    <% if REDIRECT_PORT %>
         server {
-            listen       <%= HTTP_PORT %>;
+            listen       <%= REDIRECT_PORT %>;
             server_name  redirect;
             access_log   off;
             if ($host = $remote_addr) {
@@ -65,7 +69,7 @@ http {
     <% end %>
 
     server {
-        listen       <%= HTTPS_PORT %>;
+        listen       <%= APP_PORT %>;
         server_name  <%= APP_DOMAIN %>;
         root <%= ENV.fetch('APP_ROOT_PATH', '/usr/src/app/public') %>;
 
