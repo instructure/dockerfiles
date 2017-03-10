@@ -12,7 +12,7 @@
   HTTPS_PORT = nil if HTTPS_PORT.empty?
 
   APP_PORT = HTTPS_PORT || HTTP_PORT
-  REDIRECT_PORT = HTTP_PORT if HTTP_PORT != HTTPS_PORT
+  REDIRECT_PORT = HTTP_PORT != HTTPS_PORT ? HTTP_PORT : nil
 %>
 worker_processes <%= ENV.fetch('NGINX_WORKER_COUNT', (RAILS_ENV == 'production' ? 'auto' : 1)) %>;
 pid /run/nginx.pid;
