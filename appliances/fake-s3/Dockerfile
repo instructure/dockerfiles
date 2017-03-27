@@ -12,7 +12,7 @@ RUN chmod +x /fakes3/entrypoint.sh && \
 USER docker
 
 # install fake-s3
-RUN gem install fakes3 -v 0.2.4
+RUN gem install fakes3 -v 0.2.5
 
 
 # run fake-s3
