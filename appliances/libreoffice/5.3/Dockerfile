@@ -50,7 +50,7 @@ RUN apt-get clean           \
 
 RUN mkdir /tmp/lo \
   && cd /tmp/lo \
-  && curl -L -k https://download.documentfoundation.org/libreoffice/stable/5.3.0/deb/x86_64/LibreOffice_5.3.0_Linux_x86-64_deb.tar.gz | tar xz --strip-components=1 \
+  && curl -L -k https://download.documentfoundation.org/libreoffice/stable/5.3.1/deb/x86_64/LibreOffice_5.3.1_Linux_x86-64_deb.tar.gz | tar xz --strip-components=1 \
   && cd DEBS \
   && dpkg -i *.deb \
   && rm -fr /tmp/lo
