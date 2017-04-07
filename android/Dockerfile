@@ -68,20 +68,6 @@ RUN ./build_image.sh "$IDRSA"
 USER root
 RUN rm /root_build_image.sh /build_image.sh
 
-# ************************************ tini ************************************
-# https://github.com/krallin/tini
-ENV TINI_VERSION v0.9.0
-
-# Verify tini signature
-USER root
-RUN curl -o /usr/local/bin/tini -fsSL https://github.com/krallin/tini/releases/download/"$TINI_VERSION"/tini \
- && curl -o /usr/local/bin/tini.asc -fsSL https://github.com/krallin/tini/releases/download/"$TINI_VERSION"/tini.asc \
- && gpg --keyserver keyserver.ubuntu.com --recv-keys 0527A9B7 \
- && gpg --verify /usr/local/bin/tini.asc \
- && rm /usr/local/bin/tini.asc \
- && chmod a+x /usr/local/bin/tini
-# ********************************** end tini **********************************
-
 # cloudbees cli
 RUN curl -o /usr/local/bin/jenkins-cli.jar -fsSL https://jenkins.ci.cloudbees.com/jnlpJars/jenkins-cli.jar \
  && chmod a+x /usr/local/bin/jenkins-cli.jar
@@ -97,4 +83,4 @@ COPY entrypoint.sh /
 
 # Run entrypoint as docker user
 USER docker
-CMD ["/usr/local/bin/tini", "--", "/entrypoint.sh"]
+CMD ["/tini", "--", "/entrypoint.sh"]
