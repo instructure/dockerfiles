@@ -6,7 +6,7 @@ FROM instructure/core:latest
 MAINTAINER Instructure
 
 ENV NODE_VERSION 6.5.0
-ENV NPM_VERSION 3.10.3
+ENV NPM_VERSION 3.10.10
 
 USER root
 
