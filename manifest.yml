@@ -74,7 +74,7 @@ node:
     '7.5-yarn':
       full_version: '7.5.0'
       npm_version: '4.6.1'
-      yarn_version: '0.23.3-1'
+      yarn_version: '0.24.5-1'
 
 node-passenger:
   versions:
