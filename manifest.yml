@@ -130,6 +130,14 @@ spark:
       spark_version: '2.1.0'
       hadoop_version: '2.7.3'
 
+clojure:
+  versions:
+    '8':
+      java_version: '8'
+      package_sha: '871d2e308076d2e9edf457cffc9d15996c8d003e'
+      recv_key: '2E708FB2FCECA07FF8184E275A92E04305696D78'
+      lein_version: '2.5.3'
+
 # Coordinate with owner(s) of canvadocs before upgrades (currently the Content team)
 appliances/libreoffice:
   versions:
