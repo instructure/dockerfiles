@@ -20,11 +20,11 @@ golang:
       full_version: '1.6.4'
       package_sha: 'b58bf5cede40b21812dfa031258db18fc39746cc0972bc26dae0393acc377aaf'
     '1.7':
-      full_version: '1.7.5'
-      package_sha: '2e4dd6c44f0693bef4e7b46cc701513d74c3cc44f2419bf519d7868b12931ac3'
+      full_version: '1.7.6'
+      package_sha: 'ad5808bf42b014c22dd7646458f631385003049ded0bb6af2efc7f1f79fa29ea'
     '1.8':
-      full_version: '1.8'
-      package_sha: '53ab94104ee3923e228a2cb2116e5e462ad3ebaeea06ff04463479d7f12d27ca'
+      full_version: '1.8.3'
+      package_sha: '1862f4c3d3907e59b04a757cfda0ea7aa9ef39274af99a784f5be843c80c6772'
 
 java:
   defaults:
