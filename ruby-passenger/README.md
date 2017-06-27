@@ -37,6 +37,10 @@ The passenger default is 6. You may override this with the
 The passenger default is 0. We set a default of 1. You may override this with the
 `PASSENGER_MIN_INSTANCES` variable.
 
+## Passenger startup timeout (PASSENGER_STARTUP_TIMEOUT)
+The passenger default is 90. You may override this with the
+`PASSENGER_STARTUP_TIMEOUT` variable.
+
 ## main.d (/usr/src/nginx/main.d/*.conf)
 Additional global configuration settings can be included in the
 `/usr/src/nginx/main.d/` directory.

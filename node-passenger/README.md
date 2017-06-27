@@ -33,6 +33,10 @@ be a valid string that the `client_max_body_size` directive will accept.
 The passenger default is 6. You may override this with the
 `PASSENGER_MAX_POOL_SIZE` variable.
 
+## Passenger startup timeout (PASSENGER_STARTUP_TIMEOUT)
+The passenger default is 90. You may override this with the
+`PASSENGER_STARTUP_TIMEOUT` variable.
+
 ## main.d (/usr/src/nginx/main.d/*.conf)
 Additional global configuration settings can be included in the
 `/usr/src/nginx/main.d/` directory.
