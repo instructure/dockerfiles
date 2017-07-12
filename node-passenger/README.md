@@ -1,9 +1,11 @@
 # Introduction
+
 This container is designed to be a starting point for development and
 deployment of node based web apps.
 
 ## Quick start (for simple apps without background processing)
-1. Choose your node version (4, 4.3, 5.7, 6)
+
+1. Choose your node version (4, 4.3, 5.7, 6, 6.5, 6.8, 6.9, 6.10, 7.5-yarn, and 8)
 2. Set your container to be `FROM` `instructure/node-passenger:<node version>`
 3. Copy app and assets to `/usr/src/app` (nginx will serve static assets from public)
 making sure to change the ownership of these files to docker:docker (`RUN chown -R docker:docker /usr/src/app`)
@@ -32,6 +34,14 @@ be a valid string that the `client_max_body_size` directive will accept.
 ## Passenger max pool size (PASSENGER_MAX_POOL_SIZE)
 The passenger default is 6. You may override this with the
 `PASSENGER_MAX_POOL_SIZE` variable.
+
+## Passenger min instances (PASSENGER_MIN_INSTANCES)
+The passenger default is 0. We set a default of 1. You may override this with the
+`PASSENGER_MIN_INSTANCES` variable.
+
+## Passenger max request queue size (PASSENGER_MAX_REQUEST_QUEUE_SIZE)
+The passenger default is 100. We set a default of 100. You may override this
+with the `PASSENGER_MAX_REQUEST_QUEUE_SIZE` variable.
 
 ## Passenger startup timeout (PASSENGER_STARTUP_TIMEOUT)
 The passenger default is 90. You may override this with the
@@ -83,21 +93,30 @@ When deploying with CloudGate `CG_ENVIRONMENT` will be set and both SSL and `X-F
 
 ## application root path (APP_ROOT_PATH)
 Occasionally you may need to change the root path. This currently defaults to
-`/usr/src/app/public` this can be overridden by the `APP_ROOT_PATH` variable.
+`/usr/src/app/public`. This can be overridden by setting the `APP_ROOT_PATH` variable.
 
-## sample Dockerfile
+## Sample Dockerfile
 
-```
+```Dockerfile
 FROM instructure/node-passenger:6
 
+ENV APP_HOME "/usr/src/app/"
+
 USER root
-ENV APP_HOME /usr/src/app
-RUN mkdir -p $APP_HOME
+
+COPY nginx/conf.d/* /usr/src/nginx/conf.d/
+COPY nginx/location.d/* /usr/src/nginx/location.d/
+COPY nginx/main.d/* /usr/src/nginx/main.d/
+
 COPY . $APP_HOME
-WORKDIR $APP_HOME
-COPY nginx/passenger.conf /usr/src/nginx/conf.d/passenger.conf
-RUN npm install
-RUN chown -R docker:docker $APP_HOME
-ENV NODE_ENV development
+RUN npm install && chown -R docker:docker $APP_HOME
+
 USER docker
 ```
+
+# Making changes
+
+All of the Dockerfiles in this directory are generated using a Rake task
+(generate:ruby-passenger), this task also copies all of the source files
+from the `template` directory. Make changes to any of these files, run the Rake
+task and the updates will propagate to the sub folders for each version.

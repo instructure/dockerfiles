@@ -1,9 +1,11 @@
 # Introduction
+
 This container is designed to be a starting point for development and
 deployment of ruby based web apps.
 
 ## Quick start (for simple apps without background processing)
-1. Choose your ruby version (currently 2.1, 2.2, and 2.3 are available)
+
+1. Choose your ruby version (2.1, 2.2, 2.3, or 2.4)
 2. Set your container to be `FROM` `instructure/ruby-passenger:<ruby version>`
 3. Copy app and assets to `/usr/src/app` (nginx will serve static assets from public)
 making sure to change the ownership of these files to docker:docker (`RUN chown -R docker:docker /usr/src/app`)
@@ -18,7 +20,7 @@ development and test, set the RAILS_ENV env var in your `Dockerfile` or
 other related vars in passenger.
 
 ## nginx worker process count (NGINX_WORKER_COUNT)
-The default number of wokers (1) in this container is well suited for use
+The default number of workers (1) in this container is well suited for use
 in development environments, this will likely be insufficient in production
 environments. To increase the number of workers set `NGINX_WORKER_COUNT` in
 the environment before calling the entrypoint script.
@@ -37,6 +39,10 @@ The passenger default is 6. You may override this with the
 The passenger default is 0. We set a default of 1. You may override this with the
 `PASSENGER_MIN_INSTANCES` variable.
 
+## Passenger max request queue size (PASSENGER_MAX_REQUEST_QUEUE_SIZE)
+The passenger default is 100. We set a default of 100. You may override this
+with the `PASSENGER_MAX_REQUEST_QUEUE_SIZE` variable.
+
 ## Passenger startup timeout (PASSENGER_STARTUP_TIMEOUT)
 The passenger default is 90. You may override this with the
 `PASSENGER_STARTUP_TIMEOUT` variable.
@@ -53,7 +59,7 @@ If you wish to use an explicit whitelist instead, remove or replace the
 `/usr/src/nginx/main.d/env.conf.erb` file in your derived image.
 
 ## conf.d (/usr/src/nginx/conf.d/*.conf;)
-You may want to add some additional NGINX paremeters. This can now
+You may want to add some additional NGINX parameters. This can now
 be done by adding a file to `/usr/src/nginx/conf.d/`
 Example: web.conf
 
@@ -76,25 +82,42 @@ When deploying with CloudGate `CG_ENVIRONMENT` will be set and both SSL and `X-F
 
 ## application root path (APP_ROOT_PATH)
 Occasionally you may need to change the root path. This currently defaults to
-`/usr/src/app/public` this can be overriden by the `APP_ROOT_PATH` variable.
+`/usr/src/app/public`. This can be overridden by setting the `APP_ROOT_PATH` variable.
 
-## sample Dockerfile
-	FROM instructure/ruby-passenger:2.1
+## Sample Dockerfile
 
-	USER root
-	RUN apt-get update && apt-get install -y postgresql-client
+```Dockerfile
+FROM instructure/ruby-passenger:2.4
 
-	WORKDIR /usr/local
-	RUN curl -O http://nodejs.org/dist/v0.10.33/node-v0.10.33-linux-x64.tar.gz
-	RUN tar --strip-components 1 -xzf node-v0.10.33-linux-x64.tar.gz
-	RUN rm node-v0.10.33-linux-x64.tar.gz
+ENV APP_HOME "/usr/src/app/"
 
-	ADD . /usr/src/app/
-	WORKDIR /usr/src/app
-	RUN chown -R docker:docker /usr/src/app
-	USER docker
+USER root
+
+COPY nginx/conf.d/* /usr/src/nginx/conf.d/
+COPY nginx/location.d/* /usr/src/nginx/location.d/
+COPY nginx/main.d/* /usr/src/nginx/main.d/
+
+# Install PostgreSQL 9.6 libraries and client.
+RUN echo "deb https://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list \
+ && curl -s https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
+ && apt-get update && apt-get install -y postgresql-client-9.6 \
+ && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+COPY Gemfile Gemfile.lock $APP_HOME
+RUN chown -R docker:docker $APP_HOME
+
+USER docker
+RUN bundle install --quiet --jobs 8
+USER root
+
+COPY . $APP_HOME
+RUN mkdir -p log tmp && chown -R docker:docker $APP_HOME
+
+USER docker
+```
 
 # Making changes
+
 All of the Dockerfiles in this directory are generated using a Rake task
 (generate:ruby-passenger), this task also copies all of the source files
 from the `template` directory. Make changes to any of these files, run the Rake
