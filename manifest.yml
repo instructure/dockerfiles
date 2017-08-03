@@ -26,6 +26,33 @@ golang:
       full_version: '1.8.3'
       package_sha: '1862f4c3d3907e59b04a757cfda0ea7aa9ef39274af99a784f5be843c80c6772'
 
+rust:
+  versions:
+    '1.18':
+      full_version: '1.18.0'
+      package_sha: 'b5754708958aba0de49455b0665d27fe670291e14e0c0ca68a03008a1cb985b0'
+    '1.19':
+      full_version: '1.19.0'
+      package_sha: '0d16f515adaf4176daa2c3a55c6ccb3c9c1695982dcad5200e75f748dff8ffb4'
+
+rust-musl:
+  template_files:
+    - Dockerfile
+    - cargo-config.toml
+  versions:
+    '1.18':
+      full_version: '1.18.0'
+      package_sha: 'b5754708958aba0de49455b0665d27fe670291e14e0c0ca68a03008a1cb985b0'
+      ssl_version: '1.0.2'
+      ssl_flavor: '1.0.2l'
+      ssl_sha: 'ce07195b659e75f4e1db43552860070061f156a98bb37b672b101ba6e3ddf30c'
+    '1.19':
+      full_version: '1.19.0'
+      package_sha: '0d16f515adaf4176daa2c3a55c6ccb3c9c1695982dcad5200e75f748dff8ffb4'
+      ssl_version: '1.0.2'
+      ssl_flavor: '1.0.2l'
+      ssl_sha: 'ce07195b659e75f4e1db43552860070061f156a98bb37b672b101ba6e3ddf30c'
+
 java:
   defaults:
     flavor: 'jdk'
