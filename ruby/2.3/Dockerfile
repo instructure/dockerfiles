@@ -6,7 +6,7 @@ FROM instructure/core:latest
 MAINTAINER Instructure
 
 ENV RUBY_MAJOR 2.3
-ENV BUNDLER_VERSION 1.12.5
+ENV BUNDLER_VERSION 1.15.3
 
 USER root
 RUN mkdir -p /usr/src/app

@@ -122,7 +122,7 @@ node-passenger:
 
 ruby:
   defaults:
-    bundler_version: 1.12.5
+    bundler_version: 1.15.3
   versions: &RUBY_VERSIONS
     '2.1': {}
     '2.2': {}
