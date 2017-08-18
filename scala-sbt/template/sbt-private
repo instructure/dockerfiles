@@ -1,0 +1,19 @@
+<%= generation_message %>
+#!/bin/bash
+
+SBT_MINOR_VERSION=<%= version %>
+SBT_CONF_DIR=$HOME/.sbt/$SBT_MINOR_VERSION
+USER_FILE=$SBT_CONF_DIR/users.sbt
+
+mkdir -p $SBT_CONF_DIR
+
+if [ -n "$MAVEN_PRIVATE_HOSTNAME" ] && [ -n "$MAVEN_PRIVATE_USERNAME" ] && [ -n "$MAVEN_PRIVATE_PASSWORD" ]; then
+  echo "credentials += Credentials(\"Artifactory Realm\", \"$MAVEN_PRIVATE_HOSTNAME\", \"$MAVEN_PRIVATE_USERNAME\", \"$MAVEN_PRIVATE_PASSWORD\")" > $USER_FILE
+fi
+
+# Run the SBT command with the credentials which have been added above.
+sbt "$@"
+EXIT_CODE=$?
+
+[ -e "$USER_FILE" ] && rm $USER_FILE
+exit $EXIT_CODE

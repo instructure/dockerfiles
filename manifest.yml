@@ -153,6 +153,16 @@ ruby-node-pg:
       ruby_version: '2.4'
       node_version: '6.x'
 
+scala-sbt:
+  template_files:
+     - Dockerfile
+     - sbt-private
+  versions:
+    '0.13':
+      full_version: '0.13.16'
+    '1.0':
+      full_version: '1.0.0'
+
 spark:
   versions:
     '1.6-hadoop2.6':
