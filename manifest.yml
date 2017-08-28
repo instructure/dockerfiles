@@ -25,6 +25,9 @@ golang:
     '1.8':
       full_version: '1.8.3'
       package_sha: '1862f4c3d3907e59b04a757cfda0ea7aa9ef39274af99a784f5be843c80c6772'
+    '1.9':
+      full_version: '1.9'
+      package_sha: 'd70eadefce8e160638a9a6db97f7192d8463069ab33138893ad3bf31b0650a79'
 
 rust:
   versions:
