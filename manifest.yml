@@ -126,6 +126,7 @@ node-passenger:
 ruby:
   defaults:
     bundler_version: 1.15.3
+    rubygems_version: 2.6.13
   versions: &RUBY_VERSIONS
     '2.1': {}
     '2.2': {}

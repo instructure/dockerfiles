@@ -4,6 +4,7 @@ MAINTAINER Instructure
 
 ENV RUBY_MAJOR <%= version %>
 ENV BUNDLER_VERSION <%= bundler_version %>
+ENV RUBYGEMS_VERSION <%= rubygems_version %>
 
 USER root
 RUN mkdir -p /usr/src/app
@@ -51,7 +52,8 @@ RUN sed -i '/<\/policymap>/i\
   <policy domain="coder" rights="none" pattern="WIN" />\n\
   <policy domain="coder" rights="none" pattern="PLT" />' /etc/ImageMagick/policy.xml
 
-RUN gem install -i /var/lib/gems/$RUBY_MAJOR.0 bundler -v $BUNDLER_VERSION
+RUN gem update --system $RUBYGEMS_VERSION \
+ && gem install -i /var/lib/gems/$RUBY_MAJOR.0 bundler -v $BUNDLER_VERSION
 ENV BUNDLE_APP_CONFIG /home/docker/.bundle
 
 USER docker
