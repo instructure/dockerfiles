@@ -7,9 +7,9 @@ MAINTAINER Instructure
 
 USER root
 
-ENV RUST_VERSION 1.19.0
+ENV RUST_VERSION 1.20.0
 ENV RUST_DOWNLOAD_URL https://static.rust-lang.org/dist/rust-$RUST_VERSION-x86_64-unknown-linux-gnu.tar.gz
-ENV RUST_DOWNLOAD_SHA256 30ff67884464d32f6bbbde4387e7557db98868e87fb2afbb77c9b7716e3bff09
+ENV RUST_DOWNLOAD_SHA256 ca1cf3aed73ff03d065a7d3e57ecca92228d35dc36d9274a6597441319f18eb8
 
 RUN mkdir -p /usr/src/rust/
 
