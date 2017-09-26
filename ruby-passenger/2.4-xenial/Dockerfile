@@ -1,5 +1,8 @@
-<%= generation_message %>
-FROM instructure/ruby:<%= version %>
+# GENERATED FILE, DO NOT MODIFY!
+# To update this file please edit the relevant template and run the generation
+# task `rake generate:ruby-passenger`
+
+FROM instructure/ruby:2.4-xenial
 MAINTAINER Instructure
 
 USER root
@@ -7,7 +10,7 @@ USER root
 #Install Nginx with Passenger from official repository
 RUN  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CAC40B2F7 \
   && apt-get install -y apt-transport-https ca-certificates \
-  && sh -c 'echo deb https://oss-binaries.phusionpassenger.com/apt/passenger <%= base_distro %> main > /etc/apt/sources.list.d/passenger.list' \
+  && sh -c 'echo deb https://oss-binaries.phusionpassenger.com/apt/passenger xenial main > /etc/apt/sources.list.d/passenger.list' \
   && apt-get update \
   && apt-get install -y --no-install-recommends nginx-extras passenger \
   && apt-get clean \

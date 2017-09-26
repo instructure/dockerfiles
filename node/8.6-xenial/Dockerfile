@@ -1,11 +1,13 @@
-<%= generation_message %>
-FROM <%= base_image %>
+# GENERATED FILE, DO NOT MODIFY!
+# To update this file please edit the relevant template and run the generation
+# task `rake generate:node`
+
+FROM instructure/core:xenial
 MAINTAINER Instructure
 
-ENV NODE_VERSION <%= full_version %>
-ENV NPM_VERSION <%= npm_version %>
-<% @use_yarn = !(yarn_version.nil? || yarn_version.empty?) -%>
-<%= "ENV YARN_VERSION #{yarn_version}\n" if @use_yarn -%>
+ENV NODE_VERSION 8.6.0
+ENV NPM_VERSION 5.4.2
+ENV YARN_VERSION 0.27.5-1
 
 USER root
 
@@ -46,7 +48,6 @@ RUN  curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux
 
 COPY npm-private /usr/local/bin
 
-<% if @use_yarn -%>
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
   && echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list \
   && apt-get update \
@@ -56,5 +57,4 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 
 COPY yarn-private /usr/local/bin
 
-<% end -%>
 USER docker

@@ -11,6 +11,14 @@
 #       sqlite_version: 2 # overrides the 3 from defaults above
 #     '4':
 
+core:
+  versions:
+    # "latest" must always be trusty for backwards compatibility.
+    latest:
+      base_image: ubuntu:trusty
+    xenial:
+      base_image: ubuntu:xenial
+
 golang:
   versions:
     '1.5':
@@ -79,6 +87,9 @@ java:
       checksum: 'e9e7ea248e2c4826b92b3f075a80e441'
 
 node: &NODE
+  defaults:
+    base_image: instructure/core:latest
+    base_distro: trusty
   versions:
     '4':
       full_version: '4.6.2'
@@ -118,6 +129,12 @@ node: &NODE
       full_version: '8.6.0'
       npm_version: '5.4.2'
       yarn_version: '0.27.5-1'
+    '8-xenial':
+      base_image: instructure/core:xenial
+      base_distro: xenial
+      full_version: '8.6.0'
+      npm_version: '5.4.2'
+      yarn_version: '0.27.5-1'
     '8.0':
       full_version: '8.0.0'
       npm_version: '5.4.2'
@@ -130,12 +147,20 @@ node: &NODE
       full_version: '8.6.0'
       npm_version: '5.4.2'
       yarn_version: '0.27.5-1'
+    '8.6-xenial':
+      base_image: instructure/core:xenial
+      base_distro: xenial
+      full_version: '8.6.0'
+      npm_version: '5.4.2'
+      yarn_version: '0.27.5-1'
 
 node-passenger:
   <<: *NODE
 
 ruby: &RUBY
   defaults:
+    base_image: instructure/core:latest
+    base_distro: trusty
     bundler_version: 1.15.3
     rubygems_version: 2.6.13
   versions:
@@ -143,6 +168,9 @@ ruby: &RUBY
     '2.2': {}
     '2.3': {}
     '2.4': {}
+    '2.4-xenial':
+      base_image: instructure/core:xenial
+      base_distro: xenial
 
 ruby-passenger:
   <<: *RUBY

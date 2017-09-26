@@ -1,10 +1,13 @@
-<%= generation_message %>
-FROM <%= base_image %>
+# GENERATED FILE, DO NOT MODIFY!
+# To update this file please edit the relevant template and run the generation
+# task `rake generate:ruby`
+
+FROM instructure/core:xenial
 MAINTAINER Instructure
 
-ENV RUBY_MAJOR <%= version[0..2] %>
-ENV BUNDLER_VERSION <%= bundler_version %>
-ENV RUBYGEMS_VERSION <%= rubygems_version %>
+ENV RUBY_MAJOR 2.4
+ENV BUNDLER_VERSION 1.15.3
+ENV RUBYGEMS_VERSION 2.6.13
 
 USER root
 RUN mkdir -p /usr/src/app
@@ -39,20 +42,6 @@ RUN apt-add-repository -y ppa:brightbox/ruby-ng \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-<% if base_image.include? 'core:latest' -%>
-# https://imagetragick.com/ mitigation
-RUN sed -i '/<\/policymap>/i\
-  <!-- ImageTragick Mitigation -->\n\
-  <policy domain="coder" rights="none" pattern="EPHEMERAL" />\n\
-  <policy domain="coder" rights="none" pattern="URL" />\n\
-  <policy domain="coder" rights="none" pattern="HTTPS" />\n\
-  <policy domain="coder" rights="none" pattern="MVG" />\n\
-  <policy domain="coder" rights="none" pattern="MSL" />\n\
-  <policy domain="coder" rights="none" pattern="TEXT" />\n\
-  <policy domain="coder" rights="none" pattern="SHOW" />\n\
-  <policy domain="coder" rights="none" pattern="WIN" />\n\
-  <policy domain="coder" rights="none" pattern="PLT" />' /etc/ImageMagick/policy.xml
-<% end -%>
 
 RUN gem update --system $RUBYGEMS_VERSION \
  && gem install -i /var/lib/gems/$RUBY_MAJOR.0 bundler -v $BUNDLER_VERSION
