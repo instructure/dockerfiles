@@ -14,4 +14,7 @@ VOLUME $DATADIR
 
 COPY entrypoint.sh /home/docker/entrypoint.sh
 
+# Configure a sane default Java heap size (that can be overridden).
+ENV JAVA_OPTS "-Xmx256m"
+
 ENTRYPOINT ["/home/docker/entrypoint.sh", "-dbPath /var/lib/dynamo"]
