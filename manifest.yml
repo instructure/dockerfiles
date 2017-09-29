@@ -115,7 +115,7 @@ node:
       npm_version: '4.6.1'
       yarn_version: '0.27.5-1'
     '8':
-      full_version: '8.4.0'
+      full_version: '8.6.0'
       npm_version: '5.0.2'
       yarn_version: '0.27.5-1'
     '8.0':
@@ -125,6 +125,10 @@ node:
     '8.4':
       full_version: '8.4.0'
       npm_version: '5.0.2'
+      yarn_version: '0.27.5-1'
+    '8.6':
+      full_version: '8.6.0'
+      npm_version: '5.4.2'
       yarn_version: '0.27.5-1'
 
 node-passenger:
