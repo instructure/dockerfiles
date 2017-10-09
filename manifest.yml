@@ -78,7 +78,7 @@ java:
       flavor: 'jre'
       checksum: 'e9e7ea248e2c4826b92b3f075a80e441'
 
-node:
+node: &NODE
   versions:
     '4':
       full_version: '4.6.2'
@@ -116,15 +116,15 @@ node:
       yarn_version: '0.27.5-1'
     '8':
       full_version: '8.6.0'
-      npm_version: '5.0.2'
+      npm_version: '5.4.2'
       yarn_version: '0.27.5-1'
     '8.0':
       full_version: '8.0.0'
-      npm_version: '5.0.2'
+      npm_version: '5.4.2'
       yarn_version: '0.27.5-1'
     '8.4':
       full_version: '8.4.0'
-      npm_version: '5.0.2'
+      npm_version: '5.4.2'
       yarn_version: '0.27.5-1'
     '8.6':
       full_version: '8.6.0'
@@ -132,30 +132,20 @@ node:
       yarn_version: '0.27.5-1'
 
 node-passenger:
-  versions:
-    '4':
-    '4.3':
-    '5.7':
-    '6':
-    '6.5':
-    '6.8':
-    '6.9':
-    '6.10':
-    '7.5-yarn':
-    '8':
+  <<: *NODE
 
-ruby:
+ruby: &RUBY
   defaults:
     bundler_version: 1.15.3
     rubygems_version: 2.6.13
-  versions: &RUBY_VERSIONS
+  versions:
     '2.1': {}
     '2.2': {}
     '2.3': {}
     '2.4': {}
 
 ruby-passenger:
-  versions: *RUBY_VERSIONS
+  <<: *RUBY
 
 ruby-node-pg:
   versions:
