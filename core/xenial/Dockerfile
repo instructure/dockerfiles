@@ -37,7 +37,7 @@ ENV LC_ALL     en_US.UTF-8
 RUN dpkg-reconfigure locales
 
 # Install Tini for init use (reaps defunct processes and forwards signals)
-ENV TINI_VERSION v0.14.0
+ENV TINI_VERSION v0.16.1
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini.asc /tini.asc
 RUN gpg --keyserver keyserver.ubuntu.com --recv-keys 595E85A6B1B4779EA4DAAEC70B588DFF0527A9B7 \

@@ -11,6 +11,24 @@
 #       sqlite_version: 2 # overrides the 3 from defaults above
 #     '4':
 
+# Coordinate with owner(s) of canvadocs before upgrades (currently the Content team)
+appliances/libreoffice:
+  versions:
+    '5.2':
+      full_version: '5.2.5'
+      short_version: '5.2'
+    '5.3':
+      full_version: '5.3.2'
+      short_version: '5.3'
+
+clojure:
+  versions:
+    '8':
+      java_version: '8'
+      package_sha: '871d2e308076d2e9edf457cffc9d15996c8d003e'
+      recv_key: '2E708FB2FCECA07FF8184E275A92E04305696D78'
+      lein_version: '2.5.3'
+
 core:
   versions:
     # "latest" must always be trusty for backwards compatibility.
@@ -36,42 +54,6 @@ golang:
     '1.9':
       full_version: '1.9.1'
       package_sha: '07d81c6b6b4c2dcf1b5ef7c27aaebd3691cdb40548500941f92b221147c5d9c7'
-
-rust:
-  versions:
-    '1.18':
-      full_version: '1.18.0'
-      package_sha: 'abdc9f37870c979dd241ba8c7c06d8bb99696292c462ed852c0af7f988bb5887'
-    '1.19':
-      full_version: '1.19.0'
-      package_sha: '30ff67884464d32f6bbbde4387e7557db98868e87fb2afbb77c9b7716e3bff09'
-    '1.20':
-      full_version: '1.20.0'
-      package_sha: 'ca1cf3aed73ff03d065a7d3e57ecca92228d35dc36d9274a6597441319f18eb8'
-
-rust-musl:
-  template_files:
-    - Dockerfile
-    - cargo-config.toml
-  versions:
-    '1.18':
-      full_version: '1.18.0'
-      package_sha: 'abdc9f37870c979dd241ba8c7c06d8bb99696292c462ed852c0af7f988bb5887'
-      ssl_version: '1.0.2'
-      ssl_flavor: '1.0.2l'
-      ssl_sha: 'ce07195b659e75f4e1db43552860070061f156a98bb37b672b101ba6e3ddf30c'
-    '1.19':
-      full_version: '1.19.0'
-      package_sha: '30ff67884464d32f6bbbde4387e7557db98868e87fb2afbb77c9b7716e3bff09'
-      ssl_version: '1.0.2'
-      ssl_flavor: '1.0.2l'
-      ssl_sha: 'ce07195b659e75f4e1db43552860070061f156a98bb37b672b101ba6e3ddf30c'
-    '1.20':
-      full_version: '1.20.0'
-      package_sha: 'ca1cf3aed73ff03d065a7d3e57ecca92228d35dc36d9274a6597441319f18eb8'
-      ssl_version: '1.0.2'
-      ssl_flavor: '1.0.2l'
-      ssl_sha: 'ce07195b659e75f4e1db43552860070061f156a98bb37b672b101ba6e3ddf30c'
 
 java:
   defaults:
@@ -172,9 +154,6 @@ ruby: &RUBY
       base_image: instructure/core:xenial
       base_distro: xenial
 
-ruby-passenger:
-  <<: *RUBY
-
 ruby-node-pg:
   versions:
     '2.1':
@@ -196,6 +175,45 @@ ruby-node-pg:
       ruby_version: '2.4'
       node_version: '6.x'
 
+ruby-passenger:
+  <<: *RUBY
+
+rust:
+  versions:
+    '1.18':
+      full_version: '1.18.0'
+      package_sha: 'abdc9f37870c979dd241ba8c7c06d8bb99696292c462ed852c0af7f988bb5887'
+    '1.19':
+      full_version: '1.19.0'
+      package_sha: '30ff67884464d32f6bbbde4387e7557db98868e87fb2afbb77c9b7716e3bff09'
+    '1.20':
+      full_version: '1.20.0'
+      package_sha: 'ca1cf3aed73ff03d065a7d3e57ecca92228d35dc36d9274a6597441319f18eb8'
+
+rust-musl:
+  template_files:
+    - Dockerfile
+    - cargo-config.toml
+  versions:
+    '1.18':
+      full_version: '1.18.0'
+      package_sha: 'abdc9f37870c979dd241ba8c7c06d8bb99696292c462ed852c0af7f988bb5887'
+      ssl_version: '1.0.2'
+      ssl_flavor: '1.0.2l'
+      ssl_sha: 'ce07195b659e75f4e1db43552860070061f156a98bb37b672b101ba6e3ddf30c'
+    '1.19':
+      full_version: '1.19.0'
+      package_sha: '30ff67884464d32f6bbbde4387e7557db98868e87fb2afbb77c9b7716e3bff09'
+      ssl_version: '1.0.2'
+      ssl_flavor: '1.0.2l'
+      ssl_sha: 'ce07195b659e75f4e1db43552860070061f156a98bb37b672b101ba6e3ddf30c'
+    '1.20':
+      full_version: '1.20.0'
+      package_sha: 'ca1cf3aed73ff03d065a7d3e57ecca92228d35dc36d9274a6597441319f18eb8'
+      ssl_version: '1.0.2'
+      ssl_flavor: '1.0.2l'
+      ssl_sha: 'ce07195b659e75f4e1db43552860070061f156a98bb37b672b101ba6e3ddf30c'
+
 scala-sbt:
   template_files:
      - Dockerfile
@@ -214,21 +232,3 @@ spark:
     '2.1-hadoop2.7':
       spark_version: '2.1.0'
       hadoop_version: '2.7.3'
-
-clojure:
-  versions:
-    '8':
-      java_version: '8'
-      package_sha: '871d2e308076d2e9edf457cffc9d15996c8d003e'
-      recv_key: '2E708FB2FCECA07FF8184E275A92E04305696D78'
-      lein_version: '2.5.3'
-
-# Coordinate with owner(s) of canvadocs before upgrades (currently the Content team)
-appliances/libreoffice:
-  versions:
-    '5.2':
-      full_version: '5.2.5'
-      short_version: '5.2'
-    '5.3':
-      full_version: '5.3.2'
-      short_version: '5.3'
