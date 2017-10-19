@@ -1,4 +1,4 @@
-FROM instructure/node
+FROM instructure/node:6
 MAINTAINER Instructure
 
 ENV DATADIR /var/lib/kinesalite
