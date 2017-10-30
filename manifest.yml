@@ -204,7 +204,7 @@ scala-sbt:
     '0.13':
       full_version: '0.13.16'
     '1.0':
-      full_version: '1.0.0'
+      full_version: '1.0.3'
 
 spark:
   versions:

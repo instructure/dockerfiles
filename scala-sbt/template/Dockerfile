@@ -9,7 +9,7 @@ RUN echo 'deb https://dl.bintray.com/sbt/debian /' >> /etc/apt/sources.list.d/sb
 
 ARG SBT_VERSION=<%= full_version %>
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends sbt=$SBT_VERSION && \
+    apt-get install -y --no-install-recommends bc sbt=$SBT_VERSION && \
     apt-get clean autoremove -y && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /root/.sbt /root/.ivy2
 

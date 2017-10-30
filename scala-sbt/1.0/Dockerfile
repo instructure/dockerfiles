@@ -10,9 +10,9 @@ RUN echo 'deb https://dl.bintray.com/sbt/debian /' >> /etc/apt/sources.list.d/sb
     sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 \
       --recv 2EE0EA64E40A89B84B2DF73499E82A75642AC823
 
-ARG SBT_VERSION=1.0.0
+ARG SBT_VERSION=1.0.3
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends sbt=$SBT_VERSION && \
+    apt-get install -y --no-install-recommends bc sbt=$SBT_VERSION && \
     apt-get clean autoremove -y && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /root/.sbt /root/.ivy2
 
