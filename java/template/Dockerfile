@@ -14,7 +14,7 @@ RUN echo oracle-java$JAVA_VERSION-installer shared/accepted-oracle-license-v1-1 
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/ /var/cache/oracle* && \
     rm -rf /usr/lib/jvm/java-${JAVA_VERSION}-oracle/src.zip
 <% when 'jre' %>
-ENV JAVA_HOME /usr/jdk1.<%= java_version %>.0_<%= update %>
+ENV JAVA_HOME /usr/jre1.<%= java_version %>.0_<%= update %>
 
 RUN curl --junk-session-cookies \
          --location \

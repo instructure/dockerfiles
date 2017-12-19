@@ -64,14 +64,13 @@ java:
   defaults:
     flavor: 'jdk'
   versions:
-    '7': {}
     '8': {}
     '8-jre':
       java_version: 8
-      update: 121
-      build: 13
+      update: 151
+      build: 12
       flavor: 'jre'
-      checksum: 'e9e7ea248e2c4826b92b3f075a80e441'
+      checksum: 'e758a0de34e24606bca991d704f6dcbf'
 
 node: &NODE
   defaults:
