@@ -1,7 +1,7 @@
 <%= generation_message %>
 #!/bin/bash
 
-SBT_MINOR_VERSION=<%= version %>
+SBT_MINOR_VERSION=<%= minor_version %>
 SBT_CONF_DIR=$HOME/.sbt/$SBT_MINOR_VERSION
 USER_FILE=$SBT_CONF_DIR/users.sbt
 
