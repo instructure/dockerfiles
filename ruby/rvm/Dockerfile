@@ -48,13 +48,20 @@ RUN sed -i '/<\/policymap>/i\
   <policy domain="coder" rights="none" pattern="PLT" />' /etc/ImageMagick/policy.xml
 
 USER docker
+
+# Install RVM
 RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3 \
-    && /bin/bash -l -c "curl -L get.rvm.io | bash -s -- --autolibs=read-fail stable" \
-    && echo "bundler" >> /home/docker/.rvm/gemsets/global.gems \
-    && /bin/bash -l -c "rvm install 2.1" \
-    && /bin/bash -l -c "rvm install 2.2" \
-    && /bin/bash -l -c "rvm install 2.3" \
-    && /bin/bash -l -c "rvm install 2.4" \
-    && /bin/bash -l -c "rvm use --default 2.4"
+ && curl -L get.rvm.io | bash -s -- --autolibs=read-fail stable \
+ && echo 'bundler' >> /home/docker/.rvm/gemsets/global.gems
+
+SHELL ["/bin/bash", "-lc"]
+CMD ["/bin/bash", "-l"]
+
+# Install Rubies
+RUN rvm install 2.1.10 \
+ && rvm install 2.2.9 \
+ && rvm install 2.3.6 \
+ && rvm install 2.4.3 \
+ && rvm use --default 2.4.3
 
 WORKDIR /usr/src/app
