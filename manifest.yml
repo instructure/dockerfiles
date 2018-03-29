@@ -67,10 +67,10 @@ java:
     '8': {}
     '8-jre':
       java_version: 8
-      update: 151
+      update: 162
       build: 12
       flavor: 'jre'
-      checksum: 'e758a0de34e24606bca991d704f6dcbf'
+      checksum: '0da788060d494f5095bf8624735fa2f1'
 
 node: &NODE
   defaults:

@@ -6,12 +6,12 @@ FROM instructure/core
 
 USER root
 
-ENV JAVA_HOME /usr/jre1.8.0_151
+ENV JAVA_HOME /usr/jre1.8.0_162
 
 RUN curl --junk-session-cookies \
          --location \
          --header "Cookie: oraclelicense=accept-securebackup-cookie" \
-         "http://download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/server-jre-8u151-linux-x64.tar.gz" | \
+         "http://download.oracle.com/otn-pub/java/jdk/8u162-b12/0da788060d494f5095bf8624735fa2f1/server-jre-8u162-linux-x64.tar.gz" | \
     tar -xz -C /usr/ && \
     ln -s $JAVA_HOME /usr/java && \
     rm -rf $JAVA_HOME/man
