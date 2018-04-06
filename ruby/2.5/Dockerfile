@@ -2,10 +2,10 @@
 # To update this file please edit the relevant template and run the generation
 # task `rake generate:ruby`
 
-FROM instructure/core:xenial
+FROM instructure/core:bionic
 MAINTAINER Instructure
 
-ENV RUBY_MAJOR 2.4
+ENV RUBY_MAJOR 2.5
 ENV BUNDLER_VERSION 1.16.2
 ENV RUBYGEMS_VERSION 2.7.6
 

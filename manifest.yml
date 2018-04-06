@@ -78,6 +78,8 @@ java:
       flavor: 'jre'
       checksum: '0da788060d494f5095bf8624735fa2f1'
 
+# We are no longer accepting new minor version tags for Node images, simply
+# update the corresponding major version tag (4, 6, 8) to the latest minor.
 node: &NODE
   defaults:
     base_image: instructure/core:latest
@@ -118,32 +120,32 @@ node: &NODE
       npm_version: '4.6.1'
       yarn_version: '0.27.5-1'
     '8':
-      full_version: '8.9.3'
-      npm_version: '5.5.1'
+      full_version: '8.11.2'
+      npm_version: '5.10.0'
       yarn_version: '0.27.5-1'
     '8-xenial':
       base_image: instructure/core:xenial
       base_distro: xenial
-      full_version: '8.9.3'
-      npm_version: '5.5.1'
+      full_version: '8.11.2'
+      npm_version: '5.10.0'
       yarn_version: '0.27.5-1'
     '8.0':
       full_version: '8.0.0'
-      npm_version: '5.4.2'
+      npm_version: '5.10.0'
       yarn_version: '0.27.5-1'
     '8.4':
       full_version: '8.4.0'
-      npm_version: '5.4.2'
+      npm_version: '5.10.0'
       yarn_version: '0.27.5-1'
     '8.6':
       full_version: '8.6.0'
-      npm_version: '5.4.2'
+      npm_version: '5.10.0'
       yarn_version: '0.27.5-1'
     '8.6-xenial':
       base_image: instructure/core:xenial
       base_distro: xenial
       full_version: '8.6.0'
-      npm_version: '5.4.2'
+      npm_version: '5.10.0'
       yarn_version: '0.27.5-1'
     '10':
       base_image: instructure/core:bionic
@@ -159,16 +161,27 @@ ruby: &RUBY
   defaults:
     base_image: instructure/core:latest
     base_distro: trusty
-    bundler_version: 1.15.3
-    rubygems_version: 2.6.13
+    bundler_version: 1.16.2
+    rubygems_version: 2.7.6
   versions:
-    '2.1': {}
-    '2.2': {}
-    '2.3': {}
-    '2.4': {}
+    '2.1':
+      bundler_version: 1.15.3
+      rubygems_version: 2.6.13
+    '2.2':
+      bundler_version: 1.15.3
+      rubygems_version: 2.6.13
+    '2.3':
+      bundler_version: 1.15.3
+      rubygems_version: 2.6.13
+    '2.4': # This is the last trusty-based Ruby image we plan to add.
+      bundler_version: 1.15.3
+      rubygems_version: 2.6.13
     '2.4-xenial':
       base_image: instructure/core:xenial
       base_distro: xenial
+    '2.5':
+      base_image: instructure/core:bionic
+      base_distro: bionic
 
 ruby-node-pg:
   versions:
