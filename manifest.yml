@@ -46,15 +46,6 @@ core:
 
 golang:
   versions:
-    '1.5':
-      full_version: '1.5.4'
-      package_sha: 'a3358721210787dc1e06f5ea1460ae0564f22a0fbd91be9dcd947fb1d19b9560'
-    '1.6':
-      full_version: '1.6.4'
-      package_sha: 'b58bf5cede40b21812dfa031258db18fc39746cc0972bc26dae0393acc377aaf'
-    '1.7':
-      full_version: '1.7.6'
-      package_sha: 'ad5808bf42b014c22dd7646458f631385003049ded0bb6af2efc7f1f79fa29ea'
     '1.8':
       full_version: '1.8.7'
       package_sha: 'de32e8db3dc030e1448a6ca52d87a1e04ad31c6b212007616cfcc87beb0e4d60'
