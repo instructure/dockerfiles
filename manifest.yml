@@ -76,40 +76,9 @@ node: &NODE
     base_image: instructure/core:latest
     base_distro: trusty
   versions:
-    '4':
-      full_version: '4.8.7'
-      npm_version: '3.10.10'
-    '4.3':
-      full_version: '4.3.2'
-      npm_version: '3.10.10'
-    '4.4':
-      full_version: '4.4.7'
-      npm_version: '3.10.10'
-    '4.6':
-      full_version: '4.6.2'
-      npm_version: '3.10.10'
-    '5.7':
-      full_version: '5.7.1'
-      npm_version: '3.10.10'
     '6':
       full_version: '6.12.2'
       npm_version: '3.10.10'
-    '6.5':
-      full_version: '6.5.0'
-      npm_version: '3.10.10'
-    '6.8':
-      full_version: '6.8.1'
-      npm_version: '3.10.10'
-    '6.9':
-      full_version: '6.9.5'
-      npm_version: '3.10.10'
-    '6.10':
-      full_version: '6.10.2'
-      npm_version: '3.10.10'
-    '7.5-yarn':
-      full_version: '7.5.0'
-      npm_version: '4.6.1'
-      yarn_version: '0.27.5-1'
     '8':
       full_version: '8.11.2'
       npm_version: '5.10.0'
@@ -118,24 +87,6 @@ node: &NODE
       base_image: instructure/core:xenial
       base_distro: xenial
       full_version: '8.11.2'
-      npm_version: '5.10.0'
-      yarn_version: '0.27.5-1'
-    '8.0':
-      full_version: '8.0.0'
-      npm_version: '5.10.0'
-      yarn_version: '0.27.5-1'
-    '8.4':
-      full_version: '8.4.0'
-      npm_version: '5.10.0'
-      yarn_version: '0.27.5-1'
-    '8.6':
-      full_version: '8.6.0'
-      npm_version: '5.10.0'
-      yarn_version: '0.27.5-1'
-    '8.6-xenial':
-      base_image: instructure/core:xenial
-      base_distro: xenial
-      full_version: '8.6.0'
       npm_version: '5.10.0'
       yarn_version: '0.27.5-1'
     '10':
