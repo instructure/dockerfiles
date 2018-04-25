@@ -2,11 +2,12 @@
 # To update this file please edit the relevant template and run the generation
 # task `rake generate:node`
 
-FROM instructure/core:latest
+FROM instructure/core:bionic
 MAINTAINER Instructure
 
-ENV NODE_VERSION 6.5.0
-ENV NPM_VERSION 3.10.10
+ENV NODE_VERSION 10.0.0
+ENV NPM_VERSION 6.0.0
+ENV YARN_VERSION 1.6.0-1
 
 USER root
 
@@ -47,5 +48,14 @@ RUN  curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux
   && npm cache clear --force
 
 COPY npm-private /usr/local/bin
+
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+  && echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list \
+  && apt-get update \
+  && apt-get install -y --no-install-recommends yarn="$YARN_VERSION" \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
+
+COPY yarn-private /usr/local/bin
 
 USER docker
