@@ -21,7 +21,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     psmisc \
     git \
     build-essential \
+<% if version == 'bionic' -%>
+    dirmngr \
+    gpg-agent \
+    python3 \
+<% else -%>
     python \
+<% end -%>
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
 
@@ -40,7 +46,7 @@ RUN dpkg-reconfigure locales
 ENV TINI_VERSION v0.16.1
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini.asc /tini.asc
-RUN gpg --keyserver keyserver.ubuntu.com --recv-keys 595E85A6B1B4779EA4DAAEC70B588DFF0527A9B7 \
+RUN gpg --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 595E85A6B1B4779EA4DAAEC70B588DFF0527A9B7 \
  && gpg --verify /tini.asc && chmod +x /tini
 
 # Switch to the 'docker' user

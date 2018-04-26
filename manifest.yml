@@ -41,6 +41,8 @@ core:
       base_image: ubuntu:trusty
     xenial:
       base_image: ubuntu:xenial
+    bionic:
+      base_image: ubuntu:bionic
 
 golang:
   versions:

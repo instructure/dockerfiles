@@ -1,4 +1,4 @@
-FROM ubuntu:trusty
+FROM ubuntu:bionic
 MAINTAINER Instructure
 
 ## Create a 'docker' user
@@ -21,7 +21,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     psmisc \
     git \
     build-essential \
-    python \
+    dirmngr \
+    gpg-agent \
+    python3 \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
 
