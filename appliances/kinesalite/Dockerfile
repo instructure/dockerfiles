@@ -13,4 +13,4 @@ VOLUME $DATADIR
 
 COPY entrypoint.sh /entrypoint.sh
 
-ENTRYPOINT ["/entrypoint.sh", "--path", "/var/lib/kinesalite"]
+ENTRYPOINT ["/tini", "--", "/entrypoint.sh", "--path", "/var/lib/kinesalite"]
