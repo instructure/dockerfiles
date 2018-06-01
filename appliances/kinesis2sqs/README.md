@@ -1,6 +1,8 @@
 # Kinesis2Sqs
 
-A ruby based docker appliance image to pull messages from Kinesis and push them to SQS.
+A ruby based docker appliance image to pull messages from Kinesis and push them
+to SQS. We use this to simulate our Live Events messaging system in development.
+
 An entry in your docker-compose.yml file might look like this:
 
 ```
