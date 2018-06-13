@@ -50,11 +50,11 @@ golang:
       full_version: '1.8.7'
       package_sha: 'de32e8db3dc030e1448a6ca52d87a1e04ad31c6b212007616cfcc87beb0e4d60'
     '1.9':
-      full_version: '1.9.6'
-      package_sha: 'd1eb07f99ac06906225ac2b296503f06cc257b472e7d7817b8f822fe3766ebfe'
+      full_version: '1.9.7'
+      package_sha: '88573008f4f6233b81f81d8ccf92234b4f67238df0f0ab173d75a302a1f3d6ee'
     '1.10':
-      full_version: '1.10.2'
-      package_sha: '4b677d698c65370afa33757b6954ade60347aaca310ea92a63ed717d7cb0c2ff'
+      full_version: '1.10.3'
+      package_sha: 'fa1b0e45d3b647c252f51f5e1204aba049cde4af177ef9f2181f43004f901035'
 
 
 java:
