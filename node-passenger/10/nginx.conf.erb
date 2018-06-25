@@ -22,6 +22,9 @@ user docker;
 # Add files to white list env variables
 include /usr/src/nginx/main.d/*.conf;
 
+# Ubuntu 18 requires this for nginx+passenger to work.
+include /etc/nginx/modules-enabled/*.conf;
+
 events {
     worker_connections <%= ENV.fetch('NGINX_WORKER_CONNECTIONS', '1024') %>;
 }
