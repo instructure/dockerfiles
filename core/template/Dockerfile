@@ -25,6 +25,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     dirmngr \
     gpg-agent \
     python3 \
+    tzdata \
 <% else -%>
     python \
 <% end -%>
