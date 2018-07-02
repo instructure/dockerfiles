@@ -33,6 +33,11 @@ clojure:
       package_sha: '871d2e308076d2e9edf457cffc9d15996c8d003e'
       recv_key: '2E708FB2FCECA07FF8184E275A92E04305696D78'
       lein_version: '2.5.3'
+    '8-lein2.8':
+      java_version: '8'
+      package_sha: '3e95453428632d198f8772a5cf8e971c4814e811'
+      recv_key: '2B72BF956E23DE5E830D50F6002AF007D1A7CC18'
+      lein_version: '2.8.1'
 
 core:
   versions:
