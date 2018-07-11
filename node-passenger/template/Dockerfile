@@ -10,12 +10,11 @@ RUN  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CA
   && sh -c 'echo deb https://oss-binaries.phusionpassenger.com/apt/passenger <%= base_distro %> main > /etc/apt/sources.list.d/passenger.list' \
   && apt-get update \
   && apt-get install -y --no-install-recommends \
+    nginx-extras \
+    passenger sudo \
 <% if base_distro == 'bionic' -%>
     libnginx-mod-http-passenger \
-<% else -%>
-    nginx-extras \
 <% end -%>
-    passenger sudo \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
