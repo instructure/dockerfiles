@@ -25,6 +25,7 @@ appliances/debugging:
   versions:
     trusty: {}
     xenial: {}
+    bionic: {}
 
 clojure:
   versions:

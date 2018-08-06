@@ -1,4 +1,4 @@
-FROM ubuntu:<%= version %>
+FROM ubuntu:bionic
 
 USER root
 
