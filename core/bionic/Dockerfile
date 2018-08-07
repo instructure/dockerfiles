@@ -21,10 +21,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     psmisc \
     git \
     build-essential \
+    tzdata \
     dirmngr \
     gpg-agent \
     python3 \
-    tzdata \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
 
