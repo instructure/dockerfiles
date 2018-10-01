@@ -1,0 +1,8 @@
+proxy_redirect off;
+proxy_http_version 1.1;
+proxy_request_buffering off;
+proxy_buffering off;
+proxy_set_header Connection "";
+proxy_connect_timeout <%= ENV.fetch('NGINX_PROXY_CONNECT_TIMEOUT', '90') %>;
+proxy_send_timeout <%= ENV.fetch('NGINX_PROXY_SEND_TIMEOUT', '300') %>;
+proxy_read_timeout <%= ENV.fetch('NGINX_PROXY_READ_TIMEOUT', '300') %>;
