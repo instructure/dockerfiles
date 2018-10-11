@@ -56,8 +56,8 @@ golang:
       full_version: '1.10.4'
       package_sha: 'fa04efdb17a275a0c6e137f969a1c4eb878939e91e1da16060ce42f02c2ec5ec'
     '1.11':
-      full_version: '1.11'
-      package_sha: 'b3fcf280ff86558e0559e185b601c9eade0fd24c900b4c63cd14d1d38613e499'
+      full_version: '1.11.1'
+      package_sha: '2871270d8ff0c8c69f161aaae42f9f28739855ff5c5204752a8d92a1c9f63993'
 
 
 java:
