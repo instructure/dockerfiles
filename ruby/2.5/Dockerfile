@@ -13,6 +13,7 @@ USER root
 RUN mkdir -p /usr/src/app
 RUN chown docker:docker /usr/src/app
 
+
 RUN apt-add-repository -y ppa:brightbox/ruby-ng \
  && apt-get update \
  && apt-get install -y \
