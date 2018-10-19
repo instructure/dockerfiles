@@ -112,21 +112,43 @@ ruby: &RUBY
     '2.1':
       bundler_version: 1.15.3
       rubygems_version: 2.6.13
+      jemalloc: false
     '2.2':
       bundler_version: 1.15.3
       rubygems_version: 2.6.13
+      jemalloc: false
     '2.3':
       bundler_version: 1.15.3
       rubygems_version: 2.6.13
+      jemalloc: false
     '2.4': # This is the last trusty-based Ruby image we plan to add.
       bundler_version: 1.15.3
       rubygems_version: 2.6.13
+      jemalloc: false
     '2.4-xenial':
       base_image: instructure/core:xenial
       base_distro: xenial
+      jemalloc: false
     '2.5':
       base_image: instructure/core:bionic
       base_distro: bionic
+      jemalloc: false
+    '2.3-jemalloc':
+      bundler_version: 1.15.3
+      rubygems_version: 2.6.13
+      jemalloc: true
+    '2.4-jemalloc': # This is the last trusty-based Ruby image we plan to add.
+      bundler_version: 1.15.3
+      rubygems_version: 2.6.13
+      jemalloc: true
+    '2.4-xenial-jemalloc':
+      base_image: instructure/core:xenial
+      base_distro: xenial
+      jemalloc: true
+    '2.5-jemalloc':
+      base_image: instructure/core:bionic
+      base_distro: bionic
+      jemalloc: true
 
 ruby-node-pg:
   versions:

@@ -1,30 +1,22 @@
-<%= generation_message %>
-FROM <%= base_image %>
+# GENERATED FILE, DO NOT MODIFY!
+# To update this file please edit the relevant template and run the generation
+# task `rake generate:ruby`
+
+FROM instructure/core:xenial
 MAINTAINER Instructure
 
-<% ruby_major = version.split('.').take(2).join('.').split('-')[0] -%>
-ENV RUBY_MAJOR <%= ruby_major %>
-ENV BUNDLER_VERSION <%= bundler_version %>
-ENV RUBYGEMS_VERSION <%= rubygems_version %>
+ENV RUBY_MAJOR 2.4
+ENV BUNDLER_VERSION 1.16.2
+ENV RUBYGEMS_VERSION 2.7.6
 
 USER root
 RUN mkdir -p /usr/src/app
 RUN chown docker:docker /usr/src/app
 
-<% if jemalloc -%>
 RUN apt-get update \
-<% else -%>
-RUN apt-add-repository -y ppa:brightbox/ruby-ng \
- && apt-get update \
-<% end -%>
  && apt-get install -y \
-<% if jemalloc -%>
       libjemalloc-dev \
       libgmp3-dev \
-<% else -%>
-      ruby$RUBY_MAJOR \
-      ruby$RUBY_MAJOR-dev \
-<% end -%>
       make \
       imagemagick \
       libbz2-dev \
@@ -45,13 +37,9 @@ RUN apt-add-repository -y ppa:brightbox/ruby-ng \
       libxslt-dev \
       libyaml-dev \
       zlib1g-dev \
-<% unless jemalloc -%>
- && apt-add-repository -y --remove ppa:brightbox/ruby-ng \
-<% end -%>
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-<% if jemalloc -%>
 RUN mkdir -p /tmp/ruby-build && \
   ( \
     cd /tmp/ruby-build && \
@@ -68,8 +56,8 @@ RUN mkdir -p /tmp/ruby-build && \
       --with-jemalloc \
       --enable-multiarch \
       --target="$DEB_HOST_MULTIARCH" \
-      --program-suffix=<%= ruby_major %> \
-      --with-soname="ruby-<%= ruby_major %>" \
+      --program-suffix=2.4 \
+      --with-soname="ruby-2.4" \
       --enable-shared \
       --enable-install-static-library \
       --disable-rpath \
@@ -92,21 +80,6 @@ RUN update-alternatives --install /usr/bin/gem gem /usr/bin/gem$RUBY_MAJOR 181 &
 
 # BrightBox also provides rake out of the box.
 RUN gem install rake
-<% end -%>
-<% if base_image.include? 'core:latest' -%>
-# https://imagetragick.com/ mitigation
-RUN sed -i '/<\/policymap>/i\
-  <!-- ImageTragick Mitigation -->\n\
-  <policy domain="coder" rights="none" pattern="EPHEMERAL" />\n\
-  <policy domain="coder" rights="none" pattern="URL" />\n\
-  <policy domain="coder" rights="none" pattern="HTTPS" />\n\
-  <policy domain="coder" rights="none" pattern="MVG" />\n\
-  <policy domain="coder" rights="none" pattern="MSL" />\n\
-  <policy domain="coder" rights="none" pattern="TEXT" />\n\
-  <policy domain="coder" rights="none" pattern="SHOW" />\n\
-  <policy domain="coder" rights="none" pattern="WIN" />\n\
-  <policy domain="coder" rights="none" pattern="PLT" />' /etc/ImageMagick/policy.xml
-<% end -%>
 
 RUN gem update --system $RUBYGEMS_VERSION \
  && gem install -i /var/lib/gems/$RUBY_MAJOR.0 bundler -v $BUNDLER_VERSION
