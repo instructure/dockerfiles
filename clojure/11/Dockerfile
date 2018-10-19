@@ -1,12 +1,15 @@
-<%= generation_message %>
-FROM instructure/java:<%= java_version %>
+# GENERATED FILE, DO NOT MODIFY!
+# To update this file please edit the relevant template and run the generation
+# task `rake generate:clojure`
+
+FROM instructure/java:11
 
 USER root
 
 #
 # Clojure
 #
-ENV LEIN_VERSION <%= lein_version %>
+ENV LEIN_VERSION 2.8.1
 ENV LEIN_INSTALL /usr/local/bin/
 
 WORKDIR /tmp
@@ -15,7 +18,7 @@ WORKDIR /tmp
 RUN mkdir -p $LEIN_INSTALL \
   && curl -OLs https://github.com/technomancy/leiningen/archive/$LEIN_VERSION.tar.gz \
   && echo "Comparing archive checksum ..." \
-  && echo "<%= package_sha %> *$LEIN_VERSION.tar.gz" | sha1sum -c - \
+  && echo "3e95453428632d198f8772a5cf8e971c4814e811 *$LEIN_VERSION.tar.gz" | sha1sum -c - \
 \
   && mkdir ./leiningen \
   && tar -xzf $LEIN_VERSION.tar.gz  -C ./leiningen/ --strip-components=1 \
@@ -28,8 +31,8 @@ RUN mkdir -p $LEIN_INSTALL \
   && curl -OLs https://github.com/technomancy/leiningen/releases/download/$LEIN_VERSION/leiningen-$LEIN_VERSION-standalone.zip \
   && curl -OLs https://github.com/technomancy/leiningen/releases/download/$LEIN_VERSION/leiningen-$LEIN_VERSION-standalone.zip.asc \
 \
-  && (gpg --keyserver pool.sks-keyservers.net --recv-key <%= recv_key %> \
-  || gpg --keyserver keyserver.ubuntu.com --recv-key <%= recv_key %>) \
+  && (gpg --keyserver pool.sks-keyservers.net --recv-key 2B72BF956E23DE5E830D50F6002AF007D1A7CC18 \
+  || gpg --keyserver keyserver.ubuntu.com --recv-key 2B72BF956E23DE5E830D50F6002AF007D1A7CC18) \
   && echo "Verifying Jar file signature ..." \
   && gpg --verify leiningen-$LEIN_VERSION-standalone.zip.asc \
 \
@@ -39,11 +42,7 @@ RUN mkdir -p $LEIN_INSTALL \
 \
   && apt-get update \
 \
-<% if install_unlimited_jce %>
-  # Install the unlimited JCE policy to allow for stronger encryption
-  && apt-get install -y --no-install-recommends --force-yes oracle-java8-unlimited-jce-policy \
-\
-<% end %>
+
   # Some REPLs (e.g., Figwheel) necessitate a readline wrapper.
   && apt-get install -y rlfe && rm -rf /var/lib/apt/lists/*
 
