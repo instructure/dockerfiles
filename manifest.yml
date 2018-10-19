@@ -62,15 +62,28 @@ golang:
 
 java:
   defaults:
-    flavor: 'jdk'
+    use_openjdk: true
+    distro: bionic
   versions:
-    '8': {}
+    '8':
+      use_openjdk: false
+      flavor: 'jdk'
+      distro: trusty
     '8-jre':
+      use_openjdk: false
       java_version: 8
       update: 162
       build: 12
       flavor: 'jre'
       checksum: '0da788060d494f5095bf8624735fa2f1'
+      distro: trusty
+    '11':
+      java_version: 11
+      flavor: 'jdk'
+    '11-jre':
+      java_version: 11
+      flavor: 'jre'
+
 
 # We are no longer accepting new minor version tags for Node images, simply
 # update the corresponding major version tag (4, 6, 8) to the latest minor.

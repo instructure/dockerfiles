@@ -2,7 +2,7 @@
 # To update this file please edit the relevant template and run the generation
 # task `rake generate:java`
 
-FROM instructure/core
+FROM instructure/core:trusty
 
 USER root
 

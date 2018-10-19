@@ -1,8 +1,14 @@
 <%= generation_message %>
-FROM instructure/core
+FROM instructure/core:<%= distro %>
 
 USER root
-<% case flavor
+<% if use_openjdk %>
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends openjdk-<%= java_version %>-<%= flavor %> && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/ /var/cache/oracle*
+<% else
+case flavor
 when 'jdk' %>
 ENV JAVA_VERSION=<%= version %>
 
@@ -25,5 +31,6 @@ RUN curl --junk-session-cookies \
 
 ENV PATH $PATH:$JAVA_HOME/bin
 
-<% end %>
+<% end
+end %>
 USER docker
