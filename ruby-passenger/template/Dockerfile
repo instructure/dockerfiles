@@ -11,12 +11,19 @@ RUN  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CA
   && apt-get update \
   && apt-get install -y --no-install-recommends \
     nginx-extras \
+<% if jemalloc -%>
+    sudo \
+<% else -%>
     passenger sudo \
+<% end -%>
 <% if base_distro == 'bionic' -%>
     libnginx-mod-http-passenger \
 <% end -%>
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+<% if jemalloc -%>
+RUN gem install passenger --no-rdoc --no-ri
+<% end -%>
 
 RUN echo 'docker ALL=(ALL) NOPASSWD: SETENV: /usr/sbin/nginx' >> /etc/sudoers
 
