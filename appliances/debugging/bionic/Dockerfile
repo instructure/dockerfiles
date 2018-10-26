@@ -7,6 +7,7 @@ RUN apt-get update && \
             curl \
             gdb \
             lsof \
+            net-tools \
             pstack \
             strace && \
     apt-get clean
