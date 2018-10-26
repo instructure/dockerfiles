@@ -23,7 +23,6 @@ appliances/libreoffice:
 
 appliances/debugging:
   versions:
-    trusty: {}
     xenial: {}
     bionic: {}
 
