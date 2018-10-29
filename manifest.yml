@@ -74,7 +74,7 @@ java:
     '8':
       use_openjdk: false
       flavor: 'jdk'
-      distro: trusty
+      distro: latest
     '8-jre':
       use_openjdk: false
       java_version: 8
@@ -82,7 +82,7 @@ java:
       build: 12
       flavor: 'jre'
       checksum: '0da788060d494f5095bf8624735fa2f1'
-      distro: trusty
+      distro: latest
     '11':
       java_version: 11
       flavor: 'jdk'
