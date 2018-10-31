@@ -49,12 +49,12 @@ CMD ["/bin/bash", "-l"]
 # Install Rubies
 RUN rvm install 2.2.10 \
  && rvm alias create 2.2 ruby-2.2.10 \
- && rvm install 2.3.7 \
- && rvm alias create 2.3 ruby-2.3.7 \
- && rvm install 2.4.4 \
- && rvm alias create 2.4 ruby-2.4.4 \
- && rvm install 2.5.1 \
- && rvm alias create 2.5 ruby-2.5.1 \
- && rvm use --default 2.5.1
+ && rvm install 2.3.8 \
+ && rvm alias create 2.3 ruby-2.3.8 \
+ && rvm install 2.4.5 \
+ && rvm alias create 2.4 ruby-2.4.5 \
+ && rvm install 2.5.3 \
+ && rvm alias create 2.5 ruby-2.5.3 \
+ && rvm use --default 2.5.3
 
 WORKDIR /usr/src/app
