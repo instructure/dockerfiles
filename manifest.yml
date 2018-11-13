@@ -116,7 +116,7 @@ node: &NODE
       base_distro: bionic
       full_version: '10.9.0'
       npm_version: '6.4.1'
-      yarn_version: '1.9.4-1'
+      yarn_version: '1.12.3-1'
 
 node-passenger:
   <<: *NODE
