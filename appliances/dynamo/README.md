@@ -1,5 +1,16 @@
 # DynamoDB
 
+---
+
+WARNING: This appliance image is deprecated, and will be removed soon. Please
+replace all usage either with the official `amazon/dynamodb-local` image, or
+the `instructure/dynamo-local-admin` image.
+
+* https://hub.docker.com/r/amazon/dynamodb-local/
+* https://hub.docker.com/r/instructure/dynamo-local-admin/
+
+---
+
 A docker container appliance wrapping [DynamoDB Local][dbd], for use testing and
 developing against Amazon's DynamoDB.
 
