@@ -1,4 +1,4 @@
-FROM instructure/ruby:2.1
+FROM instructure/ruby:2.5
 
 USER root
 
@@ -11,7 +11,7 @@ RUN chmod +x /fakes3/entrypoint.sh && \
 
 USER docker
 
-# install fake-s3
+# install fake-s3 - 0.2.5 is the last release licensed under MIT
 RUN gem install fakes3 -v 0.2.5
 
 
