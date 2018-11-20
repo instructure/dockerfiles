@@ -230,6 +230,8 @@ rust-musl:
       ssl_sha: 'ce07195b659e75f4e1db43552860070061f156a98bb37b672b101ba6e3ddf30c'
 
 scala-sbt:
+  defaults:
+    base_image: instructure/java:8
   template_files:
      - Dockerfile
      - sbt-private
@@ -240,6 +242,10 @@ scala-sbt:
     '1':
       full_version: '1.1.0'
       minor_version: '1.1'
+    '1.2':
+      base_image: instructure/java:11
+      full_version: '1.2.7'
+      minor_version: '1.2'
 
 spark:
   versions:

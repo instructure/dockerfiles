@@ -2,7 +2,7 @@
 # To update this file please edit the relevant template and run the generation
 # task `rake generate:scala-sbt`
 
-FROM instructure/java:8
+FROM instructure/java:11
 MAINTAINER Instructure Shared Services Org - Analytics Team
 USER root
 
@@ -10,7 +10,7 @@ RUN echo 'deb https://dl.bintray.com/sbt/debian /' > /etc/apt/sources.list.d/sbt
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 \
       --recv 2EE0EA64E40A89B84B2DF73499E82A75642AC823
 
-ARG SBT_VERSION=1.1.0
+ARG SBT_VERSION=1.2.7
 RUN apt-get update && \
     apt-get install -y --no-install-recommends bc sbt=$SBT_VERSION && \
     apt-get clean autoremove -y && \
