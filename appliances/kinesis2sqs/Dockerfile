@@ -1,11 +1,9 @@
-FROM instructure/ruby:2.3
+FROM ruby:2.5-alpine
 MAINTAINER Instructure
-
-USER docker
 
 COPY Gemfile Gemfile.lock ./
 RUN bundle install --quiet --jobs 8
 
 COPY entrypoint.rb .
 
-CMD ["/tini", "--", "ruby", "./entrypoint.rb"]
+CMD ["ruby", "./entrypoint.rb"]
