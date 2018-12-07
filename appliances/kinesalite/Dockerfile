@@ -1,16 +1,15 @@
-FROM instructure/node:6
+FROM instructure/node:10
 MAINTAINER Instructure
 
 ENV DATADIR /var/lib/kinesalite
 
 USER root
-RUN npm install kinesalite --global
 RUN mkdir $DATADIR && chown docker:docker $DATADIR
 USER docker
+
+RUN npm install kinesalite@1.14.0
 
 EXPOSE 4567
 VOLUME $DATADIR
 
-COPY entrypoint.sh /entrypoint.sh
-
-ENTRYPOINT ["/tini", "--", "/entrypoint.sh", "--path", "/var/lib/kinesalite"]
+ENTRYPOINT ["/tini", "--", "/usr/src/app/node_modules/kinesalite/cli.js", "--path", "/var/lib/kinesalite"]
