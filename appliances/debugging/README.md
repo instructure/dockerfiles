@@ -5,7 +5,7 @@ to an already running container.
 
 ## Connecting to a running container
 
-```bash
+```console
 CONTAINER_NAME=cloudgate-running docker run --rm \
   -it \
   --net=container:${CONTAINER_NAME} \
