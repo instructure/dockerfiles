@@ -18,6 +18,16 @@ RUN  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CA
 <% end -%>
 <% if base_distro == 'bionic' -%>
     libnginx-mod-http-passenger \
+
+# libnginx-mod-http-passenger in bionic destroys the alternatives in the base ruby image
+    && update-alternatives --install /usr/bin/gem gem /usr/bin/gem$RUBY_MAJOR 181 \
+    && update-alternatives \
+      --install /usr/bin/ruby ruby /usr/bin/ruby${RUBY_MAJOR} 51 \
+      --slave /usr/bin/erb erb /usr/bin/erb${RUBY_MAJOR} \
+      --slave /usr/bin/irb irb /usr/bin/irb${RUBY_MAJOR} \
+      --slave /usr/bin/rdoc rdoc /usr/bin/rdoc${RUBY_MAJOR} \
+      --slave /usr/bin/ri ri /usr/bin/ri${RUBY_MAJOR} \
+
 <% end -%>
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
