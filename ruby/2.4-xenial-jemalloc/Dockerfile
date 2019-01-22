@@ -43,7 +43,7 @@ RUN apt-get update \
 RUN mkdir -p /tmp/ruby-build && \
   ( \
     cd /tmp/ruby-build && \
-    RUBY_FILE="$(curl -sS https://cache.ruby-lang.org/pub/ruby/ | grep -oE /pub/ruby/ruby-${RUBY_MAJOR}.[0-9]+.tar.gz | sort -r | awk -F "/" '{print $4 }' | head -n 1)" && \
+    RUBY_FILE="$(curl -sS https://cache.ruby-lang.org/pub/ruby/index.txt | grep -oE /pub/ruby/${RUBY_MAJOR}/ruby-${RUBY_MAJOR}.[0-9]+.tar.gz | sort -r | awk -F "/" '{print $5 }' | head -n 1)" && \
     curl -sSO https://cache.ruby-lang.org/pub/ruby/$RUBY_MAJOR/$RUBY_FILE && \
     tar zxf $RUBY_FILE --strip-components=1 -C . && \
     rm $RUBY_FILE \

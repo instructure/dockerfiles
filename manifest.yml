@@ -127,50 +127,56 @@ node-passenger:
 
 ruby: &RUBY
   defaults:
-    base_image: instructure/core:latest
-    base_distro: trusty
+    base_distro: bionic
+    base_image: instructure/core:bionic
     bundler_version: 1.17.3
+    jemalloc: false
     rubygems_version: 2.7.6
   versions:
     '2.1':
+      base_distro: trusty
+      base_image: instructure/core:latest
       bundler_version: 1.15.3
       rubygems_version: 2.6.13
-      jemalloc: false
     '2.2':
+      base_distro: trusty
+      base_image: instructure/core:latest
       bundler_version: 1.15.3
       rubygems_version: 2.6.13
-      jemalloc: false
     '2.3':
+      base_distro: trusty
+      base_image: instructure/core:latest
       bundler_version: 1.15.3
       rubygems_version: 2.6.13
-      jemalloc: false
-    '2.4': # This is the last trusty-based Ruby image we plan to add.
-      bundler_version: 1.15.3
-      rubygems_version: 2.6.13
-      jemalloc: false
-    '2.4-xenial':
-      base_image: instructure/core:xenial
-      base_distro: xenial
-      jemalloc: false
-    '2.5':
-      base_image: instructure/core:bionic
-      base_distro: bionic
-      jemalloc: false
     '2.3-jemalloc':
+      base_distro: trusty
+      base_image: instructure/core:latest
+      bundler_version: 1.15.3
+      jemalloc: true
+      rubygems_version: 2.6.13
+    '2.4':  # This is the last trusty-based Ruby image we plan to add.
+      base_distro: trusty
+      base_image: instructure/core:latest
       bundler_version: 1.15.3
       rubygems_version: 2.6.13
-      jemalloc: true
-    '2.4-jemalloc': # This is the last trusty-based Ruby image we plan to add.
+    '2.4-jemalloc':  # This is the last trusty-based Ruby image we plan to add.
+      base_distro: trusty
+      base_image: instructure/core:latest
       bundler_version: 1.15.3
-      rubygems_version: 2.6.13
       jemalloc: true
-    '2.4-xenial-jemalloc':
-      base_image: instructure/core:xenial
+      rubygems_version: 2.6.13
+    '2.4-xenial':
       base_distro: xenial
+      base_image: instructure/core:xenial
+    '2.4-xenial-jemalloc':
+      base_distro: xenial
+      base_image: instructure/core:xenial
       jemalloc: true
+    '2.5':
     '2.5-jemalloc':
-      base_image: instructure/core:bionic
-      base_distro: bionic
+      jemalloc: true
+    '2.6':
+    '2.6-jemalloc':
       jemalloc: true
 
 ruby-node-pg:

@@ -5,7 +5,7 @@
 FROM instructure/core:bionic
 MAINTAINER Instructure
 
-ENV RUBY_MAJOR 2.5
+ENV RUBY_MAJOR 2.6
 ENV BUNDLER_VERSION 1.17.3
 ENV RUBYGEMS_VERSION 2.7.6
 
@@ -56,8 +56,8 @@ RUN mkdir -p /tmp/ruby-build && \
       --with-jemalloc \
       --enable-multiarch \
       --target="$DEB_HOST_MULTIARCH" \
-      --program-suffix=2.5 \
-      --with-soname="ruby-2.5" \
+      --program-suffix=2.6 \
+      --with-soname="ruby-2.6" \
       --enable-shared \
       --enable-install-static-library \
       --disable-rpath \
