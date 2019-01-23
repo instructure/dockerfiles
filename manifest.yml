@@ -57,14 +57,15 @@ core:
       base_image: ubuntu:bionic
 
 golang:
+  defaults:
+    base_image: instructure/core:bionic
   versions:
     '1.10':
-      full_version: '1.10.4'
-      package_sha: 'fa04efdb17a275a0c6e137f969a1c4eb878939e91e1da16060ce42f02c2ec5ec'
+      full_version: '1.10.8'
+      package_sha: 'd8626fb6f9a3ab397d88c483b576be41fa81eefcec2fd18562c87626dbb3c39e'
     '1.11':
-      full_version: '1.11.1'
-      package_sha: '2871270d8ff0c8c69f161aaae42f9f28739855ff5c5204752a8d92a1c9f63993'
-
+      full_version: '1.11.5'
+      package_sha: 'ff54aafedff961eb94792487e827515da683d61a5f9482f668008832631e5d25'
 
 java:
   defaults:

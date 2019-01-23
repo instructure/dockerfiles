@@ -7,13 +7,18 @@ MAINTAINER Instructure
 
 USER root
 
-ENV GOLANG_VERSION 1.11.1
+ENV GOLANG_VERSION 1.11.5
 ENV GOLANG_DOWNLOAD_URL https://storage.googleapis.com/golang/go$GOLANG_VERSION.linux-amd64.tar.gz
-ENV GOLANG_DOWNLOAD_SHA256 2871270d8ff0c8c69f161aaae42f9f28739855ff5c5204752a8d92a1c9f63993
+ENV GOLANG_DOWNLOAD_SHA256 ff54aafedff961eb94792487e827515da683d61a5f9482f668008832631e5d25
 
+# Per https://github.com/golang/go/issues/29906, there are extraneous build artifacts
+# present in the 0.11.5 and 0.10.8 build tars.  Specifying `go` as the only component
+# extracted from the tar is the suggested workaround.  This would be ill-advised for
+# future releases Hence, replace the tar step below with
+# "&& tar -C /usr/local -xzf golang.tar.gz \" on the next release.
 RUN curl -fsSL "$GOLANG_DOWNLOAD_URL" -o golang.tar.gz \
 	&& echo "$GOLANG_DOWNLOAD_SHA256  golang.tar.gz" | sha256sum -c - \
-	&& tar -C /usr/local -xzf golang.tar.gz \
+	&& tar -C /usr/local -xzf golang.tar.gz go \
 	&& rm golang.tar.gz
 
 ENV GOPATH /go
