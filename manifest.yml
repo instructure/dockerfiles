@@ -133,16 +133,6 @@ ruby: &RUBY
     jemalloc: false
     rubygems_version: 2.7.6
   versions:
-    '2.1':
-      base_distro: trusty
-      base_image: instructure/core:latest
-      bundler_version: 1.15.3
-      rubygems_version: 2.6.13
-    '2.2':
-      base_distro: trusty
-      base_image: instructure/core:latest
-      bundler_version: 1.15.3
-      rubygems_version: 2.6.13
     '2.3':
       base_distro: trusty
       base_image: instructure/core:latest
@@ -181,12 +171,6 @@ ruby: &RUBY
 
 ruby-node-pg:
   versions:
-    '2.1':
-      ruby_version: '2.1'
-      node_version: '4.x'
-    '2.2':
-      ruby_version: '2.2'
-      node_version: '4.x'
     '2.3':
       ruby_version: '2.3'
       node_version: '4.x'
