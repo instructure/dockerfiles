@@ -133,28 +133,6 @@ ruby: &RUBY
     jemalloc: false
     rubygems_version: 2.7.6
   versions:
-    '2.3':
-      base_distro: trusty
-      base_image: instructure/core:latest
-      bundler_version: 1.15.3
-      rubygems_version: 2.6.13
-    '2.3-jemalloc':
-      base_distro: trusty
-      base_image: instructure/core:latest
-      bundler_version: 1.15.3
-      jemalloc: true
-      rubygems_version: 2.6.13
-    '2.4':  # This is the last trusty-based Ruby image we plan to add.
-      base_distro: trusty
-      base_image: instructure/core:latest
-      bundler_version: 1.15.3
-      rubygems_version: 2.6.13
-    '2.4-jemalloc':  # This is the last trusty-based Ruby image we plan to add.
-      base_distro: trusty
-      base_image: instructure/core:latest
-      bundler_version: 1.15.3
-      jemalloc: true
-      rubygems_version: 2.6.13
     '2.4-xenial':
       base_distro: xenial
       base_image: instructure/core:xenial
@@ -168,21 +146,6 @@ ruby: &RUBY
     '2.6':
     '2.6-jemalloc':
       jemalloc: true
-
-ruby-node-pg:
-  versions:
-    '2.3':
-      ruby_version: '2.3'
-      node_version: '4.x'
-    '2.4':
-      ruby_version: '2.4'
-      node_version: '4.x'
-    'r2.3n6.x':
-      ruby_version: '2.3'
-      node_version: '6.x'
-    'r2.4n6.x':
-      ruby_version: '2.4'
-      node_version: '6.x'
 
 ruby-passenger:
   <<: *RUBY
