@@ -147,6 +147,15 @@ ruby: &RUBY
     '2.6-jemalloc':
       jemalloc: true
 
+ruby-node-pg:
+  defaults:
+    npm_version: latest
+    yarn_version: latest
+  versions:
+    '2.6':
+      node_version: '10'
+      ruby_version: '2.6'
+
 ruby-passenger:
   <<: *RUBY
 

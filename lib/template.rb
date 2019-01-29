@@ -16,6 +16,10 @@ class Template
     TemplateRenderer.new(self, OpenStruct.new(values))
   end
 
+  def self.render_into_dockerfile(path, values)
+    new(path).render(values).to_string
+  end
+
   class TemplateRenderer
     def initialize(template, context)
       @template = template
@@ -24,8 +28,11 @@ class Template
 
     def to(output_dir)
       output_path = File.join(output_dir, @template.filename)
-      IO.write(output_path, @template.erb.result(@context.instance_eval { binding }))
+      IO.write(output_path, to_string)
+    end
+
+    def to_string
+      @template.erb.result(@context.instance_eval { binding })
     end
   end
 end
-
