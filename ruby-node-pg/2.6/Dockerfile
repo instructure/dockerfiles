@@ -46,7 +46,6 @@ ENV NPM_VERSION latest
 #  Julien Gilli <jgilli@fastmail.fm> 114F43EE0176B71C7BC219DD50A3051F888C628D
 #  Timothy J Fontaine <tjfontaine@gmail.com> 7937DFD2AB06298B2293C3187D33FF9D0246406D
 RUN set -ex && \
-  echo "disable-ipv6" > ~/.gnupg/dirmngr.conf && \
   for key in \
      4ED778F539E3634C779C87C6D7062848A1AB005C \
      94AE36675C464D64BAFA68DD7434390BDBE9B9C5 \
