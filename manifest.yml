@@ -101,6 +101,10 @@ java:
       flavor: 'jre'
       checksum: '0da788060d494f5095bf8624735fa2f1'
       distro: latest
+    '8-xenial':
+      distro: xenial
+      flavor: 'jdk'
+      java_version: 8
     '11':
       java_version: 11
       flavor: 'jdk'
