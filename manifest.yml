@@ -28,28 +28,28 @@ appliances/debugging:
 
 clojure:
   versions:
-    '8':
+    'deprecated/8':
+      install_unlimited_jce: true
       java_version: '8'
+      lein_version: '2.5.3'
       package_sha: '871d2e308076d2e9edf457cffc9d15996c8d003e'
       recv_key: '2E708FB2FCECA07FF8184E275A92E04305696D78'
-      lein_version: '2.5.3'
+    'deprecated/8-lein2.8':
       install_unlimited_jce: true
-    '8-lein2.8':
       java_version: '8'
+      lein_version: '2.8.1'
       package_sha: '3e95453428632d198f8772a5cf8e971c4814e811'
       recv_key: '2B72BF956E23DE5E830D50F6002AF007D1A7CC18'
-      lein_version: '2.8.1'
-      install_unlimited_jce: true
     '11':
       java_version: '11'
+      lein_version: '2.8.1'
       package_sha: '3e95453428632d198f8772a5cf8e971c4814e811'
       recv_key: '2B72BF956E23DE5E830D50F6002AF007D1A7CC18'
-      lein_version: '2.8.1'
 
 core:
   versions:
     # "latest" must always be trusty for backwards compatibility.
-    latest:
+    deprecated/latest:
       base_image: ubuntu:trusty
     xenial:
       base_image: ubuntu:xenial
@@ -75,11 +75,11 @@ java:
     use_openjdk: true
     distro: bionic
   versions:
-    '8':
+    'deprecated/8':
       use_openjdk: false
       flavor: 'jdk'
       distro: latest
-    '8-jre':
+    'deprecated/8-jre':
       use_openjdk: false
       java_version: 8
       update: 162
@@ -154,13 +154,13 @@ scala-sbt:
   defaults:
     base_image: instructure/java:8
   template_files:
-     - Dockerfile
-     - sbt-private
+    - Dockerfile
+    - sbt-private
   versions:
-    '0.13':
+    'deprecated/0.13':
       full_version: '0.13.16'
       minor_version: '0.13'
-    '1':
+    'deprecated/1':
       full_version: '1.1.0'
       minor_version: '1.1'
     '1.2':
@@ -171,8 +171,8 @@ scala-sbt:
 spark:
   versions:
     '1.6-hadoop2.6':
-      spark_version: '1.6.3'
       hadoop_version: '2.6.5'
+      spark_version: '1.6.3'
     '2.1-hadoop2.7':
-      spark_version: '2.1.0'
       hadoop_version: '2.7.3'
+      spark_version: '2.1.0'

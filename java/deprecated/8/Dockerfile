@@ -6,7 +6,7 @@ FROM instructure/core:latest
 
 USER root
 
-ENV JAVA_VERSION=8
+ENV JAVA_VERSION=deprecated/8
 
 RUN echo oracle-java$JAVA_VERSION-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
     add-apt-repository -y ppa:webupd8team/java && \
