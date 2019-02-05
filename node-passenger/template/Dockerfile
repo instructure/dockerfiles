@@ -11,7 +11,8 @@ RUN  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CA
   && apt-get update \
   && apt-get install -y --no-install-recommends \
     nginx-extras \
-    passenger sudo \
+    passenger \
+    sudo \
 <% if base_distro == 'bionic' -%>
     libnginx-mod-http-passenger \
 <% end -%>
