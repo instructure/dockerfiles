@@ -2,7 +2,8 @@
 #!/bin/bash
 
 SBT_MINOR_VERSION=<%= minor_version %>
-SBT_CONF_DIR=$HOME/.sbt/$SBT_MINOR_VERSION
+SBT_MAJOR_VERSION=<%= major_version %>
+SBT_CONF_DIR=$HOME/.sbt/$SBT_MAJOR_VERSION
 USER_FILE=$SBT_CONF_DIR/users.sbt
 
 mkdir -p $SBT_CONF_DIR
