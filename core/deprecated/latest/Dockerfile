@@ -29,6 +29,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
 
+
 ## Add monitoring checks
 RUN mkdir -p /monitoring/sensu/
 COPY monitoring/sensu.sh /monitoring/sensu.sh

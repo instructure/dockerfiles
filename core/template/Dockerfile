@@ -35,6 +35,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
 
+<% if version == 'bionic' -%>
+# gnupg2 and dirmngr will attempt to use IPv6 if it's enabled in Docker, even
+# if the container doesn't have an IPv6 address (this is true on Docker Hub).
+RUN mkdir ~/.gnupg && echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf
+<% end -%>
+
 ## Add monitoring checks
 RUN mkdir -p /monitoring/sensu/
 COPY monitoring/sensu.sh /monitoring/sensu.sh
