@@ -26,6 +26,20 @@ appliances/debugging:
     xenial: {}
     bionic: {}
 
+appliances/postgres:
+  defaults:
+    decoderbufs_ref: 'v0.9.2.Final'
+    wal2json_ref: 'master'
+  versions:
+    '9.5':
+      base_image: postgres:9.5
+    '9.6':
+      base_image: postgres:9.6
+    '10':
+      base_image: postgres:10
+    '11':
+      base_image: postgres:11
+
 clojure:
   versions:
     'deprecated/8':
@@ -115,6 +129,7 @@ node: &NODE
 
 node-passenger:
   <<: *NODE
+
 
 ruby: &RUBY
   defaults:
