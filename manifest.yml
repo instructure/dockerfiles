@@ -174,21 +174,12 @@ ruby-passenger:
 
 scala-sbt:
   defaults:
-    base_image: instructure/java:8
+    base_image: instructure/java:8-xenial
   template_files:
     - Dockerfile
     - sbt-private
   versions:
-    'deprecated/0.13':
-      full_version: '0.13.16'
-      minor_version: '0.13'
-      major_version: '0.13'
-    'deprecated/1':
-      full_version: '1.1.0'
-      minor_version: '1.1'
-      major_version: '1.0'
     '1.2':
-      base_image: instructure/java:11
       full_version: '1.2.7'
       minor_version: '1.2'
       major_version: '1.0'
