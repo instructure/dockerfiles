@@ -47,6 +47,10 @@ with the `PASSENGER_MAX_REQUEST_QUEUE_SIZE` variable.
 The passenger default is 90. You may override this with the
 `PASSENGER_STARTUP_TIMEOUT` variable.
 
+## Passenger spawn method (PASSENGER_SPAWN_METHOD)
+The passenger default is "smart".  You may override this to "direct" if you have
+a reason to suspect the spawn method is causing problems in your application.
+
 ## main.d (/usr/src/nginx/main.d/*.conf)
 Additional global configuration settings can be included in the
 `/usr/src/nginx/main.d/` directory.
