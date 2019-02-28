@@ -70,9 +70,12 @@ http {
 
     passenger_pre_start <%= URI.parse("http://#{APP_DOMAIN}:#{APP_PORT}").merge(ENV.fetch('CG_INSTANCE_POOL_HEALTH_CHECK_PATH', '/')) %>;
 
-    # In some cases, the smart spawn method might cause issues.
-    # As an escape hatch, expose the spawn method for configuration
-    passenger_spawn_method <%= ENV.fetch('PASSENGER_SPAWN_METHOD', 'smart') %>;
+    <% if ENV.key? 'PASSENGER_SPAWN_METHOD' %>
+      # In some cases, the default "smart" spawn method might cause issues.
+      # As an escape hatch, expose the spawn method for configuration.
+      # Allowable values: "smart", "direct"
+      passenger_spawn_method <%= ENV.fetch('PASSENGER_SPAWN_METHOD') %>;
+    <% end %>
 
     more_clear_headers 'X-Powered-By';
     passenger_set_header X-Request-Id $request_id;
