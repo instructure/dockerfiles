@@ -34,6 +34,8 @@ RUN apt-get update \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
+RUN mkdir -p /usr/src/app && chown docker:docker /usr/src/app
+
 USER docker
 
 # Install RVM
