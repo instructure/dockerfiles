@@ -1,6 +1,9 @@
-<%= generation_message %>
+# GENERATED FILE, DO NOT MODIFY!
+# To update this file please edit the relevant template and run the generation
+# task `rake generate:appliances/libreoffice`
 
-FROM instructure/core:<%= ubuntu_version %>
+
+FROM instructure/core:bionic
 
 USER root
 
@@ -43,13 +46,13 @@ RUN apt-get clean           \
 
 RUN mkdir /tmp/lo \
   && cd /tmp/lo \
-  && curl -L -k https://download.documentfoundation.org/libreoffice/stable/<%= full_version %>/deb/x86_64/LibreOffice_<%= full_version %>_Linux_x86-64_deb.tar.gz | tar xz --strip-components=1 \
+  && curl -L -k https://download.documentfoundation.org/libreoffice/stable/6.2.3/deb/x86_64/LibreOffice_6.2.3_Linux_x86-64_deb.tar.gz | tar xz --strip-components=1 \
   && cd DEBS \
   && dpkg -i *.deb \
   && rm -fr /tmp/lo
 
 # for compat with canvadocs converter, which hardcodes path to soffice
-RUN ln -s /opt/libreoffice<%= short_version %>/program/soffice /usr/bin/soffice
-ENV PATH $PATH:/opt/libreoffice<%= short_version %>/program
+RUN ln -s /opt/libreoffice6.2/program/soffice /usr/bin/soffice
+ENV PATH $PATH:/opt/libreoffice6.2/program
 
 USER docker
