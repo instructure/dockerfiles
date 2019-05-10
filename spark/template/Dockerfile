@@ -1,5 +1,5 @@
 <%= generation_message %>
-FROM instructure/java:8-jre
+FROM instructure/java:8-xenial
 
 USER root
 

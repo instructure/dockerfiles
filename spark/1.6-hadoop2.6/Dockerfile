@@ -2,7 +2,7 @@
 # To update this file please edit the relevant template and run the generation
 # task `rake generate:spark`
 
-FROM instructure/java:8-jre
+FROM instructure/java:8-xenial
 
 USER root
 
