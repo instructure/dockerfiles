@@ -48,9 +48,6 @@ clojure:
 
 core:
   versions:
-    # "latest" must always be trusty for backwards compatibility.
-    deprecated/latest:
-      base_image: ubuntu:trusty
     xenial:
       base_image: ubuntu:xenial
     bionic:
