@@ -7,7 +7,7 @@ pipeline {
 
   environment {
     TEST_IMAGE_NAME = 'dockerfiles_build'
-      CHANGE_OWNER = "${GERRIT_CHANGE_OWNER_EMAIL.split("@")[0]}"
+    CHANGE_OWNER = "${GERRIT_CHANGE_OWNER_EMAIL.split("@")[0]}"
   }
 
   stages {
@@ -15,28 +15,31 @@ pipeline {
       steps {
         timeout(activity: true, time: 30, unit: 'SECONDS') {
           dockerCacheLoad(image: "dockerfiles-ci")
-            sh 'docker build --pull --tag dockerfiles-ci --file ci/Dockerfile .'
-            sh """docker run --rm dockerfiles-ci sh -c "rake && git diff --exit-code" """
+          sh 'docker build --pull --tag dockerfiles-ci --file ci/Dockerfile .'
+          sh """docker run --rm dockerfiles-ci sh -c "rake && git diff --exit-code" """
         }
       }
     }
 
     stage('Initialize dockerfiles stage') {
       steps {
-        sh """docker run --name dockerfiles_index dockerfiles-ci sh -c "rake ci:index" """
-          sh 'docker cp dockerfiles_index:ci ci_files/'
-          script {
-            for (int i=0; i < 5; i++) {
-              dockerfiles = readYaml file: "ci_files/dockerfiles_${i}.yml"
-                dockerfileStages[i] = dockerfiles.collectEntries {
-                  [(it) : {
-                    timeout(activity: true, time: 5, unit: 'MINUTES') {
-                      sh """docker build ${it}"""
-                    }
-                  }]
+        sh """
+          docker rm -f dockerfiles_index || :
+          docker run --name dockerfiles_index dockerfiles-ci sh -c "rake ci:index"
+          docker cp dockerfiles_index:ci ci_files/
+        """
+        script {
+          for (int i=0; i < 5; i++) {
+            dockerfiles = readYaml file: "ci_files/dockerfiles_${i}.yml"
+            dockerfileStages[i] = dockerfiles.collectEntries {
+              [(it) : {
+                timeout(activity: true, time: 5, unit: 'MINUTES') {
+                  sh """docker build ${it}"""
                 }
+              }]
             }
           }
+        }
       }
     }
 
@@ -69,7 +72,7 @@ pipeline {
 
   post {
     always {
-      sh 'docker rm dockerfiles_index'
+      sh 'docker rm -f dockerfiles_index || :'
     }
 
     failure {
