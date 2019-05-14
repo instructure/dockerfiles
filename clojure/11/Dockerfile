@@ -42,7 +42,6 @@ RUN mkdir -p $LEIN_INSTALL \
 \
   && apt-get update \
 \
-
   # Some REPLs (e.g., Figwheel) necessitate a readline wrapper.
   && apt-get install -y rlfe && rm -rf /var/lib/apt/lists/*
 

@@ -39,11 +39,6 @@ RUN mkdir -p $LEIN_INSTALL \
 \
   && apt-get update \
 \
-<% if install_unlimited_jce %>
-  # Install the unlimited JCE policy to allow for stronger encryption
-  && apt-get install -y --no-install-recommends --force-yes oracle-java8-unlimited-jce-policy \
-\
-<% end %>
   # Some REPLs (e.g., Figwheel) necessitate a readline wrapper.
   && apt-get install -y rlfe && rm -rf /var/lib/apt/lists/*
 
