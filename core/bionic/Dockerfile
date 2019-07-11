@@ -35,11 +35,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # if the container doesn't have an IPv6 address (this is true on Docker Hub).
 RUN mkdir ~/.gnupg && echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf
 
-## Add monitoring checks
-RUN mkdir -p /monitoring/sensu/
-COPY monitoring/sensu.sh /monitoring/sensu.sh
-RUN chmod +x /monitoring/sensu.sh
-
 ## Ensure UTF-8 locale
 RUN locale-gen en_US.UTF-8
 ENV LANG       en_US.UTF-8

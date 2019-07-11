@@ -21,13 +21,6 @@ RUN  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CA
 
 RUN echo 'docker ALL=(ALL) NOPASSWD: SETENV: /usr/sbin/nginx' >> /etc/sudoers
 
-#Sensu check
-COPY passenger_metrics.rb /monitoring/sensu/
-COPY passenger_check /monitoring/sensu/
-RUN chmod +x /monitoring/sensu/passenger_metrics.rb /monitoring/sensu/passenger_check
-
-RUN gem install -i /var/lib/gems/$RUBY_MAJOR.0 nokogiri sensu-plugin
-
 USER docker
 RUN passenger-config build-native-support
 

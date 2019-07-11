@@ -30,11 +30,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
 
 
-## Add monitoring checks
-RUN mkdir -p /monitoring/sensu/
-COPY monitoring/sensu.sh /monitoring/sensu.sh
-RUN chmod +x /monitoring/sensu.sh
-
 ## Ensure UTF-8 locale
 RUN locale-gen en_US.UTF-8
 ENV LANG       en_US.UTF-8

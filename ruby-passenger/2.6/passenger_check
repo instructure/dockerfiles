@@ -1,3 +1,0 @@
-#!/bin/bash
-
-./passenger_metrics.rb --scheme $CG_APP_NAME.$CG_ENVIRONMENT.passenger
