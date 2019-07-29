@@ -1,13 +1,15 @@
-FROM openjdk:8-alpine
+FROM openjdk:11-jre-slim
 
-RUN apk add --no-cache \
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install -y --no-install-recommends \
       curl \
-      gnupg \
+      dirmngr \
+      gnupg2 \
       nodejs \
-      sed \
-      unzip
+      unzip \
+ && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
 
-ENV SONARQUBE_SCANNER_VERSION "3.3.0.1492"
+ENV SONARQUBE_SCANNER_VERSION "4.0.0.1744"
 
 RUN curl -sSO https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONARQUBE_SCANNER_VERSION-linux.zip \
  && curl -sSO https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONARQUBE_SCANNER_VERSION-linux.zip.asc \
