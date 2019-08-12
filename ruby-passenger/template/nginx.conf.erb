@@ -87,15 +87,15 @@ http {
     include       /etc/nginx/mime.types;
     default_type  application/octet-stream;
 
-    # Add files here to add additional nginx options
-    include      /usr/src/nginx/conf.d/*.conf;
-
     sendfile        on;
     keepalive_timeout  65;
 
+    # Add files here to add additional nginx options
+    include      /usr/src/nginx/conf.d/*.conf;
+
     <% if REDIRECT_PORT %>
         server {
-            listen       <%= REDIRECT_PORT %>;
+            listen       <%= REDIRECT_PORT %> default_server;
             server_name  redirect;
             access_log   off;
             if ($host = $remote_addr) {
@@ -106,7 +106,7 @@ http {
     <% end %>
 
     server {
-        listen       <%= APP_PORT %>;
+        listen       <%= APP_PORT %> default_server;
         server_name  <%= APP_DOMAIN %>;
         root <%= ENV.fetch('APP_ROOT_PATH', '/usr/src/app/public') %>;
 
