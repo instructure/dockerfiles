@@ -13,11 +13,13 @@
 
 # Coordinate with owner(s) of canvadocs before upgrades (currently the Content team)
 appliances/libreoffice:
+  defaults:
+    ubuntu_version: bionic
   versions:
     '6.2':
-      full_version: '6.2.3'
-      short_version: '6.2'
-      ubuntu_version: 'bionic'
+      full_version: '6.2.6.2'
+    '6.3':
+      full_version: '6.3.0.4'
 
 appliances/debugging:
   versions:

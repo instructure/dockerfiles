@@ -43,13 +43,13 @@ RUN apt-get clean           \
 
 RUN mkdir /tmp/lo \
   && cd /tmp/lo \
-  && curl -L -k https://download.documentfoundation.org/libreoffice/stable/<%= full_version %>/deb/x86_64/LibreOffice_<%= full_version %>_Linux_x86-64_deb.tar.gz | tar xz --strip-components=1 \
+  && curl -sSL https://downloadarchive.documentfoundation.org/libreoffice/old/<%= full_version %>/deb/x86_64/LibreOffice_<%= full_version %>_Linux_x86-64_deb.tar.gz | tar xz --strip-components=1 \
   && cd DEBS \
   && dpkg -i *.deb \
   && rm -fr /tmp/lo
 
 # for compat with canvadocs converter, which hardcodes path to soffice
-RUN ln -s /opt/libreoffice<%= short_version %>/program/soffice /usr/bin/soffice
-ENV PATH $PATH:/opt/libreoffice<%= short_version %>/program
+RUN ln -s /opt/libreoffice<%= version %>/program/soffice /usr/bin/soffice
+ENV PATH $PATH:/opt/libreoffice<%= version %>/program
 
 USER docker
