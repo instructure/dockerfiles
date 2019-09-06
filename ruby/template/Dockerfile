@@ -93,20 +93,6 @@ RUN update-alternatives --install /usr/bin/gem gem /usr/bin/gem$RUBY_MAJOR 181 &
 # BrightBox also provides rake out of the box.
 RUN gem install rake
 <% end -%>
-<% if base_image.include? 'core:latest' -%>
-# https://imagetragick.com/ mitigation
-RUN sed -i '/<\/policymap>/i\
-  <!-- ImageTragick Mitigation -->\n\
-  <policy domain="coder" rights="none" pattern="EPHEMERAL" />\n\
-  <policy domain="coder" rights="none" pattern="URL" />\n\
-  <policy domain="coder" rights="none" pattern="HTTPS" />\n\
-  <policy domain="coder" rights="none" pattern="MVG" />\n\
-  <policy domain="coder" rights="none" pattern="MSL" />\n\
-  <policy domain="coder" rights="none" pattern="TEXT" />\n\
-  <policy domain="coder" rights="none" pattern="SHOW" />\n\
-  <policy domain="coder" rights="none" pattern="WIN" />\n\
-  <policy domain="coder" rights="none" pattern="PLT" />' /etc/ImageMagick/policy.xml
-<% end -%>
 
 RUN gem update --system $RUBYGEMS_VERSION \
  && gem install -i /var/lib/gems/$RUBY_MAJOR.0 bundler -v $BUNDLER_VERSION
