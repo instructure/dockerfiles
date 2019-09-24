@@ -56,7 +56,6 @@ RUN mkdir -p /tmp/ruby-build && \
       --with-jemalloc \
       --enable-multiarch \
       --target="$DEB_HOST_MULTIARCH" \
-      --program-suffix=2.6 \
       --with-soname="ruby-2.6" \
       --enable-shared \
       --enable-install-static-library \
@@ -69,14 +68,6 @@ RUN mkdir -p /tmp/ruby-build && \
     make install \
   ) && \
   rm -r /tmp/ruby-build
-
-RUN update-alternatives --install /usr/bin/gem gem /usr/bin/gem$RUBY_MAJOR 181 && \
-  update-alternatives \
-    --install /usr/bin/ruby ruby /usr/bin/ruby${RUBY_MAJOR} 51 \
-    --slave /usr/bin/erb erb /usr/bin/erb${RUBY_MAJOR} \
-    --slave /usr/bin/irb irb /usr/bin/irb${RUBY_MAJOR} \
-    --slave /usr/bin/rdoc rdoc /usr/bin/rdoc${RUBY_MAJOR} \
-    --slave /usr/bin/ri ri /usr/bin/ri${RUBY_MAJOR}
 
 # BrightBox also provides rake out of the box.
 RUN gem install rake

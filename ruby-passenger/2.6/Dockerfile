@@ -14,7 +14,8 @@ RUN  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CA
   && apt-get update \
   && apt-get install -y --no-install-recommends \
     nginx-extras \
-    passenger sudo \
+    sudo \
+    passenger \
     libnginx-mod-http-passenger \
 
 # libnginx-mod-http-passenger in bionic destroys the alternatives in the base ruby image

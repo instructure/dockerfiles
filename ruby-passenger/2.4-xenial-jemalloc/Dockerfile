@@ -17,7 +17,7 @@ RUN  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CA
     sudo \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-RUN gem install passenger --no-rdoc --no-ri
+RUN gem install passenger --no-rdoc --no-ri -v 6.0.2 && chown -R docker:docker /home/docker/.gem/
 
 RUN echo 'docker ALL=(ALL) NOPASSWD: SETENV: /usr/sbin/nginx' >> /etc/sudoers
 
