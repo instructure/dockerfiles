@@ -120,23 +120,13 @@ ruby: &RUBY
     base_distro: bionic
     base_image: instructure/core:bionic
     bundler_version: 1.17.3
-    jemalloc: false
-    jemalloc_passenger_version: 6.0.2
     rubygems_version: 2.7.10
   versions:
     '2.4-xenial':
       base_distro: xenial
       base_image: instructure/core:xenial
-    '2.4-xenial-jemalloc':
-      base_distro: xenial
-      base_image: instructure/core:xenial
-      jemalloc: true
     '2.5':
-    '2.5-jemalloc':
-      jemalloc: true
     '2.6':
-    '2.6-jemalloc':
-      jemalloc: true
 
 ruby-node-pg:
   defaults:
