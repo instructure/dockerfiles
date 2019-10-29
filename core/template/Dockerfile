@@ -1,45 +1,41 @@
+<% flavor = version.end_with?('slim') ? 'slim' : 'fat' -%>
 ARG TINI_VERSION=v0.16.1
 FROM instructure/tini:${TINI_VERSION} as tini
 
 FROM <%= base_image %>
 MAINTAINER Instructure
 
-## Create a 'docker' user
-RUN  addgroup --gid 9999 docker \
-  && adduser --uid 9999 --gid 9999 --disabled-password --gecos "Docker User" docker \
-  && usermod -L docker
-
-## APT setup
-## Upgrade all packages
-## Install common tools
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    apt-transport-https \
-    ca-certificates \
-    software-properties-common \
-    language-pack-en \
-    locales \
+## Create a 'docker' user
+RUN addgroup --gid 9999 docker \
+ && adduser --uid 9999 --gid 9999 --disabled-password --gecos "Docker User" docker \
+ && usermod -L docker \
+ && apt-get update \
  && apt-get install -y --no-install-recommends \
-    curl \
-    psmisc \
-    git \
-    build-essential \
-    tzdata \
+        apt-transport-https \
+        ca-certificates \
+        curl \
+        language-pack-en \
+        locales \
+<%= (version == 'bionic-slim' ? "        gnupg \\\n" : "") -%>
+<% if flavor == 'fat' -%>
+ && apt-get install -y --no-install-recommends \
+        build-essential \
+        git \
+        psmisc \
+        python \
+        software-properties-common \
+        tzdata \
 <% if version == 'bionic' -%>
-    dirmngr \
-    gpg-agent \
-    python3 \
-<% else -%>
-    python \
+        dirmngr \
+        gpg-agent \
+ # gnupg2 and dirmngr will attempt to use IPv6 if it's enabled in Docker, even
+ # if the container doesn't have an IPv6 address (this is true on Docker Hub).
+ && mkdir ~/.gnupg && echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf \
+<% end -%>
 <% end -%>
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
-
-<% if version == 'bionic' -%>
-# gnupg2 and dirmngr will attempt to use IPv6 if it's enabled in Docker, even
-# if the container doesn't have an IPv6 address (this is true on Docker Hub).
-RUN mkdir ~/.gnupg && echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf
-<% end -%>
 
 ## Ensure UTF-8 locale
 RUN locale-gen en_US.UTF-8

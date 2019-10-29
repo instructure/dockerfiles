@@ -52,7 +52,11 @@ core:
   versions:
     xenial:
       base_image: ubuntu:xenial
+    xenial-slim:
+      base_image: ubuntu:xenial
     bionic:
+      base_image: ubuntu:bionic
+    bionic-slim:
       base_image: ubuntu:bionic
 
 golang:
