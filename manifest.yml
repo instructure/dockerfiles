@@ -131,7 +131,7 @@ node-pm2:
     '12':
       base_image: instructure/node:12
 
-php:
+php: &PHP
   defaults:
     base_image: instructure/core:bionic-slim
   versions:
@@ -142,6 +142,9 @@ php:
     '7.3':
       base_image: instructure/core:bionic
     '7.3-slim': {}
+
+php-nginx:
+  <<: *PHP
 
 ruby: &RUBY
   defaults:
