@@ -118,6 +118,19 @@ node: &NODE
 node-passenger:
   <<: *NODE
 
+node-pm2:
+  defaults:
+    base_distro: bionic
+    base_image: instructure/node:12
+  versions:
+    '8-xenial':
+      base_distro: xenial
+      base_image: instructure/node:8-xenial
+    '10':
+      base_image: instructure/node:10
+    '12':
+      base_image: instructure/node:12
+
 
 ruby: &RUBY
   defaults:

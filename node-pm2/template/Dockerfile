@@ -1,8 +1,5 @@
-# GENERATED FILE, DO NOT MODIFY!
-# To update this file please edit the relevant template and run the generation
-# task `rake generate:node-pm2`
-
-FROM instructure/node:8-xenial
+<%= generation_message %>
+FROM <%= base_image %>
 MAINTAINER Instructure
 
 USER root
@@ -13,7 +10,7 @@ RUN  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CA
   # TODO can this be a non-passenger source? don't think we can take it out
   # because then we get nginx 1.10 instead of 1.14, and I'm not sure if 1.10
   # has the features we need
-  && sh -c 'echo deb https://oss-binaries.phusionpassenger.com/apt/passenger xenial main > /etc/apt/sources.list.d/passenger.list' \
+  && sh -c 'echo deb https://oss-binaries.phusionpassenger.com/apt/passenger <%= base_distro %> main > /etc/apt/sources.list.d/passenger.list' \
   && apt-get update \
   && apt-get install -y --no-install-recommends \
     nginx-extras \
