@@ -24,10 +24,13 @@ RUN /bin/bash -c 'source /etc/lsb-release \
 
 # Update some defaults to be a bit more sane
 RUN ln -s /etc/php/${PHP_VERSION} /etc/php/current \
- && mkdir -p /var/run/php /entrypoint.d/ \
+ && mkdir -p /usr/src/app /var/run/php /entrypoint.d/ \
+ && chown docker:docker /usr/src/app \
  && chown docker:docker /var/run/php \
  && chown -R docker:docker /entrypoint.d \
  && update-alternatives --install /usr/bin/python python /usr/bin/python3 10
+
+WORKDIR /usr/src/app
 
 USER docker
 
