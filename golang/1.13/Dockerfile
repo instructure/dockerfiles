@@ -16,6 +16,12 @@ RUN curl -fsSL "$GOLANG_DOWNLOAD_URL" -o golang.tar.gz \
   && tar -C /usr/local -xzf golang.tar.gz \
   && rm golang.tar.gz
 
+# For private gomodules that install via git
+RUN apt-get update \
+  && apt-get install -y openssh-client \
+  && apt-get clean
+ENV GOPRIVATE gerrit.instructure.com,github.com/instructure
+
 ENV GOPATH /go
 ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 ENV SRCPATH $GOPATH/src
