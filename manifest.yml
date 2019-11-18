@@ -63,21 +63,12 @@ golang:
   defaults:
     base_image: instructure/core:bionic
   versions:
-    '1.10':
-      full_version: '1.10.8'
-      package_sha: 'd8626fb6f9a3ab397d88c483b576be41fa81eefcec2fd18562c87626dbb3c39e'
-    '1.10-bionic':
-      full_version: '1.10.8'
-      package_sha: 'd8626fb6f9a3ab397d88c483b576be41fa81eefcec2fd18562c87626dbb3c39e'
-    '1.11':
-      full_version: '1.11.5'
-      package_sha: 'ff54aafedff961eb94792487e827515da683d61a5f9482f668008832631e5d25'
     '1.12':
       full_version: '1.12.9'
       package_sha: 'ac2a6efcc1f5ec8bdc0db0a988bb1d301d64b6d61b7e8d9e42f662fbb75a2b9b'
     '1.13':
-      full_version: '1.13'
-      package_sha: '68a2297eb099d1a76097905a2ce334e3155004ec08cdea85f24527be3c48e856'
+      full_version: '1.13.4'
+      package_sha: '692d17071736f74be04a72a06dab9cac1cd759377bd85316e52b2227604c004c'
 
 java:
   defaults:
