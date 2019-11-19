@@ -9,7 +9,7 @@ USER root
 #
 # Clojure
 #
-ENV LEIN_VERSION 2.8.1
+ENV LEIN_VERSION 2.9.1
 ENV LEIN_INSTALL /usr/local/bin/
 
 WORKDIR /tmp
@@ -18,7 +18,7 @@ WORKDIR /tmp
 RUN mkdir -p $LEIN_INSTALL \
   && curl -OLs https://github.com/technomancy/leiningen/archive/$LEIN_VERSION.tar.gz \
   && echo "Comparing archive checksum ..." \
-  && echo "3e95453428632d198f8772a5cf8e971c4814e811 *$LEIN_VERSION.tar.gz" | sha1sum -c - \
+  && echo "71e6585fb3a0e7834dc711e7c3904425f506b28c *$LEIN_VERSION.tar.gz" | sha1sum -c - \
 \
   && mkdir ./leiningen \
   && tar -xzf $LEIN_VERSION.tar.gz  -C ./leiningen/ --strip-components=1 \
