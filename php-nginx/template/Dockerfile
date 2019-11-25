@@ -16,7 +16,7 @@ RUN /bin/bash -c 'source /etc/lsb-release \
         php${PHP_VERSION}-fpm \
         nginx \
         python3-pip \
- && pip3 install supervisor \
+ && pip3 install supervisor setuptools \
  && apt-get purge --yes --autoremove python3-pip \
  # delete default php-fpm pool
  && rm -f /etc/php/${PHP_VERSION}/fpm/pool.d/www.conf
