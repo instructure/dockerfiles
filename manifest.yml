@@ -177,6 +177,11 @@ scala-sbt:
       full_version: '1.2.7'
       minor_version: '1.2'
       major_version: '1.0'
+    '1.3':
+      base_image: instructure/java:11
+      full_version: '1.3.3'
+      minor_version: '1.3'
+      major_version: '1.0'
 
 spark:
   versions:
