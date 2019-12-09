@@ -70,6 +70,15 @@ golang:
       full_version: '1.13.4'
       package_sha: '692d17071736f74be04a72a06dab9cac1cd759377bd85316e52b2227604c004c'
 
+graalvm-ce:
+  defaults:
+    distro: bionic
+  versions:
+    '19.3.0-java11':
+      java_version: 11
+      graal_version: 19.3.0
+      package_sha: 238c5c21bb4aa292caf95b2aca592ce8c1be2f036d93af48cd865f67d558f907
+
 java:
   defaults:
     distro: bionic
