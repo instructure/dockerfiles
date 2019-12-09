@@ -4,6 +4,8 @@ import configparser
 
 from os import environ
 
+php_version = environ.get('PHP_VERSION', 'unknown')
+
 config = configparser.RawConfigParser()
 
 globalSection = 'global'
@@ -18,17 +20,19 @@ config.set(appSection, 'listen.owner', 'docker')
 config.set(appSection, 'listen.group', 'docker')
 config.set(appSection, 'chdir', '/')
 config.set(appSection, 'catch_workers_output', 'yes')
+if php_version != '7.1':  # this option was introduced in 7.3
+    config.set(appSection, 'decorate_workers_output', 'no')  # stop FPM from mangling our output
 config.set(appSection, 'access.log', '/dev/stderr')
 config.set(appSection, 'clear_env', 'no')
 config.set(appSection, 'chdir', '/usr/src/app')
 
-pingPath = environ['FPM_PING_PATH']
+pingPath = environ.get('FPM_PING_PATH', None)
 if pingPath:
     config.set(appSection, 'ping.path', pingPath)
 
 config.set(appSection, 'pm', environ.get('FPM_PM_MODE', 'dynamic'))
 
-statusPath = environ['FPM_STATUS_PATH']
+statusPath = environ.get('FPM_STATUS_PATH', None)
 if statusPath:
     config.set(appSection, 'pm.status_path', statusPath)
 
