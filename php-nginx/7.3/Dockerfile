@@ -28,7 +28,7 @@ RUN ln -s /usr/sbin/php-fpm${PHP_VERSION} /usr/sbin/php-fpm \
  && mkdir -p /usr/src/php/fpm /var/log/php \
  && mkdir -p /usr/src/supervisor \
  && mkdir -p /var/lib/nginx/body /var/lib/fastcgi \
- && chown -R docker:docker /usr/src/nginx /usr/src/php/fpm /usr/src/supervisor /var/run/php /var/log/nginx /var/lib/nginx \
+ && chown -R docker:docker /usr/src/nginx /usr/src/php /usr/src/supervisor /var/run/php /var/log/nginx /var/lib/nginx \
  && mkdir -p /usr/src/app
 
 COPY --chown=docker:docker entrypoint.d/ /entrypoint.d/
