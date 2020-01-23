@@ -58,6 +58,8 @@ RUN rvm install 2.3.8 \
  && rvm alias create 2.5 ruby-2.5.7 \
  && rvm install 2.6.5 \
  && rvm alias create 2.6 ruby-2.6.5 \
- && rvm use --default 2.6.5
+ && rvm install 2.7.0 \
+ && rvm alias create 2.7 ruby-2.7.0 \
+ && rvm use --default 2.7.0
 
 WORKDIR /usr/src/app
