@@ -5,6 +5,8 @@
 FROM instructure/php:7.1
 LABEL maintainer=Instructure
 
+ENV PHP_INI_SCAN_DIR=/etc/php/current/fpm/conf.d:/usr/src/php/conf.d
+
 USER root
 
 RUN /bin/bash -c 'source /etc/lsb-release \

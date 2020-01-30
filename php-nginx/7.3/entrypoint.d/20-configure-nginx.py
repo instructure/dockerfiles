@@ -21,6 +21,12 @@ args['nginxWorkerCount'] = os.environ.get('NGINX_WORKER_COUNT', 'auto')
 args['nginxWorkerConnections'] = os.environ.get('NGINX_WORKER_CONNECTIONS', '1024')
 args['nginxMaxUploadSize'] = os.environ.get('NGINX_MAX_UPLOAD_SIZE', '10m')
 
+args['hstsEnabled'] = os.environ.get('HSTS_ENABLED', 'true').lower() not in ['false', 'f', '0']
+args['hstsMaxAge'] = os.environ.get('HSTS_MAX_AGE', '10368000')
+
+hstsOptions = os.environ.get('HSTS_OPTIONS', '')
+args['hstsOptions'] = hstsOptions if not hstsOptions else '; ' + hstsOptions
+
 templateEnv = Environment(
     loader=FileSystemLoader(searchpath=scriptDir),
 )
