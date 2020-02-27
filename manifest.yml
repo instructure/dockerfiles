@@ -45,8 +45,8 @@ clojure:
     '11':
       java_version: '11'
       lein_version: '2.9.1'
-      package_sha: '71e6585fb3a0e7834dc711e7c3904425f506b28c'
-      recv_key: '2B72BF956E23DE5E830D50F6002AF007D1A7CC18'
+      package_sha: 'a4c239b407576f94e2fef5bfa107f0d3f97d0b19c253b08860d9609df4ab8b29'
+      jar_sha: 'ea7c831a4f5c38b6fc3926c6ad32d1d4b9b91bf830a715ecff5a70a18bda55f8'
 
 core:
   versions:
