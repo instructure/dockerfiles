@@ -25,17 +25,9 @@ if php_version != '7.1':  # this option was introduced in 7.3
 config.set(appSection, 'access.log', '/dev/stderr')
 config.set(appSection, 'clear_env', 'no')
 config.set(appSection, 'chdir', '/usr/src/app')
-
-pingPath = environ.get('FPM_PING_PATH', None)
-if pingPath:
-    config.set(appSection, 'ping.path', pingPath)
-
+config.set(appSection, 'ping.path', '/php-ping')
 config.set(appSection, 'pm', environ.get('FPM_PM_MODE', 'dynamic'))
-
-statusPath = environ.get('FPM_STATUS_PATH', None)
-if statusPath:
-    config.set(appSection, 'pm.status_path', statusPath)
-
+config.set(appSection, 'pm.status_path', '/php-status')
 config.set(appSection, 'pm.max_children', environ.get('FPM_MAX_CHILDREN', '5'))
 config.set(appSection, 'pm.start_servers', environ.get('FPM_START_CHILDREN', '2'))
 config.set(appSection, 'pm.min_spare_servers', environ.get('FPM_MIN_SPARE_CHILDREN', '1'))
