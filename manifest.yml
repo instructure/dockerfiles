@@ -49,15 +49,21 @@ clojure:
       jar_sha: 'ea7c831a4f5c38b6fc3926c6ad32d1d4b9b91bf830a715ecff5a70a18bda55f8'
 
 core:
+  defaults:
+    flavor: slim
   versions:
     xenial:
       base_image: ubuntu:xenial
+      flavor: fat
     xenial-slim:
       base_image: ubuntu:xenial
     bionic:
       base_image: ubuntu:bionic
+      flavor: fat
     bionic-slim:
       base_image: ubuntu:bionic
+    focal:
+      base_image: ubuntu:focal
 
 golang:
   defaults:

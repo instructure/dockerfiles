@@ -1,5 +1,4 @@
-ARG TINI_VERSION=v0.16.1
-FROM instructure/tini:${TINI_VERSION} as tini
+FROM instructure/tini:latest as tini
 
 FROM ubuntu:bionic
 MAINTAINER Instructure

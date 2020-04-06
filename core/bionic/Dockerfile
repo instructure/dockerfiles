@@ -1,5 +1,4 @@
-ARG TINI_VERSION=v0.16.1
-FROM instructure/tini:${TINI_VERSION} as tini
+FROM instructure/tini:latest as tini
 
 FROM ubuntu:bionic
 MAINTAINER Instructure
@@ -16,6 +15,7 @@ RUN addgroup --gid 9999 docker \
         curl \
         language-pack-en \
         locales \
+        gnupg \
  && apt-get install -y --no-install-recommends \
         build-essential \
         git \
@@ -23,8 +23,6 @@ RUN addgroup --gid 9999 docker \
         python \
         software-properties-common \
         tzdata \
-        dirmngr \
-        gpg-agent \
  # gnupg2 and dirmngr will attempt to use IPv6 if it's enabled in Docker, even
  # if the container doesn't have an IPv6 address (this is true on Docker Hub).
  && mkdir ~/.gnupg && echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf \

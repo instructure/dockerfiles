@@ -1,8 +1,7 @@
 FROM instructure/tini:latest as tini
 
-FROM <%= base_image %>
+FROM ubuntu:focal
 MAINTAINER Instructure
-<% gnupg2 = ['bionic', 'bionic-slim', 'focal'].include?(version) -%>
 
 ENV DEBIAN_FRONTEND=noninteractive
 ## Create a 'docker' user
@@ -16,21 +15,7 @@ RUN addgroup --gid 9999 docker \
         curl \
         language-pack-en \
         locales \
-<%= gnupg2 ? "        gnupg \\\n" : "" -%>
-<% if flavor == 'fat' -%>
- && apt-get install -y --no-install-recommends \
-        build-essential \
-        git \
-        psmisc \
-        python \
-        software-properties-common \
-        tzdata \
-<% if gnupg2 -%>
- # gnupg2 and dirmngr will attempt to use IPv6 if it's enabled in Docker, even
- # if the container doesn't have an IPv6 address (this is true on Docker Hub).
- && mkdir ~/.gnupg && echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf \
-<% end -%>
-<% end -%>
+        gnupg \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
 
