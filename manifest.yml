@@ -184,18 +184,20 @@ ruby: &RUBY
     base_distro: bionic
     base_image: instructure/core:bionic
     bundler_version: 1.17.3
-    rubygems_version: 2.7.10
+    rubygems_version: 2.7.11
   versions:
-    '2.4-xenial':
-      base_distro: xenial
-      base_image: instructure/core:xenial
     '2.5':
     '2.6':
     '2.7-bionic':
       base_distro: bionic
       base_image: instructure/core:bionic
-      rubygems_version: 3.1.2
-      bundler_version: 2.1.4
+      bundler_version: 2.2.6
+      rubygems_version: 3.2.6
+    '2.7':
+      base_distro: focal
+      base_image: instructure/core:focal
+      bundler_version: 2.2.6
+      rubygems_version: 3.2.6
 
 ruby-node-pg:
   defaults:
@@ -210,11 +212,9 @@ ruby-node-pg:
       ruby_version: '2.6'
 
 ruby-passenger:
-  <<: *RUBY
+  defaults:
+    base_distro: bionic
   versions:
-    '2.4-xenial':
-      base_distro: xenial
-      base_image: instructure/core:xenial
     '2.5':
     '2.6':
     '2.6-p6.0.4':
@@ -222,8 +222,8 @@ ruby-passenger:
       version_override: "2.6"
       # https://github.com/phusion/passenger/issues/2281 is blocking some users
     '2.7-bionic':
-      base_distro: bionic
-      base_image: instructure/core:bionic
+    '2.7':
+      base_distro: focal
 
 scala-sbt:
   defaults:

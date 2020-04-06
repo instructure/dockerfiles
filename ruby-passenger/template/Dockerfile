@@ -13,7 +13,7 @@ RUN  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CA
     nginx-extras \
     sudo \
     passenger<%= passenger_version ? "=#{passenger_version}" : "" %> \
-<% if base_distro == 'bionic' -%>
+<% if ['bionic', 'focal'].include?(base_distro) -%>
     libnginx-mod-http-passenger<%= passenger_version ? "=#{passenger_version}" : "" %> \
   # libnginx-mod-http-passenger in bionic destroys the alternatives in the base ruby image
   && update-alternatives --install /usr/bin/gem gem /usr/bin/gem$RUBY_MAJOR 181 \

@@ -2,7 +2,7 @@
 # To update this file please edit the relevant template and run the generation
 # task `rake generate:ruby-passenger`
 
-FROM instructure/ruby:2.4-xenial
+FROM instructure/ruby:2.7
 MAINTAINER Instructure
 
 USER root
@@ -10,12 +10,21 @@ USER root
 #Install Nginx with Passenger from official repository
 RUN  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CAC40B2F7 \
   && apt-get install -y apt-transport-https ca-certificates \
-  && sh -c 'echo deb https://oss-binaries.phusionpassenger.com/apt/passenger xenial main > /etc/apt/sources.list.d/passenger.list' \
+  && sh -c 'echo deb https://oss-binaries.phusionpassenger.com/apt/passenger focal main > /etc/apt/sources.list.d/passenger.list' \
   && apt-get update \
   && apt-get install -y --no-install-recommends \
     nginx-extras \
     sudo \
     passenger \
+    libnginx-mod-http-passenger \
+  # libnginx-mod-http-passenger in bionic destroys the alternatives in the base ruby image
+  && update-alternatives --install /usr/bin/gem gem /usr/bin/gem$RUBY_MAJOR 181 \
+  && update-alternatives \
+    --install /usr/bin/ruby ruby /usr/bin/ruby${RUBY_MAJOR} 51 \
+    --slave /usr/bin/erb erb /usr/bin/erb${RUBY_MAJOR} \
+    --slave /usr/bin/irb irb /usr/bin/irb${RUBY_MAJOR} \
+    --slave /usr/bin/rdoc rdoc /usr/bin/rdoc${RUBY_MAJOR} \
+    --slave /usr/bin/ri ri /usr/bin/ri${RUBY_MAJOR} \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 

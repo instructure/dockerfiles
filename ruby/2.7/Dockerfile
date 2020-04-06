@@ -2,16 +2,20 @@
 # To update this file please edit the relevant template and run the generation
 # task `rake generate:ruby`
 
-FROM instructure/core:xenial
+FROM instructure/core:focal
 MAINTAINER Instructure
 
-ENV RUBY_MAJOR 2.4
-ENV BUNDLER_VERSION 1.17.3
-ENV RUBYGEMS_VERSION 2.7.10
+ENV RUBY_MAJOR 2.7
+ENV BUNDLER_VERSION 2.2.6
+ENV RUBYGEMS_VERSION 3.2.6
 
 USER root
 RUN mkdir -p /usr/src/app
 RUN chown docker:docker /usr/src/app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        software-properties-common \
+ && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
 
 RUN apt-add-repository -y ppa:brightbox/ruby-ng \
  && apt-get update \
