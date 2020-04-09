@@ -5,8 +5,6 @@
 FROM instructure/php:7.3
 LABEL maintainer=Instructure
 
-ENV PHP_INI_SCAN_DIR=/etc/php/current/fpm/conf.d:/usr/src/php/conf.d
-
 ENV DD_AGENT_MAJOR_VERSION=7
 ENV DD_TRACE_AGENT_VERSION=0.41.1
 ARG DD_TRACER_AGENT_URL=https://github.com/DataDog/dd-trace-php/releases/download/${DD_TRACE_AGENT_VERSION}/datadog-php-tracer_${DD_TRACE_AGENT_VERSION}_amd64.deb
@@ -38,7 +36,7 @@ RUN /bin/bash -c 'source /etc/lsb-release \
 
 RUN ln -s /usr/sbin/php-fpm${PHP_VERSION} /usr/sbin/php-fpm \
  && mkdir -p /usr/src/nginx/conf.d /usr/src/nginx/location.d /usr/src/nginx/main.d \
- && mkdir -p /usr/src/php/fpm /var/log/php \
+ && mkdir -p /usr/src/php/fpm /usr/src/php/conf.d /var/log/php \
  && mkdir -p /usr/src/supervisor \
  && mkdir -p /var/lib/nginx/body /var/lib/fastcgi \
  && chown -R docker:docker /usr/src/nginx /usr/src/php /usr/src/supervisor /var/run/php /var/log/nginx /var/lib/nginx \
@@ -47,15 +45,14 @@ RUN ln -s /usr/sbin/php-fpm${PHP_VERSION} /usr/sbin/php-fpm \
 # install datadog php tracer
 RUN cd /tmp && curl -L ${DD_TRACER_AGENT_URL} > datadog-php-tracer_amd64.deb \
  && dpkg -i datadog-php-tracer_amd64.deb \
- && rm datadog-php-tracer_amd64.deb \
- && PHP_EXTENSION_VERSION=$(php -i | awk '/^PHP[ \t]+API[ \t]+=>/ { print $NF }') \
- && echo "extension=/opt/datadog-php/extensions/ddtrace-${PHP_EXTENSION_VERSION}.so" > /etc/php/current/mods-available/ddtrace.ini \
- && echo 'ddtrace.request_init_hook=/opt/datadog-php/dd-trace-sources/bridge/dd_wrap_autoloader.php' >> /etc/php/current/mods-available/ddtrace.ini \
- && ln -s /etc/php/current/mods-available/ddtrace.ini /etc/php/current/fpm/conf.d/99-ddtrace.ini
+ && rm datadog-php-tracer_amd64.deb
 
 COPY --chown=docker:docker entrypoint.d/ /entrypoint.d/
 COPY --chown=docker:docker supervisor/ /usr/src/supervisor/
 
 USER docker
+
+# for some reason this prevents ddtrace from installing correctly if ran before the ddtrace installation
+ENV PHP_INI_SCAN_DIR=:/usr/src/php/conf.d
 
 CMD ["supervisord", "--configuration", "/usr/src/supervisor/supervisord.conf"]
