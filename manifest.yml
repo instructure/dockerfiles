@@ -203,3 +203,12 @@ spark:
     '2.1-hadoop2.7':
       hadoop_version: '2.7.3'
       spark_version: '2.1.0'
+
+tini:
+  defaults:
+    base_image: alpine
+    gpg_key: 595E85A6B1B4779EA4DAAEC70B588DFF0527A9B7
+  versions:
+    'v0.16.1':
+    'v0.18.0':
+
