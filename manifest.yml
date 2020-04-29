@@ -64,11 +64,14 @@ golang:
     base_image: instructure/core:bionic
   versions:
     '1.12':
-      full_version: '1.12.9'
-      package_sha: 'ac2a6efcc1f5ec8bdc0db0a988bb1d301d64b6d61b7e8d9e42f662fbb75a2b9b'
+      full_version: '1.12.17'
+      package_sha: 'a53dd476129d496047487bfd53d021dd17e0c96895865a0e7d0469ce3db8c8d2'
     '1.13':
-      full_version: '1.13.4'
-      package_sha: '692d17071736f74be04a72a06dab9cac1cd759377bd85316e52b2227604c004c'
+      full_version: '1.13.10'
+      package_sha: '8a4cbc9f2b95d114c38f6cbe94a45372d48c604b707db2057c787398dfbf8e7f'
+    '1.14':
+      full_version: '1.14.2'
+      package_sha: '6272d6e940ecb71ea5636ddb5fab3933e087c1356173c61f4a803895e947ebb3'
 
 graalvm-ce:
   defaults:
