@@ -9,11 +9,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       unzip \
  && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
 
-ENV SONARQUBE_SCANNER_VERSION "4.0.0.1744"
+ENV SONARQUBE_SCANNER_VERSION "4.3.0.2102"
 
 RUN curl -sSO https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONARQUBE_SCANNER_VERSION-linux.zip \
  && curl -sSO https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONARQUBE_SCANNER_VERSION-linux.zip.asc \
- && gpg --recv-keys CFCA4A29D26468DE && gpg --verify sonar-scanner-cli-$SONARQUBE_SCANNER_VERSION-linux.zip.asc \
+ && gpg --keyserver hkp://keyserver.ubuntu.com --recv-keys CFCA4A29D26468DE \
+ && gpg --verify sonar-scanner-cli-$SONARQUBE_SCANNER_VERSION-linux.zip.asc \
  && unzip sonar-scanner-cli-$SONARQUBE_SCANNER_VERSION-linux.zip \
  && rm sonar-scanner-cli-$SONARQUBE_SCANNER_VERSION-linux.zip* \
  && mv sonar-scanner-$SONARQUBE_SCANNER_VERSION-linux sonar-scanner \
