@@ -135,10 +135,14 @@ http {
             include      /usr/src/nginx/location.d/*.conf;
         }
 
-        <% if CG_ENVIRONMENT != 'local' %>
-            # Match the health check path separately to prevent interference with the health check
+        <% if CG_ENVIRONMENT != 'local' && ENV.fetch('PASSENGER_HEALTH_CHECK_LOCATION', '1') == '1' %>
+            # Match the health check path separately to prevent redirects with health checks
+            # and setup a process reserved for health checks with its own request queue.
             location <%= ENV.fetch('CG_INSTANCE_POOL_HEALTH_CHECK_PATH') %> {
                 passenger_enabled on;
+                passenger_app_group_name health_check;
+                passenger_max_request_queue_size 10;
+                passenger_min_instances 1;
             }
         <% end %>
 
