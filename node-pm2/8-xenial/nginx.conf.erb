@@ -93,9 +93,12 @@ http {
         location / {
             proxy_pass      http://127.0.0.1:3000;
 
-            # Occasionally you may need to add some additonial option to your location block, you can add files here to do so.
+            # Occasionally you may need to add some additional option to your location block, you can add files here to do so.
             include      /usr/src/nginx/location.d/*.conf;
         }
+
+        # Custom location blocks can be added to files here.
+        include /usr/src/nginx/server.d/*.conf;
 
         location ~ /\.git {
             deny all;

@@ -72,14 +72,32 @@ gzip on;
 gzip_types text/css text/xml text/plain application/x-javascript application/atom+xml application/rss+xml;
 ```
 
-## location.d (/usr/src/nginx/location.d/*.conf;)
-You may want to add some additional NGINX location parameters. This can now
-be done by adding a file to `/usr/src/nginx/location.d/`
+## location.d (/usr/src/nginx/location.d/*.conf)
+
+You may want to add some additional NGINX location parameters. This can be done
+by adding a file to `/usr/src/nginx/location.d/`.
+
 Example: location.conf
 
 ```
 try_files $uri $uri/ /index.html;
 ```
+
+## server.d (/usr/src/nginx/server.d/*.conf)
+
+You may want to add some additional NGINX location blocks. This can be done by
+adding a file to `/usr/src/nginx/server.d/`.
+
+Example: server.conf
+
+```
+# For fingerprinted assets following the format `[filename].[alpha-numeric-hash].[ext]`,
+# set a far future cache control header to optimize assets.
+location ~* \.[[:alnum:]]+\.(?:css|js|ttf|otf|eot|woff|woff2|jpe?g|gif|png|ico|svg)$ {
+  add_header Cache-Control "max-age=31557600";
+}
+```
+
 ## SSL enforcement and X-Forwarded-For  (CG_ENVIRONMENT)
 By default `CG_ENVIRONMENT` is set to `local`, which does NOT enable SSL or turn on `X-Forwarded-For`.
 When deploying with CloudGate `CG_ENVIRONMENT` will be set and both SSL and `X-Forwarded-For` Will be enabled.

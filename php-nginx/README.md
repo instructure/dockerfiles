@@ -18,7 +18,8 @@ these include statements will read any `.conf` files present in the specified di
 *Included Directories*
  * `/usr/src/nginx/main.d`: included in the top level of the generated config, use to set global options
  * `/usr/src/nginx/conf.d`: included inside the body of the `http` block defining
- * `/usr/src/nginx/location.d`: included inside the `location` blocks defined for handling routing 
+ * `/usr/src/nginx/location.d`: included inside the `location` blocks defined for handling routing
+ * `/usr/src/nginx/server.d`: included inside the main `server` block
 
 *Environment Variables*
 
