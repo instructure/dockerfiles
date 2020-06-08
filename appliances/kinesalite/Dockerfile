@@ -7,7 +7,7 @@ USER root
 RUN mkdir $DATADIR && chown docker:docker $DATADIR
 USER docker
 
-RUN npm install kinesalite@1.14.0
+RUN npm install kinesalite@3.3.1
 
 EXPOSE 4567
 VOLUME $DATADIR
