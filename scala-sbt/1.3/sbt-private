@@ -1,8 +1,7 @@
+#!/bin/bash
 # GENERATED FILE, DO NOT MODIFY!
 # To update this file please edit the relevant template and run the generation
 # task `rake generate:scala-sbt`
-
-#!/bin/bash
 
 SBT_MINOR_VERSION=1.3
 SBT_MAJOR_VERSION=1.0

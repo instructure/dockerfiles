@@ -1,6 +1,5 @@
-<%= generation_message %>
 #!/bin/bash
-
+<%= generation_message %>
 SBT_MINOR_VERSION=<%= minor_version %>
 SBT_MAJOR_VERSION=<%= major_version %>
 SBT_CONF_DIR=$HOME/.sbt/$SBT_MAJOR_VERSION
