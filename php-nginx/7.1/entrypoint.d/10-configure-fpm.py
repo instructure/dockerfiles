@@ -23,7 +23,7 @@ config.set(appSection, 'catch_workers_output', 'yes')
 if php_version != '7.1':  # this option was introduced in 7.3
     config.set(appSection, 'decorate_workers_output', 'no')  # stop FPM from mangling our output
 config.set(appSection, 'access.log', '/dev/stderr')
-config.set(appSection, 'access.format', environ.get('FPM_ACCESS_LOG_FORMAT', '{"source":"php-fpm","time_local":"%{%Y-%m-%dT%H:%M:%S%z}T","client_ip":"%{HTTP_X_FORWARDED_FOR}e","remote_addr":"%R","request":"%m %{REQUEST_URI}e %{SERVER_PROTOCOL}e","status":"%s","body_bytes_sent":"%l","request_time":"%d","amzn_trace_id":"%{HTTP_X_AMZN_TRACE_ID}e","request_id":"%{HTTP_X_REQUEST_ID}e"}'))
+config.set(appSection, 'access.format', environ.get('FPM_ACCESS_LOG_FORMAT', '\'{"stream":"php-fpm","time_local":"%{%Y-%m-%dT%H:%M:%S%z}T","client_ip":"%{HTTP_X_FORWARDED_FOR}e","remote_addr":"%R","request":"%m %{REQUEST_URI}e %{SERVER_PROTOCOL}e","status":"%s","body_bytes_sent":"%l","request_time":"%d","amzn_trace_id":"%{HTTP_X_AMZN_TRACE_ID}e","request_id":"%{HTTP_X_REQUEST_ID}e"}\''))
 config.set(appSection, 'clear_env', 'no')
 config.set(appSection, 'chdir', '/usr/src/app')
 config.set(appSection, 'ping.path', '/php-ping')
