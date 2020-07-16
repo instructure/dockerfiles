@@ -1,5 +1,8 @@
-<%= generation_message %>
-FROM instructure/ruby:<%= version %>
+# GENERATED FILE, DO NOT MODIFY!
+# To update this file please edit the relevant template and run the generation
+# task `rake generate:ruby-passenger`
+
+FROM instructure/ruby:2.6
 MAINTAINER Instructure
 
 USER root
@@ -7,14 +10,13 @@ USER root
 #Install Nginx with Passenger from official repository
 RUN  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CAC40B2F7 \
   && apt-get install -y apt-transport-https ca-certificates \
-  && sh -c 'echo deb https://oss-binaries.phusionpassenger.com/apt/passenger <%= base_distro %> main > /etc/apt/sources.list.d/passenger.list' \
+  && sh -c 'echo deb https://oss-binaries.phusionpassenger.com/apt/passenger bionic main > /etc/apt/sources.list.d/passenger.list' \
   && apt-get update \
   && apt-get install -y --no-install-recommends \
     nginx-extras \
     sudo \
-    passenger<%= passenger_version ? "=#{passenger_version}" : "" %> \
-<% if base_distro == 'bionic' -%>
-    libnginx-mod-http-passenger<%= passenger_version ? "=#{passenger_version}" : "" %> \
+    passenger=1:6.0.4-1~bionic1 \
+    libnginx-mod-http-passenger=1:6.0.4-1~bionic1 \
   # libnginx-mod-http-passenger in bionic destroys the alternatives in the base ruby image
   && update-alternatives --install /usr/bin/gem gem /usr/bin/gem$RUBY_MAJOR 181 \
   && update-alternatives \
@@ -23,7 +25,6 @@ RUN  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CA
     --slave /usr/bin/irb irb /usr/bin/irb${RUBY_MAJOR} \
     --slave /usr/bin/rdoc rdoc /usr/bin/rdoc${RUBY_MAJOR} \
     --slave /usr/bin/ri ri /usr/bin/ri${RUBY_MAJOR} \
-<% end -%>
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 

@@ -68,6 +68,7 @@ namespace :generate do
         print "- #{version}... "
         values ||= {}
         with_clean_output_dir(image_name, version) do |output_dir|
+          version = values['version_override'] if values['version_override']
           template_values = defaults
                             .merge(values)
                             .merge(

@@ -177,6 +177,16 @@ ruby-node-pg:
 
 ruby-passenger:
   <<: *RUBY
+  versions:
+    '2.4-xenial':
+      base_distro: xenial
+      base_image: instructure/core:xenial
+    '2.5':
+    '2.6':
+    '2.6-p6.0.4':
+      passenger_version: 1:6.0.4-1~bionic1
+      version_override: "2.6"
+      # https://github.com/phusion/passenger/issues/2281 is blocking some users
 
 scala-sbt:
   defaults:
