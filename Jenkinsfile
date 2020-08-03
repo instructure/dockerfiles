@@ -33,7 +33,7 @@ pipeline {
             dockerfiles = readYaml file: "ci_files/dockerfiles_${i}.yml"
             dockerfileStages[i] = dockerfiles.collectEntries {
               [(it) : {
-                timeout(activity: true, time: 5, unit: 'MINUTES') {
+                timeout(activity: true, time: 10, unit: 'MINUTES') {
                   sh """docker build ${it}"""
                 }
               }]

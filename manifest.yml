@@ -153,6 +153,15 @@ php: &PHP
 php-nginx:
   <<: *PHP
 
+python: &PYTHON
+  defaults:
+    base_image: instructure/core:bionic
+  versions:
+    '3.7':
+      python_version: 3.7.5
+      python_build_version: 3.7
+      pip_version: 20.1
+
 ruby: &RUBY
   defaults:
     base_distro: bionic

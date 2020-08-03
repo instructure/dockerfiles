@@ -1,6 +1,6 @@
 <%= generation_message %>
 FROM <%= base_image %>
-MAINTAINER Instructure Shared Services Org - Analytics Team
+MAINTAINER Instructure Engineering
 USER root
 
 RUN echo 'deb https://dl.bintray.com/sbt/debian /' > /etc/apt/sources.list.d/sbt.list && \
