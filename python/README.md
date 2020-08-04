@@ -6,9 +6,8 @@ app in (we suggest /usr/src/app) and start hacking.
 
 ## GPG Signatures
 
-We check the signatures on the binaries we download.  The list of signatures is here:
-
-<<>>
+We check the signatures on the binaries we download by using a static public file:
+https://www.python.org/static/files/pubkeys.txt
 
 ## Private PYPI Repository
 
