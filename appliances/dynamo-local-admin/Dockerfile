@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       gnupg2 \
       nginx \
       supervisor \
+      xz-utils \
  && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
 
 RUN mkdir ~/.gnupg && echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf
@@ -18,7 +19,7 @@ RUN mkdir ~/.gnupg && echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf
 # was a more elegant way to compose at the image level, but I suspect the
 # response here would be "use two containers".
 
-ENV NODE_VERSION 10
+ENV NODE_VERSION 12
 ENV NPM_CONFIG_LOGLEVEL error
 
 # verify gpg and sha256: http://nodejs.org/dist/v*/SHASUMS256.txt.asc
@@ -48,9 +49,11 @@ RUN NODE_FILE="$(curl -sfS https://nodejs.org/dist/latest-v$NODE_VERSION.x/ | gr
   grep " $NODE_FILE\$" SHASUMS256.txt.asc | sha256sum -c - && \
   tar -xJf "$NODE_FILE" --warning=no-unknown-keyword -C /usr/local --strip-components=1 --no-same-owner && \
   ls -la /usr/local/bin/n* && \
-  rm "$NODE_FILE" SHASUMS256.txt.asc SHASUMS256.txt
+  rm "$NODE_FILE" SHASUMS256.txt.asc SHASUMS256.txt && \
+  npm install -g "npm@latest" && \
+  npm cache clean --force
 
-RUN npm install --no-optional --global dynamodb-admin@3.1.1 \
+RUN npm install --no-optional --global dynamodb-admin@4.0.0 \
  && npm cache clean --force
 
 RUN mkdir -p /var/lib/dynamodb && cd /usr/lib && \
