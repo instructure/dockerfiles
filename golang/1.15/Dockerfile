@@ -7,15 +7,21 @@ MAINTAINER Instructure
 
 USER root
 
-ENV GOLANG_VERSION 1.12.17
+ENV GOLANG_VERSION 1.15
 ENV GOLANG_DOWNLOAD_URL https://storage.googleapis.com/golang/go$GOLANG_VERSION.linux-amd64.tar.gz
-ENV GOLANG_DOWNLOAD_SHA256 a53dd476129d496047487bfd53d021dd17e0c96895865a0e7d0469ce3db8c8d2
+ENV GOLANG_DOWNLOAD_SHA256 2d75848ac606061efe52a8068d0e647b35ce487a15bb52272c427df485193602
 
 RUN curl -fsSL "$GOLANG_DOWNLOAD_URL" -o golang.tar.gz \
   && echo "$GOLANG_DOWNLOAD_SHA256  golang.tar.gz" | sha256sum -c - \
   && tar -C /usr/local -xzf golang.tar.gz \
   && rm golang.tar.gz
 
+# For private gomodules that install via git
+RUN apt-get update \
+  && apt-get install -y openssh-client \
+  && apt-get clean
+RUN ssh-keyscan -p 29418 -H gerrit.instructure.com 2>/dev/null >> /etc/ssh/ssh_known_hosts
+ENV GOPRIVATE gerrit.instructure.com,github.com/instructure
 
 ENV GOPATH /go
 ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
