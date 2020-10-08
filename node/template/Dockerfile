@@ -1,6 +1,6 @@
 <%= generation_message %>
 FROM <%= base_image %>
-MAINTAINER Instructure
+LABEL maintainer="Instructure"
 
 USER root
 
@@ -8,6 +8,6 @@ USER root
 <%= Template.render_into_dockerfile("templates/yarn_install.Dockerfile", yarn_version: yarn_version) -%>
 <% end -%>
 
-<%= Template.render_into_dockerfile("templates/node_install.Dockerfile", node_version: node_version, npm_version: npm_version) %>
+<%= Template.render_into_dockerfile("templates/node_install.Dockerfile", node_version: node_version, npm_version: npm_version, base_distro: base_distro) %>
 
 USER docker

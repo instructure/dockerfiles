@@ -3,7 +3,7 @@
 # task `rake generate:node`
 
 FROM instructure/core:bionic
-MAINTAINER Instructure
+LABEL maintainer="Instructure"
 
 USER root
 

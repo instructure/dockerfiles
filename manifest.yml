@@ -127,6 +127,10 @@ node: &NODE
       node_version: '10'
     '12':
       node_version: '12'
+    '14':
+      node_version: '14'
+      base_distro: focal
+      base_image: instructure/core:focal
 
 node-passenger:
   <<: *NODE

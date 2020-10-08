@@ -11,6 +11,13 @@ We check the signatures on the binaries we download.  The list of signatures is 
 
 https://github.com/nodejs/node#release-team
 
+## Slim Images
+
+Node images from 14 on are built on a "slim" base image, which means that NPM
+packages that use native extensions will need to install more apt packages,
+such as `node-gyp`. If your app doesn't need any native extensions, you are
+ready to rock!
+
 ## Private NPM Repository
 
 All Node images include a convenient wrapper for installing NPM packages from
