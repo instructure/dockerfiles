@@ -3,6 +3,13 @@
 This container is designed to be a starting point for development and deployment
 of Node.js based web applications.
 
+## Slim Images
+
+Node images from 14 on are built on a "slim" base image, which means that NPM
+packages that use native extensions will need to install more apt packages,
+such as `node-gyp`. If your app doesn't need any native extensions, you are
+ready to rock!
+
 ## Quick start (for simple apps without background processing)
 
 1. Choose your node version (8-xenial, 10, or 12)
