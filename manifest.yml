@@ -81,6 +81,10 @@ graalvm-ce:
       java_version: 11
       graal_version: 19.3.0
       package_sha: 238c5c21bb4aa292caf95b2aca592ce8c1be2f036d93af48cd865f67d558f907
+    '20.2.0-java11':
+      java_version: 11
+      graal_version: 20.2.0
+      package_sha: 5db74b5b8888712d2ac3cd7ae2a8361c2aa801bc94c801f5839351aba5064e29
 
 java:
   defaults:
