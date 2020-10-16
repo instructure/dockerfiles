@@ -52,13 +52,18 @@ http {
         access_log /var/log/nginx/access.log;
     <% end %>
     error_log /var/log/nginx/error.log;
+
     passenger_default_user docker;
     passenger_user docker;
+
+    passenger_disable_log_prefix on;
     passenger_friendly_error_pages off;
     passenger_show_version_in_header off;
+
     passenger_root /usr/lib/ruby/vendor_ruby/phusion_passenger/locations.ini;
     passenger_ruby /usr/bin/ruby;
     passenger_nodejs /usr/local/bin/node;
+
     passenger_app_env <%= NODE_ENV %>;
     passenger_max_pool_size <%= ENV.fetch('PASSENGER_MAX_POOL_SIZE', '6') %>;
     passenger_min_instances <%= ENV.fetch('PASSENGER_MIN_INSTANCES', '1') %>;
