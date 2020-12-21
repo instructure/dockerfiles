@@ -1,0 +1,157 @@
+<%
+  require 'uri'
+  # pulling from APP_URL kept for backward-compatibility, but should only ever contain a domain name
+  APP_DOMAIN = ENV.fetch('APP_DOMAIN', ENV.fetch('APP_URL', 'app.invalid'))
+  CG_ENVIRONMENT = ENV.fetch('CG_ENVIRONMENT', 'local')
+  RAILS_ENV = ENV.fetch('RAILS_ENV', 'production')
+
+  LEGACY_PORTS = ENV.fetch('LEGACY_PORTS', '1') == '1'
+  HTTP_PORT = ENV.fetch('CG_HTTP_PORT', LEGACY_PORTS ? '81' : '8080')
+  HTTP_PORT = nil if HTTP_PORT.empty?
+  HTTPS_PORT = ENV.fetch('CG_HTTPS_PORT', LEGACY_PORTS ? '80' : '8443')
+  HTTPS_PORT = nil if HTTPS_PORT.empty?
+
+  APP_PORT = HTTPS_PORT || HTTP_PORT
+  REDIRECT_PORT = HTTP_PORT != HTTPS_PORT ? HTTP_PORT : nil
+%>
+worker_processes <%= ENV.fetch('NGINX_WORKER_COUNT', (RAILS_ENV == 'production' ? 'auto' : 1)) %>;
+pid /run/nginx.pid;
+daemon off;
+user docker;
+
+# Add files to white list env variables
+include /usr/src/nginx/main.d/*.conf;
+
+# Ubuntu 18 requires this for nginx+passenger to work.
+include /etc/nginx/modules-enabled/*.conf;
+
+events {
+    worker_connections <%= ENV.fetch('NGINX_WORKER_CONNECTIONS', '1024') %>;
+}
+
+http {
+    <% if CG_ENVIRONMENT != 'local' %>
+        log_format combined_json escape=json '{ '
+          '"amzn_trace_id": "$http_x_amzn_trace_id", '
+          '"body_bytes_sent": "$body_bytes_sent", '
+          '"http_referrer": "$http_referer", '
+          '"http_user_agent": "$http_user_agent", '
+          '"remote_addr": "$remote_addr", '
+          '"remote_user": "$remote_user", '
+          '"request": "$request", '
+          '"path": "$request_uri", '
+          '"request_context_id": "$http_x_request_context_id", '
+          '"request_hostname": "$host", '
+          '"request_id": "$request_id", '
+          '"request_time": "$request_time", '
+          '"status": "$status", '
+          '"time_local": "$time_local" '
+          '}';
+        access_log /var/log/nginx/access.log combined_json;
+    <% else %>
+        access_log /var/log/nginx/access.log;
+    <% end %>
+    error_log /var/log/nginx/error.log;
+
+    passenger_default_user docker;
+    passenger_user docker;
+
+    passenger_disable_log_prefix on;
+    passenger_friendly_error_pages off;
+    passenger_show_version_in_header off;
+
+    passenger_root /usr/lib/ruby/vendor_ruby/phusion_passenger/locations.ini;
+    passenger_ruby /usr/bin/ruby;
+
+    passenger_app_env <%= RAILS_ENV %>;
+    passenger_max_pool_size <%= ENV.fetch('PASSENGER_MAX_POOL_SIZE', '6') %>;
+    passenger_max_request_queue_size <%= ENV.fetch('PASSENGER_MAX_REQUEST_QUEUE_SIZE', '100') %>;
+    passenger_min_instances <%= ENV.fetch('PASSENGER_MIN_INSTANCES', '1') %>;
+    passenger_start_timeout <%= ENV.fetch('PASSENGER_STARTUP_TIMEOUT', '90') %>;
+
+    passenger_pre_start <%= URI.parse("http://#{APP_DOMAIN}:#{APP_PORT}").merge(ENV.fetch('CG_INSTANCE_POOL_HEALTH_CHECK_PATH', '/')) %>;
+
+    <% if ENV.key? 'PASSENGER_SPAWN_METHOD' %>
+      # In some cases, the default "smart" spawn method might cause issues.
+      # As an escape hatch, expose the spawn method for configuration.
+      # Allowable values: "smart", "direct"
+      passenger_spawn_method <%= ENV.fetch('PASSENGER_SPAWN_METHOD') %>;
+    <% end %>
+
+    more_clear_headers 'X-Powered-By';
+    passenger_set_header X-Request-Id $request_id;
+    server_tokens off;
+    client_body_timeout    65;
+    client_header_timeout  65;
+    client_max_body_size <%= ENV.fetch('NGINX_MAX_UPLOAD_SIZE', '10m') %>;
+
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    sendfile        on;
+    keepalive_timeout  65;
+
+    # Add files here to add additional nginx options
+    include      /usr/src/nginx/conf.d/*.conf;
+
+    <% if REDIRECT_PORT %>
+        server {
+            listen       <%= REDIRECT_PORT %> default_server;
+            server_name  redirect;
+            access_log   off;
+            if ($host = $remote_addr) {
+                return   301 https://<%= APP_DOMAIN %>$request_uri;
+            }
+            return       301 https://$host$request_uri;
+        }
+    <% end %>
+
+    server {
+        listen       <%= APP_PORT %> default_server;
+        server_name  <%= APP_DOMAIN %>;
+        root <%= ENV.fetch('APP_ROOT_PATH', '/usr/src/app/public') %>;
+
+        <% if CG_ENVIRONMENT != 'local' %>
+            add_header Strict-Transport-Security "max-age=31536000" always;
+
+            set_real_ip_from 10.0.0.0/8;
+            real_ip_header X-Forwarded-For;
+            real_ip_recursive on;
+        <% end %>
+
+        location / {
+            <% if CG_ENVIRONMENT != 'local' %>
+                # TODO: These if statements need to be removed, but we need to allow time for everyone to transition to using port 81 for HTTP and 80 for HTTPS
+                if ($host = $remote_addr) {
+                    return   301 https://<%= APP_DOMAIN %>$request_uri;
+                }
+                if ($http_x_forwarded_proto != 'https') {
+                    return   301 https://$host$request_uri;
+                }
+            <% end %>
+
+            passenger_enabled on;
+
+            # Occasionally you may need to add some additional option to your location block, you can add files here to do so.
+            include      /usr/src/nginx/location.d/*.conf;
+        }
+
+        <% if CG_ENVIRONMENT != 'local' && ENV.fetch('PASSENGER_HEALTH_CHECK_LOCATION', '1') == '1' %>
+            # Match the health check path separately to prevent redirects with health checks
+            # and setup a process reserved for health checks with its own request queue.
+            location <%= ENV.fetch('CG_INSTANCE_POOL_HEALTH_CHECK_PATH') %> {
+                passenger_enabled on;
+                passenger_app_group_name health_check;
+                passenger_max_request_queue_size 10;
+                passenger_min_instances 1;
+            }
+        <% end %>
+
+        # Custom location blocks can be added to files here.
+        include /usr/src/nginx/server.d/*.conf;
+
+        location ~ /\.git {
+            deny all;
+        }
+    }
+}

@@ -211,6 +211,9 @@ ruby-passenger:
       passenger_version: 1:6.0.4-1~bionic1
       version_override: "2.6"
       # https://github.com/phusion/passenger/issues/2281 is blocking some users
+    '2.7-bionic':
+      base_distro: bionic
+      base_image: instructure/core:bionic
 
 scala-sbt:
   defaults:
