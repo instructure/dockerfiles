@@ -13,7 +13,7 @@ RUN  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CA
     nginx-extras \
     passenger \
     sudo \
-<% if base_distro == 'bionic' -%>
+<% if ['bionic', 'focal'].include? base_distro -%>
     libnginx-mod-http-passenger \
 <% end -%>
   && apt-get clean \
