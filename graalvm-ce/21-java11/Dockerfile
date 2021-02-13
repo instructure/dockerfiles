@@ -2,13 +2,13 @@
 # To update this file please edit the relevant template and run the generation
 # task `rake generate:graalvm-ce`
 
-FROM instructure/core:bionic
+FROM instructure/core:focal
 
 USER root
 
-ENV GRAALVM_PKG=https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.2.0/graalvm-ce-java11-linux-amd64-20.2.0.tar.gz \
-    GRAALVM_PKG_SHA256=5db74b5b8888712d2ac3cd7ae2a8361c2aa801bc94c801f5839351aba5064e29 \
-    JAVA_HOME=/opt/graalvm-ce-java11-20.2.0
+ENV GRAALVM_PKG=https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.0.0.2/graalvm-ce-java11-linux-amd64-21.0.0.2.tar.gz \
+    GRAALVM_PKG_SHA256=bd3fbe796e803c4fe5cd089371588d3d716fa3cdb653fe8dd6dba31b57bef934 \
+    JAVA_HOME=/opt/graalvm-ce-java11-21.0.0.2
 
 COPY gu-wrapper.sh /usr/local/bin/gu
 

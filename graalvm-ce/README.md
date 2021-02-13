@@ -12,7 +12,7 @@ The resulting image is rather large due to graalvms included binaries
 One of the main benefits of graalvm is it's ability for language interoperability. An example `Dockerfile` adding `truffleruby` may look like
 
 ```
-FROM instructure/graalvm-ce:19.3.0-java11 as build
+FROM instructure/graalvm-ce:21-java11 as build
 USER root
 RUN apt-get update \
     && apt-get install -y --no-install-recommends zlib1g-dev libxml2-dev libssl-dev build-essential \
@@ -22,7 +22,7 @@ USER docker
 RUN gu install ruby \
     && $JAVA_HOME/languages/ruby/lib/truffle/post_install_hook.sh
 
-FROM instructure/graalvm-ce:19.3.0-java11
+FROM instructure/graalvm-ce:21-java11
 COPY --from=build --chown=docker:docker $JAVA_HOME/ $JAVA_HOME/
 USER docker
 RUN gu link

@@ -81,16 +81,16 @@ golang:
 
 graalvm-ce:
   defaults:
-    distro: bionic
+    distro: focal
   versions:
-    '19.3.0-java11':
+    '19-java11':
       java_version: 11
-      graal_version: 19.3.0
-      package_sha: 238c5c21bb4aa292caf95b2aca592ce8c1be2f036d93af48cd865f67d558f907
-    '20.2.0-java11':
+      graal_version: 19.3.5
+      package_sha: 4936cdf48cd501e9df7ff41929774bd1cd88aecb41c3fbf2c970b29c340bbc95
+    '21-java11':
       java_version: 11
-      graal_version: 20.2.0
-      package_sha: 5db74b5b8888712d2ac3cd7ae2a8361c2aa801bc94c801f5839351aba5064e29
+      graal_version: 21.0.0.2
+      package_sha: bd3fbe796e803c4fe5cd089371588d3d716fa3cdb653fe8dd6dba31b57bef934
 
 java:
   defaults:
