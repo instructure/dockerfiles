@@ -78,6 +78,10 @@ golang:
     '1.15':
       full_version: '1.15'
       package_sha: '2d75848ac606061efe52a8068d0e647b35ce487a15bb52272c427df485193602'
+    '1.16':
+      full_version: '1.16.2'
+      package_sha: '542e936b19542e62679766194364f45141fde55169db2d8d01046555ca9eb4b8'
+      base_image: 'instructure/core:focal'
 
 graalvm-ce:
   defaults:
