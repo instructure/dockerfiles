@@ -28,6 +28,8 @@ RUN yarn global add pm2@3.1.2
 RUN mkdir -p /usr/src/supervisord/ \
  && mkdir -p /usr/src/nginx/conf.d \
  && mkdir -p /usr/src/nginx/location.d \
+ && mkdir -p /usr/src/nginx/main.d \
+ && mkdir -p /usr/src/nginx/server.d \
  && mkdir -p /usr/src/app \
  && mkdir -p /var/log/app \
  && ln -sf /dev/stdout /var/log/nginx/access.log \

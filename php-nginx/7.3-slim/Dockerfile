@@ -35,7 +35,8 @@ RUN /bin/bash -c 'source /etc/lsb-release \
  && rm /lib/systemd/system/datadog-agent*service
 
 RUN ln -s /usr/sbin/php-fpm${PHP_VERSION} /usr/sbin/php-fpm \
- && mkdir -p /usr/src/nginx/conf.d /usr/src/nginx/location.d /usr/src/nginx/main.d \
+ && mkdir -p /usr/src/nginx/conf.d /usr/src/nginx/location.d \
+ && mkdir -p /usr/src/nginx/main.d /usr/src/nginx/server.d \
  && mkdir -p /usr/src/php/fpm /usr/src/php/conf.d /var/log/php \
  && mkdir -p /usr/src/supervisor \
  && mkdir -p /var/lib/nginx/body /var/lib/fastcgi \
