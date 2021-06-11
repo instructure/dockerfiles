@@ -159,14 +159,6 @@ php: &PHP
   defaults:
     base_image: instructure/core:bionic-slim
   versions:
-    '7.1':
-      base_image: instructure/core:xenial
-    '7.1-slim':
-      base_image: instructure/core:xenial-slim
-    '7.3-xenial':
-      base_image: instructure/core:xenial
-    '7.3-xenial-slim':
-      base_image: instructure/core:xenial-slim
     '7.3':
       base_image: instructure/core:bionic
     '7.3-slim': {}
