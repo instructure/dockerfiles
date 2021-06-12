@@ -2,7 +2,7 @@
 # To update this file please edit the relevant template and run the generation
 # task `rake generate:php-nginx`
 
-FROM instructure/php:7.3-slim
+FROM instructure/php:7.3-bionic-slim
 LABEL maintainer=Instructure
 
 ENV DD_AGENT_MAJOR_VERSION=7
