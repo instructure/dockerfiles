@@ -168,6 +168,12 @@ php: &PHP
 php-nginx:
   <<: *PHP
 
+php-nginx-shib:
+  defaults:
+    base_image: instructure/core:focal
+  versions:
+    '7.3': {}
+
 python: &PYTHON
   defaults:
     base_image: instructure/core:bionic
