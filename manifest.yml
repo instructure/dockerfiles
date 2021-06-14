@@ -159,12 +159,16 @@ php: &PHP
   defaults:
     base_image: instructure/core:bionic-slim
   versions:
+    '7.3-focal':
+      base_image: instructure/core:focal
     '7.3':
       base_image: instructure/core:bionic
     '7.3-slim': {}
 
 php-nginx:
-  <<: *PHP
+  versions:
+    '7.3': {}
+    '7.3-slim': {}
 
 python: &PYTHON
   defaults:
