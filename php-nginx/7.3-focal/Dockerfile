@@ -1,6 +1,8 @@
-<%= generation_message %>
-<% flavor = version.end_with?('slim') ? 'slim' : 'fat' -%>
-FROM instructure/php:<%= version %>
+# GENERATED FILE, DO NOT MODIFY!
+# To update this file please edit the relevant template and run the generation
+# task `rake generate:php-nginx`
+
+FROM instructure/php:7.3-focal
 LABEL maintainer=Instructure
 
 ENV DD_AGENT_MAJOR_VERSION=7
@@ -10,15 +12,8 @@ ARG DD_TRACER_AGENT_URL=https://github.com/DataDog/dd-trace-php/releases/downloa
 USER root
 
 RUN /bin/bash -c 'source /etc/lsb-release \
-<% if version == '7.3-focal' -%>
  && echo "deb http://nginx.org/packages/ubuntu $DISTRIB_CODENAME nginx" > /etc/apt/sources.list.d/nginx.list' \
  && curl "https://nginx.org/keys/nginx_signing.key" | apt-key add - \
-<% else -%>
- && echo "deb http://ppa.launchpad.net/nginx/stable/ubuntu $DISTRIB_CODENAME main" > /etc/apt/sources.list.d/nginx.list \
- && echo "deb-src http://ppa.launchpad.net/nginx/stable/ubuntu $DISTRIB_CODENAME main" >> /etc/apt/sources.list.d/nginx.list' \
- && curl "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xb96f2300ad11cbee" | apt-key add - \
- && curl "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x00a6f0a3c300ee8c" | apt-key add - \
-<% end -%>
  && echo "deb https://apt.datadoghq.com/ stable $DD_AGENT_MAJOR_VERSION" > /etc/apt/sources.list.d/datadog.list \
  && apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 A2923DFF56EDA6E76E55E492D3A80E30382E94DE \
  && apt-get update \
@@ -29,9 +24,7 @@ RUN /bin/bash -c 'source /etc/lsb-release \
         nginx \
         python3-pip \
         python3-yaml \
-<% if version == '7.3-focal' -%>
         python3-jinja2 \
-<% end -%>
         datadog-agent \
  && pip3 install supervisor setuptools \
  && apt-get purge --yes --autoremove python3-pip \
@@ -46,16 +39,10 @@ RUN ln -s /usr/sbin/php-fpm${PHP_VERSION} /usr/sbin/php-fpm \
  && mkdir -p /usr/src/php/fpm /usr/src/php/conf.d /var/log/php \
  && mkdir -p /usr/src/supervisor \
  && mkdir -p /var/lib/nginx/body /var/lib/fastcgi \
-<% if version == '7.3-focal' -%>
  && chown -R docker:docker /usr/src/nginx /usr/src/php /usr/src/supervisor /var/run/php /var/log/nginx /var/cache/nginx /var/lib/nginx \
-<% else -%>
- && chown -R docker:docker /usr/src/nginx /usr/src/php /usr/src/supervisor /var/run/php /var/log/nginx /var/lib/nginx \
-<% end -%>
  && mkdir -p /usr/src/app
 
-<% if version == '7.3-focal' -%>
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 10
-<% end -%>
 # install datadog php tracer
 RUN cd /tmp && curl -L ${DD_TRACER_AGENT_URL} > datadog-php-tracer_amd64.deb \
  && dpkg -i datadog-php-tracer_amd64.deb \

@@ -167,6 +167,7 @@ php: &PHP
 
 php-nginx:
   versions:
+    '7.3-focal': {}
     '7.3': {}
     '7.3-slim': {}
 
