@@ -39,10 +39,17 @@ RUN mkdir -p /usr/src/app && chown docker:docker /usr/src/app
 USER docker
 
 # Install RVM
-RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys \
-      409B6B1796C275462A1703113804BB82D39DC0E3 \
-      7D2BAF1CF37B13E2069D6956105BD0E739499BDB \
- && curl -sSL https://get.rvm.io | bash -s -- --autolibs=read-fail stable \
+RUN set -ex && \
+  for key in \
+     409B6B1796C275462A1703113804BB82D39DC0E3 \
+     7D2BAF1CF37B13E2069D6956105BD0E739499BDB \
+  ; do \
+      gpg --batch --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys "$key" || \
+      gpg --batch --keyserver hkp://ipv4.pool.sks-keyservers.net --recv-keys "$key" || \
+      gpg --batch --keyserver hkp://pgp.mit.edu:80 --recv-keys "$key" ; \
+  done
+
+RUN curl -sSL https://get.rvm.io | bash -s -- --autolibs=read-fail stable \
  && echo 'bundler' >> /home/docker/.rvm/gemsets/global.gems \
  && echo 'rvm_silence_path_mismatch_check_flag=1' >> ~/.rvmrc
 
