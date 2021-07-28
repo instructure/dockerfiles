@@ -110,7 +110,14 @@ java:
     '11-jre':
       java_version: 11
       flavor: jre
-
+    '16':
+      distro: focal
+      java_version: 16
+      flavor: jdk
+    '16-jre':
+      distro: focal
+      java_version: 16
+      flavor: jre
 
 # We are no longer accepting new minor version tags for Node images, simply
 # update the corresponding major version tag (4, 6, 8) to the latest minor.
