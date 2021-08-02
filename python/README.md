@@ -6,8 +6,13 @@ app in (we suggest /usr/src/app) and start hacking.
 
 ## GPG Signatures
 
-We check the signatures on the binaries we download by using a static public file:
-https://www.python.org/static/files/pubkeys.txt
+GPG signatures and binaries are verified by release managers' keys.
+Please find the proper key IDs on https://www.python.org/downloads/
+and reference them from the manifest YAML file:
+
+```yaml
+python_pgp_key_id: 0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D
+```
 
 ## Private PYPI Repository
 

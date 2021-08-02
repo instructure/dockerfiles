@@ -9,6 +9,7 @@ USER root
 ARG PYTHON_VERSION=3.7.5
 ARG PYTHON_MAJOR_MINOR_VERSION=3.7
 ARG PIP_VERSION=20.1
+ARG PGP_KEY_ID=0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D
 
 RUN apt-get update && apt-get install -y zlib1g-dev libncurses5-dev libffi-dev libsqlite3-dev\
                                          libgdbm-dev libnss3-dev libssl-dev libreadline-dev
@@ -16,8 +17,8 @@ RUN apt-get update && apt-get install -y zlib1g-dev libncurses5-dev libffi-dev l
 RUN cd /tmp && \
       curl -fsSLO https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tar.xz && \
       curl -fsSLO https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tar.xz.asc && \
-      curl -fsSLO https://www.python.org/static/files/pubkeys.txt && \
-      gpg --import pubkeys.txt && \
+      gpg --batch --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys ${PGP_KEY_ID} || \
+      gpg --batch --keyserver hkp://pgp.mit.edu:80 --recv-keys ${PGP_KEY_ID} && \
       gpg --verify Python-${PYTHON_VERSION}.tar.xz.asc Python-${PYTHON_VERSION}.tar.xz && \
       tar -xf Python-${PYTHON_VERSION}.tar.xz && \
       rm Python-${PYTHON_VERSION}.tar.xz && \

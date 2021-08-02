@@ -179,6 +179,7 @@ python: &PYTHON
       python_version: 3.7.5
       python_build_version: 3.7
       pip_version: 20.1
+      python_pgp_key_id: 0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D
 
 ruby: &RUBY
   defaults:
