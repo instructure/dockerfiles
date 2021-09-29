@@ -122,6 +122,14 @@ java:
       distro: focal
       java_version: 16
       flavor: jre
+    '17':
+      distro: focal
+      java_version: 17
+      flavor: jdk
+    '17-jre':
+      distro: focal
+      java_version: 17
+      flavor: jre
 
 # We are no longer accepting new minor version tags for Node images, simply
 # update the corresponding major version tag (4, 6, 8) to the latest minor.
