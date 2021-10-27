@@ -23,8 +23,8 @@ appliances/libreoffice:
 
 appliances/debugging:
   versions:
-    xenial: {}
     bionic: {}
+    focal: {}
 
 appliances/postgres:
   defaults:
