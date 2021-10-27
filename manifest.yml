@@ -126,35 +126,54 @@ java:
 # update the corresponding major version tag (4, 6, 8) to the latest minor.
 node: &NODE
   defaults:
-    base_distro: bionic
-    base_image: instructure/core:bionic
+    base_distro: focal
+    base_image: instructure/core:focal
     npm_version: latest
     yarn_version: latest
   versions:
-    '10':
-      node_version: '10'
-    '12':
+    '12':  # Supported until 04/30/2022
+      base_distro: bionic
+      base_image: instructure/core:bionic
       node_version: '12'
-    '14':
+    '14':  # Supported until 04/30/2023
       node_version: '14'
+      base_distro: focal
+      base_image: instructure/core:focal
+    '16':  # Supported until 04/30/2024
+      node_version: '16'
       base_distro: focal
       base_image: instructure/core:focal
 
 node-passenger:
-  <<: *NODE
+  defaults:
+    base_distro: focal
+    base_image: instructure/core:focal
+    npm_version: latest
+    yarn_version: latest
+  versions:
+    '12':  # Supported until 04/30/2022
+      base_distro: bionic
+      base_image: instructure/core:bionic
+      node_version: '12'
+    '14':  # Supported until 04/30/2023
+      node_version: '14'
+      base_distro: focal
+      base_image: instructure/core:focal
+  # <<: *NODE
 
 node-pm2:
   defaults:
     base_distro: bionic
     base_image: instructure/node:12
   versions:
-    '10':
-      base_image: instructure/node:10
     '12':
       base_image: instructure/node:12
     '14':
       base_image: instructure/node:14
       base_distro: focal
+    # '16':
+      # base_image: instructure/node:16
+      # base_distro: focal
 
 php: &PHP
   defaults:

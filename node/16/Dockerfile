@@ -2,7 +2,7 @@
 # To update this file please edit the relevant template and run the generation
 # task `rake generate:node`
 
-FROM instructure/core:bionic
+FROM instructure/core:focal
 LABEL maintainer="Instructure"
 
 USER root
@@ -18,7 +18,7 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 
 COPY yarn-private /usr/local/bin
 
-ENV NODE_VERSION 10
+ENV NODE_VERSION 16
 ENV NPM_VERSION latest
 
 # verify gpg and sha256: http://nodejs.org/dist/v*/SHASUMS256.txt.asc
@@ -44,6 +44,10 @@ RUN set -ex && \
 
 RUN mkdir -p /usr/src/app && chown docker:docker /usr/src/app
 WORKDIR /usr/src/app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+  xz-utils \
+  && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
 
 RUN NODE_FILE="$(curl -sfS https://nodejs.org/dist/latest-v$NODE_VERSION.x/ | grep -oE node-v${NODE_VERSION}\.[0-9.]+-linux-x64.tar.xz | sort -r | head -n 1)" && \
   NODE_LATEST_VERSION=$(echo $NODE_FILE | grep -oE "v[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+") && \
