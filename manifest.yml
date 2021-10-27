@@ -233,9 +233,9 @@ scala-sbt:
     - Dockerfile
     - sbt-private
   versions:
-    '1.3':
-      full_version: '1.3.3'
-      minor_version: '1.3'
+    '1.5':
+      full_version: '1.5.5'
+      minor_version: '1.5'
       major_version: '1.0'
 
 tini:

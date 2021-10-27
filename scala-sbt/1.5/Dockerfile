@@ -12,7 +12,7 @@ RUN echo 'deb https://repo.scala-sbt.org/scalasbt/debian all main' > /etc/apt/so
           --recv 2EE0EA64E40A89B84B2DF73499E82A75642AC823
 
 
-ARG SBT_VERSION=1.3.3
+ARG SBT_VERSION=1.5.5
 RUN apt-get update && \
     apt-get install -y --no-install-recommends bc sbt=$SBT_VERSION && \
     apt-get clean autoremove -y && \
