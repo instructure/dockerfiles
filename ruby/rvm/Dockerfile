@@ -1,4 +1,4 @@
-FROM instructure/core:xenial
+FROM instructure/core:focal
 MAINTAINER Instructure
 
 USER root
@@ -7,9 +7,8 @@ RUN apt-get update \
       autoconf \
       automake \
       bison \
+      g++ \
       gawk \
-      sqlite3 \
-      make \
       imagemagick \
       libbz2-dev \
       libcurl4-openssl-dev \
@@ -23,6 +22,7 @@ RUN apt-get update \
       libmagickwand-dev \
       libmysqlclient-dev \
       libncurses-dev \
+      libncurses5-dev \
       libpq-dev \
       libreadline-dev \
       libsqlite3-dev \
@@ -30,6 +30,9 @@ RUN apt-get update \
       libxml2-dev \
       libxslt-dev \
       libyaml-dev \
+      make \
+      patch \
+      sqlite3 \
       zlib1g-dev \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
@@ -57,11 +60,7 @@ SHELL ["/bin/bash", "-lc"]
 CMD ["/bin/bash", "-l"]
 
 # Install Rubies
-RUN rvm install 2.4.10 \
- && rvm alias create 2.4 ruby-2.4.10 \
- && rvm install 2.5.8 \
- && rvm alias create 2.5 ruby-2.5.8 \
- && rvm install 2.6.6 \
+RUN rvm install 2.6.6 \
  && rvm alias create 2.6 ruby-2.6.6 \
  && rvm install 2.7.2 \
  && rvm alias create 2.7 ruby-2.7.2 \
