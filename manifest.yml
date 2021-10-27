@@ -197,7 +197,6 @@ ruby: &RUBY
     bundler_version: 1.17.3
     rubygems_version: 2.7.11
   versions:
-    '2.5':
     '2.6':
     '2.7-bionic':
       base_distro: bionic
@@ -224,7 +223,6 @@ ruby-passenger:
   defaults:
     base_distro: bionic
   versions:
-    '2.5':
     '2.6':
     '2.6-p6.0.4':
       passenger_version: 1:6.0.4-1~bionic1
