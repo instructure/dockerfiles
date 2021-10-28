@@ -134,21 +134,7 @@ node: &NODE
       base_image: instructure/core:focal
 
 node-passenger:
-  defaults:
-    base_distro: focal
-    base_image: instructure/core:focal
-    npm_version: latest
-    yarn_version: latest
-  versions:
-    '12':  # Supported until 04/30/2022
-      base_distro: bionic
-      base_image: instructure/core:bionic
-      node_version: '12'
-    '14':  # Supported until 04/30/2023
-      node_version: '14'
-      base_distro: focal
-      base_image: instructure/core:focal
-  # <<: *NODE
+  <<: *NODE
 
 node-pm2:
   defaults:
@@ -160,9 +146,9 @@ node-pm2:
     '14':
       base_image: instructure/node:14
       base_distro: focal
-    # '16':
-      # base_image: instructure/node:16
-      # base_distro: focal
+    '16':
+      base_image: instructure/node:16
+      base_distro: focal
 
 php: &PHP
   defaults:
