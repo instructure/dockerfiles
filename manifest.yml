@@ -132,9 +132,9 @@ node: &NODE
     yarn_version: latest
   versions:
     '12':  # Supported until 04/30/2022
+      node_version: '12'
       base_distro: bionic
       base_image: instructure/core:bionic
-      node_version: '12'
     '14':  # Supported until 04/30/2023
       node_version: '14'
       base_distro: focal
@@ -223,12 +223,10 @@ ruby: &RUBY
 
 ruby-node-pg:
   defaults:
+    base_distro: bionic
     npm_version: latest
     yarn_version: latest
   versions:
-    '2.6':
-      node_version: '10'
-      ruby_version: '2.6'
     '2.6-node14':
       node_version: '14'
       ruby_version: '2.6'
