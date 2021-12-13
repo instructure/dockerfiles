@@ -78,7 +78,7 @@ pipeline {
     failure {
       script {
         if (env.GERRIT_EVENT_TYPE == 'change-merged') {
-          slackSend failOnError: true, channel: '#toolsmiths-eng', color: 'danger', message: "@${CHANGE_OWNER} the dockerfiles post-merge <${env.BUILD_URL}|build> for your recently merged patch failed!"
+          slackSend failOnError: true, channel: '#docker', color: 'danger', message: "@${CHANGE_OWNER} the dockerfiles post-merge <${env.BUILD_URL}|build> for your recently merged patch failed!"
         }
       }
     }
