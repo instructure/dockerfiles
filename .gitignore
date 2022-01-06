@@ -1,5 +1,4 @@
 /.bundle/
 /Gemfile.lock
-/.ruby-version
 ci/dockerfiles_?.yml
 /.idea

@@ -3,9 +3,10 @@ require 'ostruct'
 
 class Template
   attr_reader :path, :erb
+
   def initialize(template_path)
     @path = template_path
-    @erb = ERB.new(File.read(template_path), nil, '-')
+    @erb = ERB.new(File.read(template_path), trim_mode: '-')
   end
 
   def filename
