@@ -1,8 +1,12 @@
-FROM instructure/ruby:2.5
+FROM instructure/ruby:2.7
 MAINTAINER Instructure
 
+USER root
+RUN apt-get update \
+  && apt-get install -y g++
+
 USER docker
-RUN gem install mailcatcher -v 0.6.4
+RUN gem install mailcatcher -v 0.8.0
 
 EXPOSE 1025 8080
 
