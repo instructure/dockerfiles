@@ -1,10 +1,10 @@
 #!/bin/bash
 
-npm config set "@${NPM_PRIVATE_SCOPE}:registry=" "https:${NPM_PRIVATE_REGISTRY}"
-npm config set "${NPM_PRIVATE_REGISTRY}:username=" "${NPM_PRIVATE_USERNAME}"
-npm config set "${NPM_PRIVATE_REGISTRY}:_password=" "${NPM_PRIVATE_PASSWORD}"
-npm config set "${NPM_PRIVATE_REGISTRY}:email=" "${NPM_PRIVATE_EMAIL}"
-npm config set "${NPM_PRIVATE_REGISTRY}:always-auth=" "true"
+npm config set "@${NPM_PRIVATE_SCOPE}:registry"="https:${NPM_PRIVATE_REGISTRY}"
+npm config set "${NPM_PRIVATE_REGISTRY}:username"="${NPM_PRIVATE_USERNAME}"
+npm config set "${NPM_PRIVATE_REGISTRY}:_password"="${NPM_PRIVATE_PASSWORD}"
+npm config set "${NPM_PRIVATE_REGISTRY}:email"="${NPM_PRIVATE_EMAIL}"
+npm config set "${NPM_PRIVATE_REGISTRY}:always-auth"="true"
 
 npm "$@"
 EXIT_CODE=$?
