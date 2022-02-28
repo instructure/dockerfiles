@@ -83,6 +83,10 @@ graalvm-ce:
       java_version: 11
       graal_version: 21.0.0.2
       package_sha: bd3fbe796e803c4fe5cd089371588d3d716fa3cdb653fe8dd6dba31b57bef934
+    '22-java17':
+      java_version: 17
+      graal_version: 22.0.0.2
+      package_sha: 4f743e0ed3d974b7d619ca2ed6014554e8c12e5ebbb38b9bc9e820b182169bd4
 
 java:
   defaults:
