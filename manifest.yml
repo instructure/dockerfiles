@@ -59,6 +59,8 @@ core:
       base_image: ubuntu:bionic
     focal:
       base_image: ubuntu:focal
+    jammy:
+      base_image: ubuntu:jammy
 
 golang:
   defaults:
