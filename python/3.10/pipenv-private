@@ -1,0 +1,13 @@
+#!/bin/bash
+USER_FILE=$HOME/.pypirc
+
+if [ -n "$PYPI_PRIVATE_REGISTRY" ] && [ -n "$PYPI_PRIVATE_USERNAME" ] && [ -n "$PYPI_PRIVATE_PASSWORD" ]; then
+  echo -e "[distutils]\nindex-servers =\n\tjfrog\n[jfrog]\nrepository: https:$PYPI_PRIVATE_REGISTRY\nusername: $PYPI_PRIVATE_USERNAME\npassword: $PYPI_PRIVATE_PASSWORD" > $USER_FILE
+fi
+# Run the pipenv command with the credentials which have been added above.
+pipenv "$@"
+EXIT_CODE=$?
+
+[ -e "$USER_FILE" ] && rm $USER_FILE
+exit $EXIT_CODE
+
