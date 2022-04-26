@@ -12,7 +12,7 @@ task default: 'generate:all'
 PROJECT_DIR = File.dirname(__FILE__)
 PROJECT_PATHNAME = Pathname.new(PROJECT_DIR)
 MANIFEST = YAML.load_file(File.join(PROJECT_DIR, 'manifest.yml'), aliases: true)
-TESTING_PARALLELIZATION = 5
+TESTING_PARALLELIZATION = 9
 
 def build_output_path(*parts)
   File.join(PROJECT_DIR, *parts)
@@ -39,13 +39,53 @@ namespace :ci do
     end
 
     docker_contexts = dockerfiles.map do |path|
-      Pathname.new(path).relative_path_from(PROJECT_PATHNAME).dirname
+      from_lines = File.readlines(path).select { |x| x.start_with?('FROM') }
+      dependencies = from_lines.map { |x| x.match('FROM .*?(.+[:]?.*)') }.compact.map { |x| x[1] }
+      dependencies = dependencies.map { |x| x.sub('--platform=${TARGETPLATFORM}', '') }
+      dependencies = dependencies.map { |x| x.sub('${ROOT_PATH}', 'instructure') }
+      dependencies = dependencies.map { |x| x.sub(/AS .+/, '') }
+      dependencies = dependencies.map { |x| x.strip }
+
+      raise "unhandled FROM line format #{from_lines}" unless from_lines.count == dependencies.count
+
+      # We only care about dependencies on instructure/ images
+      dependencies = dependencies.select { |x| x.start_with?('instructure') }
+
+      {
+        dependencies: dependencies,
+        path: Pathname.new(path).relative_path_from(PROJECT_PATHNAME).dirname,
+      }
     end
 
-    split_size = (docker_contexts.size / TESTING_PARALLELIZATION.to_f).ceil
+    puts "=== Docker Image Contexts"
+    puts docker_contexts
+
+    satisfied_dependencies = []
+    grouped_docker_contexts = []
+
+    while docker_contexts.any?
+      group = docker_contexts.select { |x| (x[:dependencies] - satisfied_dependencies).empty? }
+      grouped_docker_contexts << group
+      satisfied_dependencies.concat group.map { |x| "instructure/#{x[:path].sub('/', ':')}" }
+      docker_contexts = docker_contexts.reject { |x| group.include?(x) }
+
+      raise "no change in docker contexts size #{docker_contexts}" if group.empty? && docker_contexts.any?
+    end
+
+    puts "=== Docker Image Groups"
+    grouped_docker_contexts.each_with_index { |x, i| puts "#{i}: #{x.map { |y| y[:path].to_s }}" }
+
+    puts "=== Docker Image Groups (Limited Parallelization)"
+    parallelized_docker_contexts = []
+    grouped_docker_contexts.map do |x|
+      parallelized_docker_contexts.concat x.each_slice(TESTING_PARALLELIZATION).to_a
+    end
+
+    parallelized_docker_contexts.each_with_index { |x, i| puts "#{i}: #{x.map { |y| y[:path].to_s }}" }
+
     n = 0
-    docker_contexts.sort.each_slice(split_size) do |contexts|
-      File.open("ci/dockerfiles_#{n}.yml", 'w') { |f| f.write(contexts.sort.map(&:to_s).to_yaml) }
+    parallelized_docker_contexts.each do |context_groups|
+      File.open("ci/dockerfiles_#{n}.yml", 'w') { |f| f.write(context_groups.map { |x| x[:path] }.sort.map(&:to_s).to_yaml) }
       n += 1
     end
   end

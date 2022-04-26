@@ -1,6 +1,13 @@
 #! /usr/bin/env groovy
 
+import com.cloudbees.groovy.cps.NonCPS
+
 def dockerfileStages = [:]
+
+@NonCPS
+def sortFileList(fileList) {
+  return fileList.sort { it.name.split("_")[1].split("\\.")[0].toInteger() }
+}
 
 pipeline {
   agent { label 'docker' }
@@ -24,48 +31,33 @@ pipeline {
     stage('Initialize dockerfiles stage') {
       steps {
         sh """
+          rm -rf ci_files/*
           docker rm -f dockerfiles_index || :
-          docker run --name dockerfiles_index dockerfiles-ci sh -c "rake ci:index"
-          docker cp dockerfiles_index:ci ci_files/
+          docker run --name dockerfiles_index dockerfiles-ci sh -c "rm -rf ci/dockerfiles* && rake ci:index && find ci"
+          docker cp dockerfiles_index:ci/. ci_files/
+          find ci_files
         """
         script {
-          for (int i=0; i < 5; i++) {
-            dockerfiles = readYaml file: "ci_files/dockerfiles_${i}.yml"
-            dockerfileStages[i] = dockerfiles.collectEntries {
-              [(it) : {
-                timeout(activity: true, time: 10, unit: 'MINUTES') {
-                  sh """docker build ${it}"""
+          def sortedFiles = sortFileList(findFiles(glob: "ci_files/dockerfiles_*.yml"))
+
+          sortedFiles.each { file ->
+            stage("Build Docker Images (Set ${file.name})") {
+              timeout(activity: true, time: 10, unit: 'MINUTES') {
+                def parallelStages = readYaml(file: file.path).collectEntries {
+                  [(it) : {
+                    stage(file.path) {
+                      timeout(activity: true, time: 10, unit: 'MINUTES') {
+                        sh """docker build ${it}"""
+                      }
+                    }
+                  }]
                 }
-              }]
+
+                parallel(parallelStages)
+              }
             }
           }
         }
-      }
-    }
-
-    stage('Build dockerfiles (Set #1)') {
-      steps {
-        script { parallel dockerfileStages[0] }
-      }
-    }
-    stage('Build dockerfiles (Set #2)') {
-      steps {
-        script { parallel dockerfileStages[1] }
-      }
-    }
-    stage('Build dockerfiles (Set #3)') {
-      steps {
-        script { parallel dockerfileStages[2] }
-      }
-    }
-    stage('Build dockerfiles (Set #4)') {
-      steps {
-        script { parallel dockerfileStages[3] }
-      }
-    }
-    stage('Build dockerfiles (Set #5)') {
-      steps {
-        script { parallel dockerfileStages[4] }
       }
     }
   }

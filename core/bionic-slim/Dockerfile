@@ -1,5 +1,5 @@
 ARG ROOT_PATH=instructure
-FROM ${ROOT_PATH}/tini:latest AS tini
+FROM ${ROOT_PATH}/tini:v0.16.1 AS tini
 FROM ubuntu:bionic
 MAINTAINER Instructure
 
