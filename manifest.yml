@@ -53,18 +53,26 @@ core:
     flavor: slim
   versions:
     bionic:
-      base_image: ubuntu:bionic
+      base_image:
+        name: ubuntu:bionic
+        source: dockerhub
       flavor: fat
     bionic-slim:
-      base_image: ubuntu:bionic
+      base_image:
+        name: ubuntu:bionic
+        source: dockerhub
     focal:
-      base_image: ubuntu:focal
+      base_image:
+        name: ubuntu:focal
+        source: dockerhub
     jammy:
-      base_image: ubuntu:jammy
+      base_image:
+        name: ubuntu:jammy
+        source: dockerhub
 
 golang:
   defaults:
-    base_image: 'instructure/core:focal'
+    base_image: instructure/core:focal
   versions:
     '1.16':  # supported until 1.18 is out
       full_version: '1.16.9'
@@ -122,22 +130,22 @@ java:
 node: &NODE
   defaults:
     base_distro: focal
-    base_image: instructure/core:focal
+    base_image: core:focal
     npm_version: latest
     yarn_version: latest
   versions:
     '12':  # Supported until 04/30/2022
       node_version: '12'
       base_distro: bionic
-      base_image: instructure/core:bionic
+      base_image: core:bionic
     '14':  # Supported until 04/30/2023
       node_version: '14'
       base_distro: focal
-      base_image: instructure/core:focal
+      base_image: core:focal
     '16':  # Supported until 04/30/2024
       node_version: '16'
       base_distro: focal
-      base_image: instructure/core:focal
+      base_image: core:focal
 
 node-passenger:
   <<: *NODE
@@ -188,19 +196,19 @@ rover:
 ruby: &RUBY
   defaults:
     base_distro: bionic
-    base_image: instructure/core:bionic
+    base_image: core:bionic
     bundler_version: 1.17.3
     rubygems_version: 2.7.11
   versions:
     '2.6':
     '2.7-bionic':
       base_distro: bionic
-      base_image: instructure/core:bionic
+      base_image: core:bionic
       bundler_version: 2.2.6
       rubygems_version: 3.2.6
     '2.7':
       base_distro: focal
-      base_image: instructure/core:focal
+      base_image: core:focal
       bundler_version: 2.2.6
       rubygems_version: 3.2.6
 
@@ -219,13 +227,17 @@ ruby-passenger:
     base_distro: bionic
   versions:
     '2.6':
+      base_image: ruby:2.6
     '2.6-p6.0.4':
+      base_image: ruby:2.6
       passenger_version: 1:6.0.4-1~bionic1
       version_override: "2.6"
       # https://github.com/phusion/passenger/issues/2281 is blocking some users
     '2.7-bionic':
+      base_image: ruby:2.7-bionic
     '2.7':
       base_distro: focal
+      base_image: ruby:2.7
 
 scala-sbt:
   defaults:
@@ -241,7 +253,9 @@ scala-sbt:
 
 tini:
   defaults:
-    base_image: alpine
+    base_image:
+      name: alpine
+      source: dockerhub
     gpg_key: 595E85A6B1B4779EA4DAAEC70B588DFF0527A9B7
   versions:
     'v0.16.1':

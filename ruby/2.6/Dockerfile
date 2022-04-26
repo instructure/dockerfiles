@@ -2,7 +2,8 @@
 # To update this file please edit the relevant template and run the generation
 # task `rake generate:ruby`
 
-FROM instructure/core:bionic
+ARG ROOT_PATH=instructure
+FROM ${ROOT_PATH}/core:bionic
 MAINTAINER Instructure
 
 ENV RUBY_MAJOR 2.6
@@ -57,4 +58,3 @@ RUN echo 'gem: --no-document' >> /home/docker/.gemrc \
 ENV GEM_HOME /home/docker/.gem/ruby/$RUBY_MAJOR.0
 ENV PATH $GEM_HOME/bin:$PATH
 WORKDIR /usr/src/app
-

@@ -1,4 +1,4 @@
-FROM <%= base_image %>
+<%= from_image(base_image) %>
 
 RUN apk add --no-cache \
   gnupg

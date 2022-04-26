@@ -1,6 +1,5 @@
-FROM instructure/tini:latest as tini
-
-FROM <%= base_image %>
+<%= from_image('tini:latest') %> AS tini
+<%= from_image(base_image) %>
 MAINTAINER Instructure
 <% gnupg2 = ['bionic', 'bionic-slim', 'focal'].include?(version) -%>
 

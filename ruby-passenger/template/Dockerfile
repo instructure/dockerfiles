@@ -1,5 +1,5 @@
 <%= generation_message %>
-FROM instructure/ruby:<%= version %>
+<%= from_image(base_image) %>
 MAINTAINER Instructure
 
 USER root

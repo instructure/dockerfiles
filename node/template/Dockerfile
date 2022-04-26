@@ -1,5 +1,5 @@
 <%= generation_message %>
-FROM <%= base_image %>
+<%= from_image(base_image) %>
 LABEL maintainer="Instructure"
 
 USER root

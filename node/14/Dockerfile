@@ -2,7 +2,8 @@
 # To update this file please edit the relevant template and run the generation
 # task `rake generate:node`
 
-FROM instructure/core:focal
+ARG ROOT_PATH=instructure
+FROM ${ROOT_PATH}/core:focal
 LABEL maintainer="Instructure"
 
 USER root

@@ -1,5 +1,5 @@
 <%= generation_message %>
-FROM <%= base_image %>
+<%= from_image(base_image) %>
 MAINTAINER Instructure
 
 <% ruby_major = version.split('.').take(2).join('.').split('-')[0] -%>
@@ -61,4 +61,3 @@ RUN echo 'gem: --no-document' >> /home/docker/.gemrc \
 ENV GEM_HOME /home/docker/.gem/ruby/$RUBY_MAJOR.0
 ENV PATH $GEM_HOME/bin:$PATH
 WORKDIR /usr/src/app
-
