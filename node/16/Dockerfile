@@ -3,7 +3,7 @@
 # task `rake generate:node`
 
 ARG ROOT_PATH=instructure
-FROM ${ROOT_PATH}/core:focal
+FROM --platform=${TARGETPLATFORM} ${ROOT_PATH}/core:focal
 LABEL maintainer="Instructure"
 
 USER root

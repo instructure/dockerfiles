@@ -3,7 +3,7 @@
 # task `rake generate:ruby`
 
 ARG ROOT_PATH=instructure
-FROM ${ROOT_PATH}/core:focal
+FROM --platform=${TARGETPLATFORM} ${ROOT_PATH}/core:focal
 MAINTAINER Instructure
 
 ENV RUBY_MAJOR 2.7

@@ -65,10 +65,12 @@ core:
       base_image:
         name: ubuntu:focal
         source: dockerhub
+      multiarch: true
     jammy:
       base_image:
         name: ubuntu:jammy
         source: dockerhub
+      multiarch: true
 
 golang:
   defaults:
@@ -142,10 +144,12 @@ node: &NODE
       node_version: '14'
       base_distro: focal
       base_image: core:focal
+      multiarch: true
     '16':  # Supported until 04/30/2024
       node_version: '16'
       base_distro: focal
       base_image: core:focal
+      multiarch: true
 
 node-passenger:
   <<: *NODE
@@ -211,6 +215,7 @@ ruby: &RUBY
       base_image: core:focal
       bundler_version: 2.2.6
       rubygems_version: 3.2.6
+      multiarch: true
 
 ruby-node-pg:
   defaults:
@@ -238,6 +243,7 @@ ruby-passenger:
     '2.7':
       base_distro: focal
       base_image: ruby:2.7
+      multiarch: true
 
 scala-sbt:
   defaults:
@@ -261,3 +267,4 @@ tini:
     'v0.16.1':
     'v0.18.0':
     'v0.19.0':
+      multiarch: true

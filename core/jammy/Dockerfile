@@ -1,6 +1,6 @@
 ARG ROOT_PATH=instructure
-FROM ${ROOT_PATH}/tini:v0.16.1 AS tini
-FROM ubuntu:jammy
+FROM --platform=${TARGETPLATFORM} ${ROOT_PATH}/tini:v0.19.0 AS tini
+FROM --platform=${TARGETPLATFORM} ubuntu:jammy
 MAINTAINER Instructure
 
 ENV DEBIAN_FRONTEND=noninteractive

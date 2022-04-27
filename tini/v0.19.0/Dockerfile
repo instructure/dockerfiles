@@ -1,4 +1,4 @@
-FROM alpine
+FROM --platform=${TARGETPLATFORM} alpine
 
 RUN apk add --no-cache \
   gnupg

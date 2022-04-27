@@ -3,7 +3,7 @@
 # task `rake generate:ruby-passenger`
 
 ARG ROOT_PATH=instructure
-FROM ${ROOT_PATH}/ruby:2.7
+FROM --platform=${TARGETPLATFORM} ${ROOT_PATH}/ruby:2.7
 MAINTAINER Instructure
 
 USER root

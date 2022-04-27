@@ -86,7 +86,11 @@ pipeline {
                         def pushImage = isChangeMerged() ? '--push' : ''
 
                         sh """
-                        docker buildx build --build-arg ROOT_PATH=${ROOT_PATH} --platform linux/amd64 --builder multi-platform-builder ${pushImage} --tag ${imageTag} ${it}
+                        if grep -q TARGETPLATFORM ${it}/Dockerfile; then
+                          docker buildx build --build-arg ROOT_PATH=${ROOT_PATH} --platform linux/arm64,linux/amd64 --builder multi-platform-builder ${pushImage} --tag ${imageTag} ${it}
+                        else
+                          docker buildx build --build-arg ROOT_PATH=${ROOT_PATH} --platform linux/amd64 --builder multi-platform-builder ${pushImage} --tag ${imageTag} ${it}
+                        fi
                         """
                       }
                     }

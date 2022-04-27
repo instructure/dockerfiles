@@ -40,7 +40,11 @@ class Template
 
       res = ""
       res << "ARG ROOT_PATH=instructure\n" if use_root_path
-      res << "FROM #{image_path}"
+      res << if @source.multiarch
+        "FROM --platform=${TARGETPLATFORM} #{image_path}"
+      else
+        "FROM #{image_path}"
+      end
 
       @root_path_included ||= true
       res
