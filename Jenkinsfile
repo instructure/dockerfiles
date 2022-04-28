@@ -87,9 +87,25 @@ pipeline {
 
                         sh """
                         if grep -q TARGETPLATFORM ${it}/Dockerfile; then
-                          docker buildx build --build-arg ROOT_PATH=${ROOT_PATH} --platform linux/arm64,linux/amd64 --builder multi-platform-builder ${pushImage} --tag ${imageTag} ${it}
+                          docker buildx build \
+                            --build-arg BUILDKIT_INLINE_CACHE=1 \
+                            --build-arg ROOT_PATH=${ROOT_PATH} \
+                            --cache-from=type=registry,ref=${imageTag} \
+                            --platform linux/arm64,linux/amd64 \
+                            --builder multi-platform-builder \
+                            ${pushImage} \
+                            --tag ${imageTag} \
+                            ${it}
                         else
-                          docker buildx build --build-arg ROOT_PATH=${ROOT_PATH} --platform linux/amd64 --builder multi-platform-builder ${pushImage} --tag ${imageTag} ${it}
+                          docker buildx build \
+                            --build-arg BUILDKIT_INLINE_CACHE=1 \
+                            --build-arg ROOT_PATH=${ROOT_PATH} \
+                            --cache-from=type=registry,ref=${imageTag} \
+                            --platform linux/amd64 \
+                            --builder multi-platform-builder \
+                            ${pushImage} \
+                            --tag ${imageTag} \
+                            ${it}
                         fi
                         """
                       }
