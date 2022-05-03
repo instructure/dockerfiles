@@ -35,7 +35,8 @@ namespace :ci do
       path.include?('template') ||
         path.include?('ci') ||
         path.include?('deprecated') ||
-        path.include?('appliances')
+        path.include?('appliances/fake-s3') ||
+        path.include?('appliances/zeppelin')
     end
 
     docker_contexts = dockerfiles.map do |path|

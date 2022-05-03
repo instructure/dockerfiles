@@ -92,8 +92,9 @@ pipeline {
                   [(it) : {
                     stage(file.path) {
                       timeout(activity: true, time: 10, unit: 'MINUTES') {
-                        def dockerhubTag = isDockerhubUploadEnabled() ? "--tag instructure/${it.replaceAll('\\/', ':')}" : ''
-                        def imageTag = "${ROOT_PATH}/${it.replaceAll('\\/', ':')}"
+                        def baseTag = it.replaceAll('appliances\\/', '')
+                        def dockerhubTag = isDockerhubUploadEnabled() ? "--tag instructure/${baseTag.replaceAll('\\/', ':')}" : ''
+                        def imageTag = "${ROOT_PATH}/${baseTag.replaceAll('\\/', ':')}"
                         def pushImage = isChangeMerged() ? '--push' : ''
 
                         sh """
