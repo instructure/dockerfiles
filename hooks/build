@@ -1,5 +1,0 @@
-#!/bin/bash
-
-# All images are built internally and uploaded. Dockerhub seems to be broken and
-# won't allow automated builds to be either reconfigured or deleted.
-exit 1
