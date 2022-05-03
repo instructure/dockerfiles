@@ -32,6 +32,10 @@ def isChangeMerged() {
   return env.GERRIT_EVENT_TYPE == 'change-merged' || getChangeMergedFlag()
 }
 
+def isDockerhubUploadEnabled() {
+  return env.GERRIT_EVENT_TYPE == 'change-merged'
+}
+
 pipeline {
   agent { label 'docker' }
 
@@ -75,6 +79,12 @@ pipeline {
         script {
           def sortedFiles = sortFileList(findFiles(glob: "ci_files/dockerfiles_*.yml"))
 
+          if(isDockerhubUploadEnabled()) {
+            withCredentials([string(credentialsId: 'dockerhub-rw', variable: 'DOCKERHUB_RW_PASSWORD')]) {
+              sh 'docker login --username $DOCKERHUB_RW_USERNAME --password $DOCKERHUB_RW_PASSWORD'
+            }
+          }
+
           sortedFiles.each { file ->
             stage("Build Docker Images (Set ${file.name})") {
               timeout(activity: true, time: 10, unit: 'MINUTES') {
@@ -82,6 +92,7 @@ pipeline {
                   [(it) : {
                     stage(file.path) {
                       timeout(activity: true, time: 10, unit: 'MINUTES') {
+                        def dockerhubTag = isDockerhubUploadEnabled() ? "--tag instructure/${it.replaceAll('\\/', ':')}" : ''
                         def imageTag = "${ROOT_PATH}/${it.replaceAll('\\/', ':')}"
                         def pushImage = isChangeMerged() ? '--push' : ''
 
@@ -94,7 +105,7 @@ pipeline {
                             --platform linux/arm64,linux/amd64 \
                             --builder multi-platform-builder \
                             ${pushImage} \
-                            --tag ${imageTag} \
+                            ${dockerhubTag} --tag ${imageTag} \
                             ${it}
                         else
                           docker buildx build \
@@ -104,7 +115,7 @@ pipeline {
                             --platform linux/amd64 \
                             --builder multi-platform-builder \
                             ${pushImage} \
-                            --tag ${imageTag} \
+                            ${dockerhubTag} --tag ${imageTag} \
                             ${it}
                         fi
                         """
