@@ -152,7 +152,18 @@ node: &NODE
       multiarch: true
 
 node-passenger:
-  <<: *NODE
+  versions:
+    '12':
+      base_distro: bionic
+      base_image: node:12
+    '14':
+      base_distro: focal
+      base_image: node:14
+      multiarch: true
+    '16':
+      base_distro: focal
+      base_image: node:16
+      multiarch: true
 
 node-pm2:
   defaults:

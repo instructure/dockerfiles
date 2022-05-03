@@ -2,7 +2,8 @@
 # To update this file please edit the relevant template and run the generation
 # task `rake generate:node-passenger`
 
-FROM instructure/node:16
+ARG ROOT_PATH=instructure
+FROM --platform=${TARGETPLATFORM} ${ROOT_PATH}/node:16
 MAINTAINER Instructure
 
 USER root
