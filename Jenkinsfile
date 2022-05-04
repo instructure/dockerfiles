@@ -52,7 +52,7 @@ def isDockerhubUploadEnabled() {
 }
 
 def isSlackReportingEnabled() {
-  return env.GERRIT_EVENT_TYPE == 'change-merged' || getSlackReportingEnabledFlag()
+  return env.GERRIT_EVENT_TYPE == 'change-merged' || getSlackReportingEnabledFlag() || env.SLACK_REPORTING == 'true'
 }
 
 pipeline {
