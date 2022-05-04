@@ -60,7 +60,6 @@ pipeline {
 
   environment {
     TEST_IMAGE_NAME = 'dockerfiles_build'
-    CHANGE_OWNER = "${GERRIT_CHANGE_OWNER_EMAIL.split("@")[0]}"
     DEFAULT_ROOT_PATH = "${BUILD_REGISTRY_FQDN}/jenkins"
     ROOT_PATH = "${BUILD_REGISTRY_FQDN}/${getBuildRegistryPath()}"
   }
@@ -201,7 +200,7 @@ pipeline {
     failure {
       script {
         if (env.GERRIT_EVENT_TYPE == 'change-merged') {
-          slackSend failOnError: true, channel: '#docker', color: 'danger', message: "@${CHANGE_OWNER} the dockerfiles post-merge <${env.BUILD_URL}|build> for your recently merged patch failed!"
+          slackSend failOnError: true, channel: '#docker', color: 'danger', message: "@${GERRIT_CHANGE_OWNER_EMAIL.split("@")[0]} the dockerfiles post-merge <${env.BUILD_URL}|build> for your recently merged patch failed!"
         } else if (isSlackReportingEnabled()) {
           slackSend failOnError: true, channel: '#docker', color: 'danger', message: "The dockerfiles cron <${env.BUILD_URL}|build> failed!"
         }
