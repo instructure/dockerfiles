@@ -102,7 +102,7 @@ graalvm-ce:
 
 java:
   defaults:
-    distro: bionic
+    base_image: core:bionic
   versions:
     '11':
       java_version: 11
@@ -111,29 +111,33 @@ java:
       java_version: 11
       flavor: jre
     '16':
-      distro: focal
+      base_image: core:focal
       java_version: 16
       flavor: jdk
     '16-jre':
-      distro: focal
+      base_image: core:focal
       java_version: 16
       flavor: jre
     '17':
-      distro: focal
+      base_image: core:focal
       java_version: 17
       flavor: jdk
+      multiarch: true
     '17-jre':
-      distro: focal
+      base_image: core:focal
       java_version: 17
       flavor: jre
+      multiarch: true
     '18':
-      distro: jammy
+      base_image: core:jammy
       java_version: 18
       flavor: jdk
+      multiarch: true
     '18-jre':
-      distro: jammy
+      base_image: core:jammy
       java_version: 18
       flavor: jre
+      multiarch: true
 
 # We are no longer accepting new minor version tags for Node images, simply
 # update the corresponding major version tag (4, 6, 8) to the latest minor.

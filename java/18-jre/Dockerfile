@@ -2,7 +2,10 @@
 # To update this file please edit the relevant template and run the generation
 # task `rake generate:java`
 
-FROM instructure/core:jammy
+ARG ROOT_PATH=instructure
+FROM --platform=${TARGETPLATFORM} ${ROOT_PATH}/core:jammy
+
+MAINTAINER Instructure
 
 USER root
 

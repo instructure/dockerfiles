@@ -2,7 +2,10 @@
 # To update this file please edit the relevant template and run the generation
 # task `rake generate:java`
 
-FROM instructure/core:bionic
+ARG ROOT_PATH=instructure
+FROM ${ROOT_PATH}/core:bionic
+
+MAINTAINER Instructure
 
 USER root
 
