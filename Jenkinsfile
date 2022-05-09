@@ -114,16 +114,6 @@ pipeline {
                         def dockerhubTag = isDockerhubUploadEnabled() ? "--tag instructure/${baseTag.replaceAll('\\/', ':')}" : ''
                         def imageTag = "${ROOT_PATH}/${baseTag.replaceAll('\\/', ':')}"
 
-                        def manifestScript = { failureText ->
-                          """
-                          if grep -q TARGETPLATFORM ${it}/Dockerfile; then
-                            docker manifest inspect ${imageTag} --verbose | jq -r '.[].SchemaV2Manifest.layers[].digest' | sort - || echo "${failureText}"
-                          else
-                            docker manifest inspect ${imageTag} --verbose | jq -r '.SchemaV2Manifest.layers[].digest' | sort - || echo "${failureText}"
-                          fi
-                          """
-                        }
-
                         def platform = sh(script: """
                           if grep -q TARGETPLATFORM ${it}/Dockerfile; then
                             echo "linux/arm64,linux/amd64"
@@ -132,7 +122,13 @@ pipeline {
                           fi
                         """, returnStdout: true).trim()
 
-                        def beforeManifest = sh(script: manifestScript('LOAD_MANIFEST_FAILED'), returnStdout: true).trim()
+                        def beforeManifest = sh(script: """
+                          if grep -q TARGETPLATFORM ${it}/Dockerfile; then
+                            ci/docker-manifest.sh inspect ${imageTag} --verbose | jq -r '.[].SchemaV2Manifest.layers[].digest' | sort -
+                          else
+                            ci/docker-manifest.sh inspect ${imageTag} --verbose | jq -r '.SchemaV2Manifest.layers[].digest' | sort -
+                          fi
+                        """, returnStdout: true).trim()
 
                         sh """
                         docker buildx build \
