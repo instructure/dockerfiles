@@ -190,9 +190,9 @@ pipeline {
         sh 'docker rm -f dockerfiles_index || :'
 
         if (isSlackReportingEnabled() && imageChanges.size() == 0) {
-          slackSend channel: '#docker', color: 'good', message: "[Docker Image Sync] No images were updated."
+          slackSend channel: '#docker', color: 'good', message: "[Docker Image Sync @ <${env.BUILD_URL}|Build Link>] No images were updated."
         } else if (isSlackReportingEnabled()) {
-          slackSend channel: '#docker', color: 'good', message: "[Docker Image Sync] ${imageChanges.size()} images were updated.```${getKeyNamesText(imageChanges)}```"
+          slackSend channel: '#docker', color: 'good', message: "[Docker Image Sync @ <${env.BUILD_URL}|Build Link>] ${imageChanges.size()} images were updated.```${getKeyNamesText(imageChanges)}```"
         }
       }
     }
