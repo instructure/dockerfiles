@@ -125,7 +125,7 @@ http {
                 if ($host = $remote_addr) {
                     return   301 https://<%= APP_DOMAIN %>$request_uri;
                 }
-                if ($http_x_forwarded_proto != 'https') {
+                if ($http_x_forwarded_proto = 'http') {
                     return   301 https://$host$request_uri;
                 }
             <% end %>
