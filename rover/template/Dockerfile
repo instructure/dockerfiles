@@ -8,7 +8,7 @@ RUN mkdir -p /tmp/rover \
       wget \
   && wget -O - https://github.com/apollographql/rover/tarball/<%= version %> | tar xz -C /tmp/rover --strip-components=1 \
   && cd /tmp/rover \
-  && cargo run --release --verbose -- install \
+  && cargo run --release -- install \
   && rm -rf /var/lib/apt/lists/* \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
