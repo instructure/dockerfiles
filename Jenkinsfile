@@ -55,7 +55,7 @@ def isRoverEnabled() {
 }
 
 def isChangeMerged() {
-  return env.GERRIT_EVENT_TYPE == 'change-merged' || getChangeMergedFlag()
+  return env.GERRIT_EVENT_TYPE == 'change-merged' || getChangeMergedFlag() || env.CHANGE_MERGED == 'true'
 }
 
 def isDockerhubUploadEnabled() {
