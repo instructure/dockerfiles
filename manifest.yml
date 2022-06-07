@@ -119,12 +119,12 @@ java:
       java_version: 16
       flavor: jre
     '17':
-      base_image: core:focal
+      base_image: core:jammy
       java_version: 17
       flavor: jdk
       multiarch: true
     '17-jre':
-      base_image: core:focal
+      base_image: core:jammy
       java_version: 17
       flavor: jre
       multiarch: true
