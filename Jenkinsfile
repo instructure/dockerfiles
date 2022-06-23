@@ -106,87 +106,89 @@ pipeline {
           find ci_files
         """
         script {
-          def sortedFiles = sortFileList(findFiles(glob: "ci_files/dockerfiles_*.yml"))
+          withMultiPlatformBuilder {
+            def sortedFiles = sortFileList(findFiles(glob: "ci_files/dockerfiles_*.yml"))
 
-          if(isDockerhubUploadEnabled()) {
-            withCredentials([string(credentialsId: 'dockerhub-rw', variable: 'DOCKERHUB_RW_PASSWORD')]) {
-              sh 'docker login --username $DOCKERHUB_RW_USERNAME --password $DOCKERHUB_RW_PASSWORD'
+            if(isDockerhubUploadEnabled()) {
+              withCredentials([string(credentialsId: 'dockerhub-rw', variable: 'DOCKERHUB_RW_PASSWORD')]) {
+                sh 'docker login --username $DOCKERHUB_RW_USERNAME --password $DOCKERHUB_RW_PASSWORD'
+              }
             }
-          }
 
-          sortedFiles.each { file ->
-            stage("Build Docker Images (Set ${file.name})") {
-              timeout(activity: true, time: 15, unit: 'MINUTES') {
-                def parallelStages = readYaml(file: file.path).collectEntries {
-                  [(it) : {
-                    stage(file.path) {
+            sortedFiles.each { file ->
+              stage("Build Docker Images (Set ${file.name})") {
+                timeout(activity: true, time: 15, unit: 'MINUTES') {
+                  def parallelStages = readYaml(file: file.path).collectEntries {
+                    [(it) : {
+                      stage(file.path) {
 
-                      if("${it}".trim() == "rover/v0.4.8" && !isRoverEnabled()) {
-                        echo "Skipping rover build -- add [build-rover] to commit message"
-                        return
-                      }
+                        if("${it}".trim() == "rover/v0.4.8" && !isRoverEnabled()) {
+                          echo "Skipping rover build -- add [build-rover] to commit message"
+                          return
+                        }
 
-                      def baseTag = it.replaceAll('appliances\\/', '')
-                      def dockerhubTag = isDockerhubUploadEnabled() ? "--tag instructure/${baseTag.replaceAll('\\/', ':')}" : ''
-                      def imageTag = "${ROOT_PATH}/${baseTag.replaceAll('\\/', ':')}"
+                        def baseTag = it.replaceAll('appliances\\/', '')
+                        def dockerhubTag = isDockerhubUploadEnabled() ? "--tag instructure/${baseTag.replaceAll('\\/', ':')}" : ''
+                        def imageTag = "${ROOT_PATH}/${baseTag.replaceAll('\\/', ':')}"
 
-                      def platform = sh(script: """
-                        if grep -q TARGETPLATFORM ${it}/Dockerfile; then
-                          echo "linux/arm64,linux/amd64"
-                        else
-                          echo "linux/amd64"
-                        fi
-                      """, returnStdout: true).trim()
+                        def platform = sh(script: """
+                          if grep -q TARGETPLATFORM ${it}/Dockerfile; then
+                            echo "linux/arm64,linux/amd64"
+                          else
+                            echo "linux/amd64"
+                          fi
+                        """, returnStdout: true).trim()
 
-                      def beforeManifest = sh(script: """
-                        if grep -q TARGETPLATFORM ${it}/Dockerfile; then
-                          ci/docker-manifest.sh inspect ${imageTag} --verbose | jq -r '.[].SchemaV2Manifest.layers[].digest' | sort -
-                        else
-                          ci/docker-manifest.sh inspect ${imageTag} --verbose | jq -r '.SchemaV2Manifest.layers[].digest' | sort -
-                        fi
-                      """, returnStdout: true).trim()
+                        def beforeManifest = sh(script: """
+                          if grep -q TARGETPLATFORM ${it}/Dockerfile; then
+                            ci/docker-manifest.sh inspect ${imageTag} --verbose | jq -r '.[].SchemaV2Manifest.layers[].digest' | sort -
+                          else
+                            ci/docker-manifest.sh inspect ${imageTag} --verbose | jq -r '.SchemaV2Manifest.layers[].digest' | sort -
+                          fi
+                        """, returnStdout: true).trim()
 
-                      sh """
-                      docker buildx build \
-                        --build-arg ROOT_PATH=${ROOT_PATH} \
-                        --cache-from=type=registry,ref=${imageTag} \
-                        --cache-to=type=local,dest=${it}/cache_result \
-                        --platform ${platform} \
-                        --builder multi-platform-builder \
-                        ${dockerhubTag} --tag ${imageTag} \
-                        ${it}
-                      """
+                        sh """
+                        docker buildx build \
+                          --build-arg ROOT_PATH=${ROOT_PATH} \
+                          --cache-from=type=registry,ref=${imageTag} \
+                          --cache-to=type=local,dest=${it}/cache_result \
+                          --platform ${platform} \
+                          --builder multi-platform-builder \
+                          ${dockerhubTag} --tag ${imageTag} \
+                          ${it}
+                        """
 
-                      def afterManifest = sh(script: "ci/get-cache-layers.sh ${it}/cache_result", returnStdout: true).trim()
+                        def afterManifest = sh(script: "ci/get-cache-layers.sh ${it}/cache_result", returnStdout: true).trim()
 
-                      if (beforeManifest != afterManifest) {
-                        echo "=== IMAGE CHANGE DETECTED!"
-                        echo "=== Manifest Before"
-                        echo beforeManifest
-                        echo "=== Manifest After"
-                        echo afterManifest
+                        if (beforeManifest != afterManifest) {
+                          echo "=== IMAGE CHANGE DETECTED!"
+                          echo "=== Manifest Before"
+                          echo beforeManifest
+                          echo "=== Manifest After"
+                          echo afterManifest
 
-                        imageChanges[baseTag.replaceAll('\\/', ':')] = true
+                          imageChanges[baseTag.replaceAll('\\/', ':')] = true
 
-                        if(isChangeMerged()) {
-                          sh """
-                          docker buildx build \
-                            --build-arg BUILDKIT_INLINE_CACHE=1 \
-                            --build-arg ROOT_PATH=${ROOT_PATH} \
-                            --cache-from=type=registry,ref=${imageTag} \
-                            --platform ${platform} \
-                            --push \
-                            --builder multi-platform-builder \
-                            ${dockerhubTag} --tag ${imageTag} \
-                            ${it}
-                          """
+                          if(isChangeMerged()) {
+                            sh """
+                            docker buildx build \
+                              --build-arg BUILDKIT_INLINE_CACHE=1 \
+                              --build-arg ROOT_PATH=${ROOT_PATH} \
+                              --cache-from=type=registry,ref=${imageTag} \
+                              --platform ${platform} \
+                              --push \
+                              --builder multi-platform-builder \
+                              ${dockerhubTag} --tag ${imageTag} \
+                              ${it}
+                            """
+                          }
                         }
                       }
-                    }
-                  }]
-                }
+                    }]
+                  }
 
-                parallel(parallelStages)
+                  parallel(parallelStages)
+                }
               }
             }
           }
