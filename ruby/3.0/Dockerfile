@@ -3,10 +3,10 @@
 # task `rake generate:ruby`
 
 ARG ROOT_PATH=instructure
-FROM ${ROOT_PATH}/core:bionic
+FROM --platform=${TARGETPLATFORM} ${ROOT_PATH}/core:focal
 MAINTAINER Instructure
 
-ENV RUBY_MAJOR 2.7
+ENV RUBY_MAJOR 3.0
 ENV BUNDLER_VERSION 2.2.6
 ENV RUBYGEMS_VERSION 3.2.6
 
@@ -14,7 +14,11 @@ USER root
 RUN mkdir -p /usr/src/app
 RUN chown docker:docker /usr/src/app
 
-RUN apt-add-repository -y ppa:brightbox/ruby-ng \
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        software-properties-common \
+ && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
+
+RUN apt-add-repository -y ppa:instructure/ruby \
  && apt-get update \
  && apt-get install -y \
       ruby$RUBY_MAJOR \
@@ -39,13 +43,14 @@ RUN apt-add-repository -y ppa:brightbox/ruby-ng \
       libxslt-dev \
       libyaml-dev \
       zlib1g-dev \
- && apt-add-repository -y --remove ppa:brightbox/ruby-ng \
+ && apt-add-repository -y --remove ppa:instructure/ruby \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
 
-RUN gem update  --no-document --system $RUBYGEMS_VERSION \
- && gem install --no-document -i /var/lib/gems/$RUBY_MAJOR.0 bundler -v $BUNDLER_VERSION
+# On newer rubygems-integration the deb-installed rubygems cannot be updated outside apt's processes
+# so only try to upgrade the bundler version
+RUN gem install --no-document -i /var/lib/gems/$RUBY_MAJOR.0 bundler -v $BUNDLER_VERSION
 
 ENV BUNDLE_APP_CONFIG /home/docker/.bundle
 

@@ -225,23 +225,25 @@ rover:
     'v0.4.8':
 ruby: &RUBY
   defaults:
-    base_distro: bionic
-    base_image: core:bionic
-    bundler_version: 1.17.3
-    rubygems_version: 2.7.11
+    base_distro: focal
+    base_image: core:focal
+    bundler_version: 2.2.6
+    rubygems_version: 3.2.6
+    multiarch: true
   versions:
     '2.6':
+      base_distro: bionic
+      base_image: core:bionic
+      bundler_version: 1.17.3
+      rubygems_version: 2.7.11
+      multiarch: false
     '2.7-bionic':
       base_distro: bionic
       base_image: core:bionic
-      bundler_version: 2.2.6
-      rubygems_version: 3.2.6
+      multiarch: false
     '2.7':
-      base_distro: focal
-      base_image: core:focal
-      bundler_version: 2.2.6
-      rubygems_version: 3.2.6
-      multiarch: true
+    '3.0':
+    '3.1':
 
 ruby-node-pg:
   defaults:

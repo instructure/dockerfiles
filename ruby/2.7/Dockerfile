@@ -47,8 +47,10 @@ RUN apt-add-repository -y ppa:brightbox/ruby-ng \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
+
 RUN gem update  --no-document --system $RUBYGEMS_VERSION \
  && gem install --no-document -i /var/lib/gems/$RUBY_MAJOR.0 bundler -v $BUNDLER_VERSION
+
 ENV BUNDLE_APP_CONFIG /home/docker/.bundle
 
 USER docker
