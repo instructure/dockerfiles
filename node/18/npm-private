@@ -1,0 +1,18 @@
+#!/bin/bash
+
+npm config set "@${NPM_PRIVATE_SCOPE}:registry"="https:${NPM_PRIVATE_REGISTRY}"
+npm config set "${NPM_PRIVATE_REGISTRY}:username"="${NPM_PRIVATE_USERNAME}"
+npm config set "${NPM_PRIVATE_REGISTRY}:_password"="${NPM_PRIVATE_PASSWORD}"
+npm config set "${NPM_PRIVATE_REGISTRY}:email"="${NPM_PRIVATE_EMAIL}"
+npm config set "${NPM_PRIVATE_REGISTRY}:always-auth"="true"
+
+npm "$@"
+EXIT_CODE=$?
+
+npm config delete "@${NPM_PRIVATE_SCOPE}:registry"
+npm config delete "${NPM_PRIVATE_REGISTRY}:username"
+npm config delete "${NPM_PRIVATE_REGISTRY}:_password"
+npm config delete "${NPM_PRIVATE_REGISTRY}:email"
+npm config delete "${NPM_PRIVATE_REGISTRY}:always-auth"
+
+exit $EXIT_CODE

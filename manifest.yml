@@ -162,6 +162,11 @@ node: &NODE
       base_distro: focal
       base_image: core:focal
       multiarch: true
+    '18':
+      node_version: '18'
+      base_distro: jammy
+      base_image: core:jammy
+      multiarch: true
 
 node-passenger:
   versions:
