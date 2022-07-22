@@ -15,6 +15,7 @@ RUN addgroup --gid 9999 docker \
         curl \
         language-pack-en \
         locales \
+        gnupg \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
 
