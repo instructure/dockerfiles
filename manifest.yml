@@ -72,16 +72,25 @@ core:
         source: dockerhub
       multiarch: true
 
+# Packages from https://go.dev/dl/ go<ver>.linux-amd64.tar.gz
 golang:
   defaults:
     base_image: instructure/core:focal
   versions:
     '1.16':  # supported until 1.18 is out
-      full_version: '1.16.9'
-      package_sha: 'd2c095c95f63c2a3ef961000e0ecb9d81d5c68b6ece176e2a8a2db82dc02931c'
+      full_version: '1.16.15'
+      package_sha: '77c782a633186d78c384f972fb113a43c24be0234c42fef22c2d8c4c4c8e7475'
     '1.17':  # supported until 1.19 is out
-      full_version: '1.17.2'
-      package_sha: 'f242a9db6a0ad1846de7b6d94d507915d14062660616a61ef7c808a76e4f1676'
+      full_version: '1.17.12'
+      package_sha: '6e5203fbdcade4aa4331e441fd2e1db8444681a6a6c72886a37ddd11caa415d4'
+    '1.18':  # supported until 1.20 is out
+      base_image: 'instructure/core:jammy'
+      full_version: '1.18.4'
+      package_sha: 'c9b099b68d93f5c5c8a8844a89f8db07eaa58270e3a1e01804f17f4cf8df02f5'
+    '1.18-focal':  # if focal is needed
+      base_image: 'instructure/core:focal'
+      full_version: '1.18.4'
+      package_sha: 'c9b099b68d93f5c5c8a8844a89f8db07eaa58270e3a1e01804f17f4cf8df02f5'
 
 graalvm-ce:
   defaults:
