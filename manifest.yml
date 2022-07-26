@@ -138,6 +138,16 @@ java:
       java_version: 18
       flavor: jre
       multiarch: true
+    '17-focal':
+      base_image: core:focal
+      java_version: 17
+      flavor: jdk
+      multiarch: true
+    '17-jre-focal':
+      base_image: core:focal
+      java_version: 17
+      flavor: jre
+      multiarch: true
 
 # We are no longer accepting new minor version tags for Node images, simply
 # update the corresponding major version tag (4, 6, 8) to the latest minor.
