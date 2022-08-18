@@ -14,11 +14,10 @@ USER root
 RUN mkdir -p /usr/src/app
 RUN chown docker:docker /usr/src/app
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-        software-properties-common \
- && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
-
-RUN apt-add-repository -y ppa:instructure/ruby \
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+      software-properties-common \
+ && apt-add-repository -y ppa:instructure/ruby \
  && apt-get update \
  && apt-get install -y \
       ruby$RUBY_MAJOR \
@@ -45,12 +44,11 @@ RUN apt-add-repository -y ppa:instructure/ruby \
       zlib1g-dev \
  && apt-add-repository -y --remove ppa:instructure/ruby \
  && apt-get clean \
- && rm -rf /var/lib/apt/lists/*
-
+ && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/ \
 
 # On newer rubygems-integration the deb-installed rubygems cannot be updated outside apt's processes
 # so only try to upgrade the bundler version
-RUN gem install --no-document -i /var/lib/gems/$RUBY_MAJOR.0 bundler -v $BUNDLER_VERSION
+ && gem install --no-document -i /var/lib/gems/$RUBY_MAJOR.0 bundler -v $BUNDLER_VERSION
 
 ENV BUNDLE_APP_CONFIG /home/docker/.bundle
 

@@ -1,12 +1,14 @@
-<%= generation_message %>
-<%= from_image(base_image) %>
+# GENERATED FILE, DO NOT MODIFY!
+# To update this file please edit the relevant template and run the generation
+# task `rake generate:ruby`
+
+ARG ROOT_PATH=instructure
+FROM --platform=${TARGETPLATFORM} ${ROOT_PATH}/core:jammy
 MAINTAINER Instructure
 
-<% ruby_major = version.split('.').take(2).join('.').split('-')[0] -%>
-<% ppa = ((base_distro == 'jammy' || ruby_major >= '3.0') ? ((ruby_major >= '3.0') ? 'ppa:instructure/ruby' : 'ppa:maths22/ruby-testing') : 'ppa:brightbox/ruby-ng') -%>
-ENV RUBY_MAJOR <%= ruby_major %>
-ENV BUNDLER_VERSION <%= bundler_version %>
-ENV RUBYGEMS_VERSION <%= rubygems_version %>
+ENV RUBY_MAJOR 2.7
+ENV BUNDLER_VERSION 2.2.6
+ENV RUBYGEMS_VERSION 3.2.6
 
 USER root
 RUN mkdir -p /usr/src/app
@@ -15,7 +17,7 @@ RUN chown docker:docker /usr/src/app
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
       software-properties-common \
- && apt-add-repository -y <%= ppa %> \
+ && apt-add-repository -y ppa:maths22/ruby-testing \
  && apt-get update \
  && apt-get install -y \
       ruby$RUBY_MAJOR \
@@ -40,12 +42,10 @@ RUN apt-get update \
       libxslt-dev \
       libyaml-dev \
       zlib1g-dev \
- && apt-add-repository -y --remove <%= ppa %> \
+ && apt-add-repository -y --remove ppa:maths22/ruby-testing \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/ \
-<% if (ruby_major < '3.0' && base_distro != 'jammy') %>
- && gem update  --no-document --system $RUBYGEMS_VERSION \
-<% end %>
+
 # On newer rubygems-integration the deb-installed rubygems cannot be updated outside apt's processes
 # so only try to upgrade the bundler version
  && gem install --no-document -i /var/lib/gems/$RUBY_MAJOR.0 bundler -v $BUNDLER_VERSION

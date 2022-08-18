@@ -21,7 +21,6 @@ RUN apt-get update \
     nginx-extras \
     sudo \
     passenger<%= passenger_version ? "=#{passenger_version}" : "" %> \
-<% if ['bionic', 'focal'].include?(base_distro) -%>
     libnginx-mod-http-passenger<%= passenger_version ? "=#{passenger_version}" : "" %> \
   # libnginx-mod-http-passenger in bionic destroys the alternatives in the base ruby image
   && update-alternatives --install /usr/bin/gem gem /usr/bin/gem$RUBY_MAJOR 181 \
@@ -31,7 +30,6 @@ RUN apt-get update \
     --slave /usr/bin/irb irb /usr/bin/irb${RUBY_MAJOR} \
     --slave /usr/bin/rdoc rdoc /usr/bin/rdoc${RUBY_MAJOR} \
     --slave /usr/bin/ri ri /usr/bin/ri${RUBY_MAJOR} \
-<% end -%>
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 

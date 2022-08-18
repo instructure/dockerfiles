@@ -265,8 +265,20 @@ ruby: &RUBY
       base_distro: bionic
       base_image: core:bionic
       multiarch: false
+    '2.7-jammy':
+      base_distro: jammy
+      base_image: core:jammy
+      multiarch: true
     '2.7':
+    '3.0-jammy':
+      base_distro: jammy
+      base_image: core:jammy
+      multiarch: true
     '3.0':
+    '3.1-jammy':
+      base_distro: jammy
+      base_image: core:jammy
+      multiarch: true
     '3.1':
 
 ruby-node-pg:
