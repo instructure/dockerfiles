@@ -4,7 +4,7 @@
 
 ARG ROOT_PATH=instructure
 FROM ${ROOT_PATH}/ruby:2.7-bionic
-MAINTAINER Instructure
+LABEL org.opencontainers.image.authors="Instructure"
 
 USER root
 

@@ -1,6 +1,6 @@
 <%= generation_message %>
 <%= from_image(base_image) %>
-MAINTAINER Instructure
+LABEL org.opencontainers.image.authors="Instructure"
 
 USER root
 
