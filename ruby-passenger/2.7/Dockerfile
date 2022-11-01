@@ -15,8 +15,7 @@ RUN if [ "$(dpkg --print-architecture)" = "amd64" ]; then \
     && echo deb https://oss-binaries.phusionpassenger.com/apt/passenger focal main > /etc/apt/sources.list.d/passenger.list ; \
   elif [ "$(dpkg --print-architecture)" = "arm64" ]; then \
     # Install Nginx with Passenger from Instructure packages on arm64
-    curl -fsSL https://packagecloud.io/instructure/docker-support/gpgkey | gpg --dearmor | apt-key add - \
-    && echo "deb https://packagecloud.io/instructure/docker-support/ubuntu focal main" > /etc/apt/sources.list.d/instructure-ruby.list ; \
+    curl -s https://packagecloud.io/install/repositories/instructure/docker-support/script.deb.sh | bash; \
   fi
 
 
