@@ -169,6 +169,7 @@ node: &NODE
   versions:
     '12':  # Supported until 04/30/2022
       node_version: '12'
+      npm_version: '8.19.3'
       base_distro: bionic
       base_image: core:bionic
     '14':  # Supported until 04/30/2023

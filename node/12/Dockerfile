@@ -20,7 +20,7 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 COPY yarn-private /usr/local/bin
 
 ENV NODE_VERSION 12
-ENV NPM_VERSION latest
+ENV NPM_VERSION 8.19.3
 
 RUN mkdir -p /usr/src/app && chown docker:docker /usr/src/app
 WORKDIR /usr/src/app
