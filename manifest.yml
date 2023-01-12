@@ -26,14 +26,6 @@ appliances/debugging:
     bionic: {}
     focal: {}
 
-clojure:
-  versions:
-    '11':
-      java_version: '11'
-      lein_version: '2.9.1'
-      package_sha: 'a4c239b407576f94e2fef5bfa107f0d3f97d0b19c253b08860d9609df4ab8b29'
-      jar_sha: 'ea7c831a4f5c38b6fc3926c6ad32d1d4b9b91bf830a715ecff5a70a18bda55f8'
-
 core:
   defaults:
     flavor: slim
@@ -77,23 +69,6 @@ golang:
       base_image: 'instructure/core:focal'
       full_version: '1.18.4'
       package_sha: 'c9b099b68d93f5c5c8a8844a89f8db07eaa58270e3a1e01804f17f4cf8df02f5'
-
-graalvm-ce:
-  defaults:
-    distro: focal
-  versions:
-    '19-java11':
-      java_version: 11
-      graal_version: 19.3.5
-      package_sha: 4936cdf48cd501e9df7ff41929774bd1cd88aecb41c3fbf2c970b29c340bbc95
-    '21-java11':
-      java_version: 11
-      graal_version: 21.0.0.2
-      package_sha: bd3fbe796e803c4fe5cd089371588d3d716fa3cdb653fe8dd6dba31b57bef934
-    '22-java17':
-      java_version: 17
-      graal_version: 22.0.0.2
-      package_sha: 4f743e0ed3d974b7d619ca2ed6014554e8c12e5ebbb38b9bc9e820b182169bd4
 
 java:
   defaults:
