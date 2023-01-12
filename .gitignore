@@ -1,4 +1,4 @@
 /.bundle/
 /Gemfile.lock
-ci/dockerfiles_?.yml
+ci/dockerfiles_*.yml
 /.idea

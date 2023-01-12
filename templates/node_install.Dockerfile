@@ -11,6 +11,7 @@ RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | gpg --dear
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/ && \
   npm install -g "npm@$NPM_VERSION" && \
+  rm -rf /root/.npm/_cacache && \
   npm cache clean --force
 
 COPY npm-private /usr/local/bin
