@@ -12,7 +12,7 @@ task default: 'generate:all'
 PROJECT_DIR = File.dirname(__FILE__)
 PROJECT_PATHNAME = Pathname.new(PROJECT_DIR)
 MANIFEST = YAML.load_file(File.join(PROJECT_DIR, 'manifest.yml'), aliases: true)
-TESTING_PARALLELIZATION = 5
+TESTING_PARALLELIZATION = 9
 
 def build_output_path(*parts)
   File.join(PROJECT_DIR, *parts)

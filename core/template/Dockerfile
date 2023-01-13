@@ -4,6 +4,8 @@ MAINTAINER Instructure
 
 ENV DEBIAN_FRONTEND=noninteractive
 ## Create a 'docker' user
+RUN sed -i -e 's/http:\/\/archive\.ubuntu\.com\//http:\/\/us-east-1\.ec2\.archive\.ubuntu\.com\//' /etc/apt/sources.list \
+  && sed -i -e 's/http:\/\/ports\.ubuntu\.com\//http:\/\/us-east-1\.ec2\.ports\.ubuntu\.com\//' /etc/apt/sources.list
 RUN addgroup --gid 9999 docker \
  && adduser --uid 9999 --gid 9999 --disabled-password --gecos "Docker User" docker \
  && usermod -L docker \
