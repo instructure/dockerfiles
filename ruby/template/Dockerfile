@@ -43,9 +43,9 @@ RUN apt-get update \
  && apt-add-repository -y --remove <%= ppa %> \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/ \
-<% if (ruby_major < '3.0' && base_distro != 'jammy') %>
+<% if (ruby_major < '3.0' && base_distro != 'jammy') -%>
  && gem update  --no-document --system $RUBYGEMS_VERSION \
-<% end %>
+<% end -%>
 # On newer rubygems-integration the deb-installed rubygems cannot be updated outside apt's processes
 # so only try to upgrade the bundler version
  && gem install --no-document -i /var/lib/gems/$RUBY_MAJOR.0 bundler -v $BUNDLER_VERSION

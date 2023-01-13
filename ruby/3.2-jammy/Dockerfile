@@ -45,7 +45,6 @@ RUN apt-get update \
  && apt-add-repository -y --remove ppa:instructure/ruby \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/ \
-
 # On newer rubygems-integration the deb-installed rubygems cannot be updated outside apt's processes
 # so only try to upgrade the bundler version
  && gem install --no-document -i /var/lib/gems/$RUBY_MAJOR.0 bundler -v $BUNDLER_VERSION
