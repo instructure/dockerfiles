@@ -1,4 +1,4 @@
-FROM ruby:2.5-alpine
+FROM --platform=${TARGETPLATFORM} ruby:2.7-alpine
 MAINTAINER Instructure
 
 COPY Gemfile Gemfile.lock ./

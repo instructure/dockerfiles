@@ -25,4 +25,4 @@ DEPENDENCIES
   aws-sdk-sqs (~> 1.10)
 
 BUNDLED WITH
-   1.16.1
+   2.1.4
