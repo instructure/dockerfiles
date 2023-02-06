@@ -166,16 +166,18 @@ node-passenger:
 node-pm2:
   defaults:
     base_distro: bionic
-    base_image: instructure/node:12
+    base_image: node:12
   versions:
     '12':
-      base_image: instructure/node:12
+      base_image: node:12
     '14':
-      base_image: instructure/node:14
+      base_image: node:14
       base_distro: focal
+      multiarch: true
     '16':
-      base_image: instructure/node:16
+      base_image: node:16
       base_distro: focal
+      multiarch: true
 
 php: &PHP
   defaults:

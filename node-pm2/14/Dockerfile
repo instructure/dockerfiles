@@ -2,7 +2,8 @@
 # To update this file please edit the relevant template and run the generation
 # task `rake generate:node-pm2`
 
-FROM instructure/node:14
+ARG ROOT_PATH=instructure
+FROM --platform=${TARGETPLATFORM} ${ROOT_PATH}/node:14
 MAINTAINER Instructure
 
 USER root
