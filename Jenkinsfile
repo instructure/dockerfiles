@@ -86,6 +86,18 @@ pipeline {
       }
     }
 
+    stage('Rebase') {
+      steps {
+        script {
+          if(!isChangeMerged()) {
+            withGerritCredentials {
+              sh "git fetch origin && git rebase origin/master"
+            }
+          }
+        }
+      }
+    }
+
     stage('Ensure "generate" action has been done') {
       steps {
         timeout(activity: true, time: 30, unit: 'SECONDS') {
