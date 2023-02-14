@@ -2,11 +2,6 @@
 
 import com.cloudbees.groovy.cps.NonCPS
 
-@groovy.transform.Field final static BUILD_REGISTRY_PATH_REGEX = /\[build\-registry\-path=(.+?)\]/
-@groovy.transform.Field final static CHANGE_MERGED_REGEX = /\[change\-merged\]/
-@groovy.transform.Field final static SLACK_REPORTING_REGEX = /\[slack\-reporting\]/
-@groovy.transform.Field final static ROVER_REGEX = /\[build\-rover\]/
-
 def dockerfileStages = [:]
 def imageChanges = [:]
 
@@ -23,39 +18,15 @@ def sortFileList(fileList) {
 }
 
 def getBuildRegistryPath() {
-  def commitMessage = env.GERRIT_CHANGE_COMMIT_MESSAGE ? new String(env.GERRIT_CHANGE_COMMIT_MESSAGE.decodeBase64()) : null
-
-  if (env.GERRIT_EVENT_TYPE == 'change-merged' || !commitMessage || !(commitMessage =~ BUILD_REGISTRY_PATH_REGEX).find()) {
-    return 'jenkins'
-  }
-
-  return (commitMessage =~ BUILD_REGISTRY_PATH_REGEX).findAll()[0][1]
-}
-
-def getRoverFlag() {
-  def commitMessage = env.GERRIT_CHANGE_COMMIT_MESSAGE ? new String(env.GERRIT_CHANGE_COMMIT_MESSAGE.decodeBase64()) : null
-
-  return commitMessage && (commitMessage =~ ROVER_REGEX).find()
-}
-
-def getChangeMergedFlag() {
-  def commitMessage = env.GERRIT_CHANGE_COMMIT_MESSAGE ? new String(env.GERRIT_CHANGE_COMMIT_MESSAGE.decodeBase64()) : null
-
-  return commitMessage && (commitMessage =~ CHANGE_MERGED_REGEX).find()
-}
-
-def getSlackReportingEnabledFlag() {
-  def commitMessage = env.GERRIT_CHANGE_COMMIT_MESSAGE ? new String(env.GERRIT_CHANGE_COMMIT_MESSAGE.decodeBase64()) : null
-
-  return commitMessage && (commitMessage =~ SLACK_REPORTING_REGEX).find()
+  return (commitMessageFlag("build-registry-path") as String) ?: "jenkins"
 }
 
 def isRoverEnabled() {
-  return getRoverFlag()
+  return commitMessageFlag("build-rover") as Boolean
 }
 
 def isChangeMerged() {
-  return env.GERRIT_EVENT_TYPE == 'change-merged' || getChangeMergedFlag() || env.CHANGE_MERGED == 'true'
+  return env.GERRIT_EVENT_TYPE == 'change-merged' || (commitMessageFlag("change-merged") as Boolean) || env.CHANGE_MERGED == 'true'
 }
 
 def isDockerhubUploadEnabled() {
@@ -63,7 +34,7 @@ def isDockerhubUploadEnabled() {
 }
 
 def isSlackReportingEnabled() {
-  return env.GERRIT_EVENT_TYPE == 'change-merged' || getSlackReportingEnabledFlag() || env.SLACK_REPORTING == 'true'
+  return env.GERRIT_EVENT_TYPE == 'change-merged' || (commitMessageFlag("slack-reporting") as Boolean) || env.SLACK_REPORTING == 'true'
 }
 
 pipeline {
