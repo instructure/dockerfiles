@@ -18,6 +18,10 @@ def sortFileList(fileList) {
 }
 
 def getBuildRegistryPath() {
+  if (env.GERRIT_EVENT_TYPE == 'change-merged') {
+    return "jenkins"
+  }
+
   return (commitMessageFlag("build-registry-path") as String) ?: "jenkins"
 }
 
