@@ -30,7 +30,7 @@ def isRoverEnabled() {
 }
 
 def isChangeMerged() {
-  return env.GERRIT_EVENT_TYPE == 'change-merged' || (commitMessageFlag("change-merged") as Boolean) || env.CHANGE_MERGED == 'true'
+  return env.GERRIT_EVENT_TYPE == 'change-merged' || (commitMessageFlag("change-merged") as Boolean)
 }
 
 def isDockerhubUploadEnabled() {
@@ -38,7 +38,7 @@ def isDockerhubUploadEnabled() {
 }
 
 def isSlackReportingEnabled() {
-  return env.GERRIT_EVENT_TYPE == 'change-merged' || (commitMessageFlag("slack-reporting") as Boolean) || env.SLACK_REPORTING == 'true'
+  return env.GERRIT_EVENT_TYPE == 'change-merged' || (commitMessageFlag("slack-reporting") as Boolean)
 }
 
 pipeline {
