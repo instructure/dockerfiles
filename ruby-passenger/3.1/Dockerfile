@@ -8,16 +8,10 @@ LABEL org.opencontainers.image.authors="Instructure"
 
 USER root
 
-# Install Nginx with Passenger from official repository on x86_64
-RUN if [ "$(dpkg --print-architecture)" = "amd64" ]; then \
-    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CAC40B2F7 \
+# Install Nginx with Passenger from official repository
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CAC40B2F7 \
     && apt-get install -y apt-transport-https ca-certificates \
-    && echo deb https://oss-binaries.phusionpassenger.com/apt/passenger focal main > /etc/apt/sources.list.d/passenger.list ; \
-  elif [ "$(dpkg --print-architecture)" = "arm64" ]; then \
-    # Install Nginx with Passenger from Instructure packages on arm64
-    curl -s https://packagecloud.io/install/repositories/instructure/docker-support/script.deb.sh | bash; \
-  fi
-
+    && echo deb https://oss-binaries.phusionpassenger.com/apt/passenger focal main > /etc/apt/sources.list.d/passenger.list
 
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
