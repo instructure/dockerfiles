@@ -14,9 +14,7 @@ RUN  apt-get update \
     nginx-extras \
     passenger \
     sudo \
-<% if ['bionic', 'focal'].include? base_distro -%>
     libnginx-mod-http-passenger \
-<% end -%>
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
