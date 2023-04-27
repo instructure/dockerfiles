@@ -2,4 +2,3 @@
 /Gemfile.lock
 ci/dockerfiles_*.yml
 /.idea
-.rake_tasks

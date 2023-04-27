@@ -52,4 +52,4 @@ RUN mkdir -p /usr/src/nginx/conf.d \
 USER docker
 
 EXPOSE 80
-CMD ["/tini", "-g", "--", "/usr/src/entrypoint"]
+CMD ["/tini", "--", "/usr/src/entrypoint"]
