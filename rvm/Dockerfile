@@ -60,13 +60,16 @@ SHELL ["/bin/bash", "-lc"]
 CMD ["/bin/bash", "-l"]
 
 # Install Rubies
-RUN rvm install 2.6.9 \
- && rvm alias create 2.6 ruby-2.6.9 \
- && rvm install 2.7.5 \
- && rvm alias create 2.7 ruby-2.7.5 \
- && rvm install 3.0.3 \
- && rvm alias create 3.0 ruby-3.0.3 \
- && rvm install 3.1.1 \
- && rvm alias create 3.1 ruby-3.1.1 \
- && rvm use --default 3.1.1
+RUN rvm install 2.6.10 \
+  && rvm alias create 2.6 ruby-2.6.10 \
+  && rvm install 2.7.8 \
+  && rvm alias create 2.7 ruby-2.7.8 \
+  && rvm install 3.0.6 \
+  && rvm alias create 3.0 ruby-3.0.6 \
+  && rvm install 3.1.4 \
+  && rvm alias create 3.1 ruby-3.1.4 \
+  && rvm use --default 3.1.4 \
+  && rvm install 3.2.2 \
+  && rvm alias create 3.2 ruby-3.2.2 \
+  && rvm use --default 3.2.2
 WORKDIR /usr/src/app
