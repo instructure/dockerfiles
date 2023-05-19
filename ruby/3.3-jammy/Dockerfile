@@ -3,11 +3,11 @@
 # task `rake generate:ruby`
 
 ARG ROOT_PATH=instructure
-FROM --platform=${TARGETPLATFORM} ${ROOT_PATH}/core:focal
+FROM --platform=${TARGETPLATFORM} ${ROOT_PATH}/core:jammy
 MAINTAINER Instructure
 
-ENV RUBY_MAJOR 3.1
-ENV BUNDLER_VERSION 2.2.6
+ENV RUBY_MAJOR 3.3
+ENV BUNDLER_VERSION 2.4.13
 
 USER root
 RUN mkdir -p /usr/src/app

@@ -6,7 +6,9 @@ MAINTAINER Instructure
 <% ppa = ((base_distro == 'jammy' || ruby_major >= '3.0') ? ((ruby_major >= '3.0') ? 'ppa:instructure/ruby' : 'ppa:maths22/ruby-testing') : 'ppa:brightbox/ruby-ng') -%>
 ENV RUBY_MAJOR <%= ruby_major %>
 ENV BUNDLER_VERSION <%= bundler_version %>
+<% if (ruby_major < '3.0' && base_distro != 'jammy') -%>
 ENV RUBYGEMS_VERSION <%= rubygems_version %>
+<% end -%>
 
 USER root
 RUN mkdir -p /usr/src/app

@@ -8,7 +8,6 @@ MAINTAINER Instructure
 
 ENV RUBY_MAJOR 3.0
 ENV BUNDLER_VERSION 2.2.6
-ENV RUBYGEMS_VERSION 3.2.6
 
 USER root
 RUN mkdir -p /usr/src/app
