@@ -298,9 +298,8 @@ ruby-passenger:
       base_image: ruby:3.1
     '3.2':
       base_image: ruby:3.2
-    # disabled until the base image is built and published
-    # '3.3':
-    #   base_image: ruby:3.3
+    '3.3':
+      base_image: ruby:3.3
 
 scala-sbt:
   defaults:
