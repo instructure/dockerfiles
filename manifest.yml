@@ -69,6 +69,14 @@ golang:
       base_image: 'instructure/core:focal'
       full_version: '1.18.4'
       package_sha: 'c9b099b68d93f5c5c8a8844a89f8db07eaa58270e3a1e01804f17f4cf8df02f5'
+    '1.19':  # supported until 1.21 is out
+      base_image: 'instructure/core:jammy'
+      full_version: '1.19.9'
+      package_sha: 'e858173b489ec1ddbe2374894f52f53e748feed09dde61be5b4b4ba2d73ef34b'
+    '1.20':  # supported until 1.22 is out
+      base_image: 'instructure/core:jammy'
+      full_version: '1.20.4'
+      package_sha: '698ef3243972a51ddb4028e4a1ac63dc6d60821bf18e59a807e051fee0a385bd'
 
 java:
   defaults:
