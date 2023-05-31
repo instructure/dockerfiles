@@ -16,9 +16,9 @@ RUN curl -fsSL "$GOLANG_DOWNLOAD_URL" -o golang.tar.gz \
   && tar -C /usr/local -xzf golang.tar.gz \
   && rm golang.tar.gz
 
-# For private gomodules that install via git
+# For private gomodules that install via git, and to support Makefiles
 RUN apt-get update \
-  && apt-get install -y openssh-client \
+  && apt-get install -y openssh-client make \
   && apt-get clean
 RUN ssh-keyscan -p 29418 -H gerrit.instructure.com 2>/dev/null >> /etc/ssh/ssh_known_hosts
 ENV GOPRIVATE gerrit.instructure.com,github.com/instructure
