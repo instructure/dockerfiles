@@ -341,3 +341,16 @@ tini:
     'v0.18.0':
     'v0.19.0':
       multiarch: true
+
+corretto:
+  defaults:
+    base_image: core:jammy
+  versions:
+    '17':
+      base_image: core:jammy
+      java_version: 17
+      multiarch: true
+    '20':
+      base_image: core:jammy
+      java_version: 20
+      multiarch: true
