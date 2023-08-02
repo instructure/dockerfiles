@@ -72,11 +72,11 @@ golang:
       full_version: '1.18.10'
       package_sha: '5e05400e4c79ef5394424c0eff5b9141cb782da25f64f79d54c98af0a37f8d49'
     '1.19':  # supported until 1.21 is out
-      full_version: 1.19.11
-      package_sha: ee18f98a03386e2bf48ff75737ea17c953b1572f9b1114352f104ac5eef04bb4
+      full_version: 1.19.12
+      package_sha: 48e4fcfb6abfdaa01aaf1429e43bdd49cea5e4687bd5f5b96df1e193fcfd3e7e
     '1.20':  # supported until 1.22 is out
-      full_version: 1.20.6
-      package_sha: b945ae2bb5db01a0fb4786afde64e6fbab50b67f6fa0eb6cfa4924f16a7ff1eb
+      full_version: 1.20.7
+      package_sha: f0a87f1bcae91c4b69f8dc2bc6d7e6bfcd7524fceec130af525058c0c17b1b44
 java:
   defaults:
     base_image: core:bionic
