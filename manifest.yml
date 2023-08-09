@@ -77,6 +77,9 @@ golang:
     '1.20':  # supported until 1.22 is out
       full_version: 1.20.7
       package_sha: f0a87f1bcae91c4b69f8dc2bc6d7e6bfcd7524fceec130af525058c0c17b1b44
+    '1.21':
+      full_version: 1.21.0
+      package_sha: d0398903a16ba2232b389fb31032ddf57cac34efda306a0eebac34f0965a0742
 java:
   defaults:
     base_image: core:bionic
