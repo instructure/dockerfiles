@@ -5,7 +5,12 @@ MAINTAINER Instructure
 <% ruby_major = version.split('.').take(2).join('.').split('-')[0] -%>
 <% ppa = ((base_distro == 'jammy' || ruby_major >= '3.0') ? ((ruby_major >= '3.0') ? 'ppa:instructure/ruby' : 'ppa:maths22/ruby-testing') : 'ppa:brightbox/ruby-ng') -%>
 ENV RUBY_MAJOR <%= ruby_major %>
+<% if ruby_major < '3.0' -%>
 ENV BUNDLER_VERSION <%= bundler_version %>
+<% final_bundler_version = "$BUNDLER_VERSION" -%>
+<% else -%>
+<% final_bundler_version = bundler_version -%>
+<% end -%>
 <% if (ruby_major < '3.0' && base_distro != 'jammy') -%>
 ENV RUBYGEMS_VERSION <%= rubygems_version %>
 <% end -%>
@@ -50,7 +55,7 @@ RUN apt-get update \
 <% end -%>
 # On newer rubygems-integration the deb-installed rubygems cannot be updated outside apt's processes
 # so only try to upgrade the bundler version
- && gem install --no-document -i /var/lib/gems/$RUBY_MAJOR.0 bundler -v $BUNDLER_VERSION
+ && gem install --no-document -i /var/lib/gems/$RUBY_MAJOR.0 bundler -v <%= final_bundler_version %>
 
 ENV BUNDLE_APP_CONFIG /home/docker/.bundle
 

@@ -7,7 +7,6 @@ FROM --platform=${TARGETPLATFORM} ${ROOT_PATH}/core:jammy
 MAINTAINER Instructure
 
 ENV RUBY_MAJOR 3.2
-ENV BUNDLER_VERSION 2.2.6
 
 USER root
 RUN mkdir -p /usr/src/app
@@ -46,7 +45,7 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/ \
 # On newer rubygems-integration the deb-installed rubygems cannot be updated outside apt's processes
 # so only try to upgrade the bundler version
- && gem install --no-document -i /var/lib/gems/$RUBY_MAJOR.0 bundler -v $BUNDLER_VERSION
+ && gem install --no-document -i /var/lib/gems/$RUBY_MAJOR.0 bundler -v 2.2.6
 
 ENV BUNDLE_APP_CONFIG /home/docker/.bundle
 
