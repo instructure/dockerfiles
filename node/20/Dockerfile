@@ -20,7 +20,7 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 
 COPY yarn-private /usr/local/bin
 
-ENV NODE_VERSION 18
+ENV NODE_VERSION 20
 ENV NPM_VERSION latest
 
 RUN mkdir -p /usr/src/app && chown docker:docker /usr/src/app
@@ -30,7 +30,7 @@ RUN apt-get update && \
   apt-get install -y curl && \
   mkdir -p /etc/apt/keyrings && \
   curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
-  echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_18.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list && \
+  echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list && \
   apt-get update && \
   apt-get install -y --no-install-recommends nodejs && \
   apt-get clean && \
