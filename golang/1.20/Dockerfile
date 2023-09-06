@@ -7,9 +7,9 @@ MAINTAINER Instructure
 
 USER root
 
-ENV GOLANG_VERSION 1.20.7
+ENV GOLANG_VERSION 1.20.8
 ENV GOLANG_DOWNLOAD_URL https://storage.googleapis.com/golang/go$GOLANG_VERSION.linux-amd64.tar.gz
-ENV GOLANG_DOWNLOAD_SHA256 f0a87f1bcae91c4b69f8dc2bc6d7e6bfcd7524fceec130af525058c0c17b1b44
+ENV GOLANG_DOWNLOAD_SHA256 cc97c28d9c252fbf28f91950d830201aa403836cbed702a05932e63f7f0c7bc4
 
 RUN curl -fsSL "$GOLANG_DOWNLOAD_URL" -o golang.tar.gz \
   && echo "$GOLANG_DOWNLOAD_SHA256  golang.tar.gz" | sha256sum -c - \
