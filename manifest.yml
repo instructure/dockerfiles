@@ -348,3 +348,13 @@ corretto:
       base_image: core:jammy
       java_version: 20
       multiarch: true
+
+k8s-ci:
+  defaults:
+    kustomize_version: v5.1.1
+    helm_version: v3.12.3
+    kube_linter_version: v0.6.4
+    kube_linter_go_version: '1.21'
+  versions:
+    main:
+      multiarch: true

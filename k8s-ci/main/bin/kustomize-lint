@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -e
+set -o pipefail
+
+OVERLAY=${1:-.}
+
+die() {
+  echo "$@" >&2
+  exit 1
+}
+
+[[ -d "${OVERLAY}" ]] || die "'${OVERLAY}' is not a directory."
+
+set -x
+
+kustomize build "$1" | kube-linter lint -
