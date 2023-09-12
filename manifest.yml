@@ -358,3 +358,11 @@ k8s-ci:
   versions:
     main:
       multiarch: true
+
+k8s-toolbox:
+  defaults:
+    base_image: alpine:3
+  versions:
+    '1.24':
+      kubectl_version: 1.24.17
+      multiarch: true
