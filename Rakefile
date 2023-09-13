@@ -33,10 +33,10 @@ namespace :ci do
   task 'index' do
     dockerfiles = Dir.glob(File.join(PROJECT_DIR, '**', 'Dockerfile')).reject do |path|
       path.include?('template') ||
-        path.include?('ci') ||
+        path.start_with?(File.join(PROJECT_DIR, 'ci')) ||
         path.include?('deprecated') ||
-        path.include?('appliances/fake-s3') ||
-        path.include?('appliances/zeppelin')
+        path.start_with?(File.join(PROJECT_DIR, 'appliances/fake-s3')) ||
+        path.start_with?(File.join(PROJECT_DIR, 'appliances/zeppelin'))
     end
 
     docker_contexts = dockerfiles.map do |path|
