@@ -29,7 +29,7 @@ RUN GOARCH=$TARGETARCH GOOS=$TARGETOS CGO_ENABLED=0 scripts/go-build.sh ./cmd/ku
   && mv bin/$TARGETOS/kube-linter /kube-linter
 
 
-FROM alpine:3
+FROM --platform=$TARGETPLATFORM alpine:3
 
 RUN adduser -u9999 -g9999 -D -g "Docker User" docker \
   && apk --no-cache add \
