@@ -8,7 +8,7 @@ RUN wget "https://dl.k8s.io/release/v$KUBECTL_VERSION/bin/$TARGETOS/$TARGETARCH/
   && echo "${expected}  kubectl" | sha256sum -c \
   && mv kubectl /kubectl
 
-FROM <%= base_image %>
+FROM --platform=$TARGETPLATFORM <%= base_image %>
 
 RUN apk --no-cache add \
     aws-cli \
