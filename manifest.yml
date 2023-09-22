@@ -25,6 +25,7 @@ appliances/opensearch:
   versions:
     '1.3.2':
       opensearch_version: '1.3.2'
+      multiarch: true
 
 appliances/debugging:
   versions:

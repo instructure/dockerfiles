@@ -1,7 +1,7 @@
 <%= generation_message %>
 ARG OPENSEARCH_VERSION=<%= opensearch_version %>
 
-FROM opensearchproject/opensearch:$OPENSEARCH_VERSION as builder
+FROM --platform=${TARGETPLATFORM} opensearchproject/opensearch:$OPENSEARCH_VERSION as builder
 
 USER root
 

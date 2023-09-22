@@ -4,7 +4,7 @@
 
 ARG OPENSEARCH_VERSION=1.3.2
 
-FROM opensearchproject/opensearch:$OPENSEARCH_VERSION as builder
+FROM --platform=${TARGETPLATFORM} opensearchproject/opensearch:$OPENSEARCH_VERSION as builder
 
 USER root
 
