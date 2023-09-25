@@ -354,6 +354,10 @@ corretto:
       base_image: core:jammy
       java_version: 20
       multiarch: true
+    '21':
+      base_image: core:jammy
+      java_version: 21
+      multiarch: true
 
 k8s-ci:
   defaults:
