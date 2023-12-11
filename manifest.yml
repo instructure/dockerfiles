@@ -198,6 +198,14 @@ node-pm2:
       base_image: node:16
       base_distro: focal
       multiarch: true
+    '18':
+      base_image: node:18
+      base_distro: jammy
+      multiarch: true
+    '20':
+      base_image: node:20
+      base_distro: jammy
+      multiarch: true
 
 php:
   defaults:
