@@ -185,11 +185,9 @@ node-passenger:
       multiarch: true
 node-pm2:
   defaults:
-    base_distro: bionic
-    base_image: node:12
+    base_distro: jammy
+    base_image: node:20
   versions:
-    '12':
-      base_image: node:12
     '14':
       base_image: node:14
       base_distro: focal
