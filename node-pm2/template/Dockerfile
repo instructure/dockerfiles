@@ -20,7 +20,7 @@ RUN  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CA
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN yarn global add pm2@5.2.1
+RUN yarn global add pm2@5.3.0
 
 RUN mkdir -p /usr/src/supervisord/ \
  && mkdir -p /usr/src/nginx/conf.d \
