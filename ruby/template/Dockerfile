@@ -1,6 +1,9 @@
 <%= generation_message %>
 <%= from_image(base_image) %>
 MAINTAINER Instructure
+<% if cache_bust -%>
+ENV CACHE_BUST <%= cache_bust %>
+<% end -%>
 
 <% ruby_major = version.split('.').take(2).join('.').split('-')[0] -%>
 <% ppa = ((base_distro == 'jammy' || ruby_major >= '3.0') ? ((ruby_major >= '3.0') ? 'ppa:instructure/ruby' : 'ppa:maths22/ruby-testing') : 'ppa:brightbox/ruby-ng') -%>

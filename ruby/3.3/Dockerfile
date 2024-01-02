@@ -5,6 +5,7 @@
 ARG ROOT_PATH=instructure
 FROM --platform=${TARGETPLATFORM} ${ROOT_PATH}/core:focal
 MAINTAINER Instructure
+ENV CACHE_BUST 2024-01-02
 
 ENV RUBY_MAJOR 3.3
 
@@ -45,7 +46,7 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/ \
 # On newer rubygems-integration the deb-installed rubygems cannot be updated outside apt's processes
 # so only try to upgrade the bundler version
- && gem install --no-document -i /var/lib/gems/$RUBY_MAJOR.0 bundler -v 2.4.13
+ && gem install --no-document -i /var/lib/gems/$RUBY_MAJOR.0 bundler -v 2.5.3
 
 ENV BUNDLE_APP_CONFIG /home/docker/.bundle
 
