@@ -68,8 +68,11 @@ golang:
       full_version: 1.20.13
       package_sha: 9a9d3dcae2b6a638b1f2e9bd4db08ffb39c10e55d9696914002742d90f0047b5
     '1.21':
-      full_version: 1.21.6
-      package_sha: 3f934f40ac360b9c01f616a9aa1796d227d8b0328bf64cb045c7b8c4ee9caea4
+      full_version: 1.21.7
+      package_sha: 13b76a9b2a26823e53062fa841b07087d48ae2ef2936445dc34c4ae03293702c
+    '1.22':
+      full_version: 1.22.0
+      package_sha: f6c8a87aa03b92c4b0bf3d558e28ea03006eb29db78917daec5cfb6ec1046265
 java:
   defaults:
     base_image: core:bionic
