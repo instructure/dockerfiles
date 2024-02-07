@@ -104,7 +104,7 @@ pipeline {
 
             sortedFiles.each { file ->
               stage("Build Docker Images (Set ${file.name})") {
-                timeout(activity: true, time: 15, unit: 'MINUTES') {
+                timeout(activity: true, time: 30, unit: 'MINUTES') {
                   def parallelStages = readYaml(file: file.path).collectEntries {
                     [(it) : {
                       stage(file.path) {
