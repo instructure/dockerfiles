@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM alpine:3 AS helm-builder
+FROM --platform=$BUILDPLATFORM public.ecr.aws/docker/library/alpine:3 AS helm-builder
 WORKDIR /tmp/helm
 ARG TARGETOS
 ARG TARGETARCH
@@ -8,7 +8,7 @@ RUN wget https://get.helm.sh/helm-<%= helm_version %>-$TARGETOS-$TARGETARCH.tar.
   && rm helm.tar.gz
 
 
-FROM --platform=$BUILDPLATFORM alpine:3 as kustomize-builder
+FROM --platform=$BUILDPLATFORM public.ecr.aws/docker/library/alpine:3 as kustomize-builder
 WORKDIR /tmp/kustomize
 ARG TARGETOS
 ARG TARGETARCH
@@ -19,7 +19,7 @@ RUN wget https://github.com/kubernetes-sigs/kustomize/releases/download/kustomiz
 
 
 # Currently only published under amd64, so we compile ourselves :/
-FROM --platform=$BUILDPLATFORM golang:<%= kube_linter_go_version %> AS kube-linter-builder
+FROM --platform=$BUILDPLATFORM public.ecr.aws/docker/library/golang:<%= kube_linter_go_version %> AS kube-linter-builder
 WORKDIR /src
 RUN git clone https://github.com/stackrox/kube-linter.git --branch <%= kube_linter_version %> --depth 1 . \
   && go mod download
@@ -29,7 +29,7 @@ RUN GOARCH=$TARGETARCH GOOS=$TARGETOS CGO_ENABLED=0 scripts/go-build.sh ./cmd/ku
   && mv bin/$TARGETOS/kube-linter /kube-linter
 
 
-FROM --platform=$TARGETPLATFORM alpine:3
+FROM --platform=$TARGETPLATFORM public.ecr.aws/docker/library/alpine:3
 
 RUN adduser -u9999 -g9999 -D -g "Docker User" docker \
   && apk --no-cache add \

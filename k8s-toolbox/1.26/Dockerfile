@@ -1,6 +1,6 @@
 FROM --platform=$BUILDPLATFORM public.ecr.aws/docker/library/alpine:3.18 AS kubectl-builder
 
-ARG KUBECTL_VERSION=<%= kubectl_version %>
+ARG KUBECTL_VERSION=1.26.13
 ARG TARGETARCH
 ARG TARGETOS
 RUN wget "https://dl.k8s.io/release/v$KUBECTL_VERSION/bin/$TARGETOS/$TARGETARCH/kubectl" -O kubectl \
@@ -8,7 +8,7 @@ RUN wget "https://dl.k8s.io/release/v$KUBECTL_VERSION/bin/$TARGETOS/$TARGETARCH/
   && echo "${expected}  kubectl" | sha256sum -c \
   && mv kubectl /kubectl
 
-FROM --platform=$TARGETPLATFORM <%= base_image %>
+FROM --platform=$TARGETPLATFORM public.ecr.aws/docker/library/alpine:3
 
 RUN apk --no-cache add \
     aws-cli \

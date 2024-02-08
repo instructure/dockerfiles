@@ -365,9 +365,9 @@ corretto:
 
 k8s-ci:
   defaults:
-    kustomize_version: v5.1.1
-    helm_version: v3.12.3
-    kube_linter_version: v0.6.4
+    kustomize_version: v5.3.0
+    helm_version: v3.14.0
+    kube_linter_version: v0.6.7
     kube_linter_go_version: '1.21'
   versions:
     main:
@@ -375,8 +375,11 @@ k8s-ci:
 
 k8s-toolbox:
   defaults:
-    base_image: alpine:3
+    base_image: public.ecr.aws/docker/library/alpine:3
   versions:
-    '1.24':
-      kubectl_version: 1.24.17
+    '1.25':
+      kubectl_version: 1.25.16
+      multiarch: true
+    '1.26':
+      kubectl_version: 1.26.13
       multiarch: true
