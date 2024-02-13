@@ -33,7 +33,8 @@ FROM --platform=$TARGETPLATFORM public.ecr.aws/docker/library/alpine:3
 
 RUN adduser -u9999 -g9999 -D -g "Docker User" docker \
   && apk --no-cache add \
-    bash
+    bash \
+    yamllint
 
 COPY bin/* /usr/bin/
 COPY --from=kustomize-builder /kustomize /usr/bin/kustomize
