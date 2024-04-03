@@ -135,11 +135,6 @@ node:
     npm_version: latest
     yarn_version: latest
   versions:
-    '12':  # Supported until 04/30/2022
-      node_version: '12'
-      npm_version: '8.19.3'
-      base_distro: bionic
-      base_image: core:bionic
     '14':  # Supported until 04/30/2023
       node_version: '14'
       npm_version: '9.8.1'
@@ -165,9 +160,6 @@ node:
 
 node-passenger:
   versions:
-    '12':
-      base_distro: bionic
-      base_image: node:12
     '14':
       base_distro: focal
       base_image: node:14
