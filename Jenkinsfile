@@ -127,11 +127,7 @@ pipeline {
                         """, returnStdout: true).trim()
 
                         def beforeManifest = sh(script: """
-                          if grep -q TARGETPLATFORM ${it}/Dockerfile; then
-                            ci/docker-manifest.sh inspect ${imageTag} --verbose | jq -r '.[].SchemaV2Manifest.layers[].digest' | sort -
-                          else
-                            ci/docker-manifest.sh inspect ${imageTag} --verbose | jq -r '.SchemaV2Manifest.layers[].digest' | sort -
-                          fi
+                          ci/docker-manifest.sh inspect ${imageTag} --verbose | jq -r '.[].OCIManifest.layers[] | select(.mediaType | contains("layer")) | .digest' | sort -
                         """, returnStdout: true).trim()
 
                         sh """
