@@ -234,16 +234,6 @@ ruby:
     rubygems_version: 3.2.6
     multiarch: true
   versions:
-    '2.6':
-      base_distro: bionic
-      base_image: core:bionic
-      bundler_version: 1.17.3
-      rubygems_version: 2.7.11
-      multiarch: false
-    '2.7-bionic':
-      base_distro: bionic
-      base_image: core:bionic
-      multiarch: false
     '2.7-jammy':
       base_distro: jammy
       base_image: core:jammy
@@ -273,36 +263,11 @@ ruby:
       bundler_version: 2.5.3
       cache_bust: '2024-01-02'
 
-ruby-node-pg:
-  defaults:
-    base_distro: bionic
-    npm_version: latest
-    yarn_version: latest
-  versions:
-    '2.6-node14':
-      node_version: '14'
-      ruby_version: '2.6'
-
 ruby-passenger:
   defaults:
     base_distro: focal
     multiarch: true
   versions:
-    '2.6':
-      base_distro: bionic
-      base_image: ruby:2.6
-      multiarch: false
-    '2.6-p6.0.4':
-      base_distro: bionic
-      base_image: ruby:2.6
-      passenger_version: 1:6.0.4-1~bionic1
-      version_override: "2.6"
-      multiarch: false
-      # https://github.com/phusion/passenger/issues/2281 is blocking some users
-    '2.7-bionic':
-      base_distro: bionic
-      base_image: ruby:2.7-bionic
-      multiarch: false
     '2.7':
       base_image: ruby:2.7
     '3.0':
