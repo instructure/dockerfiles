@@ -281,7 +281,7 @@ ruby-passenger:
 
 scala-sbt:
   defaults:
-    base_image: instructure/java:11
+    base_image: instructure/java:16
   template_files:
     - Dockerfile
     - sbt-private
