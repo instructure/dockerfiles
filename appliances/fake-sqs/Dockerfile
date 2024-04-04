@@ -1,4 +1,4 @@
-FROM --platform=${TARGETPLATFORM} ruby:3.3-alpine
+FROM --platform=${TARGETPLATFORM} ruby:2.5-alpine
 
 RUN gem install fake_sqs -v 0.4.3
 
