@@ -319,7 +319,10 @@ corretto:
       base_image: core:jammy
       java_version: 21
       multiarch: true
-
+    '22':
+      base_image: core:jammy
+      java_version: 22
+      multiarch: true
 k8s-ci:
   defaults:
     kustomize_version: v5.3.0
