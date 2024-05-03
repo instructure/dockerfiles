@@ -157,6 +157,11 @@ node:
       base_distro: jammy
       base_image: core:jammy
       multiarch: true
+    '22': # Supported until 04/30/2027
+      node_version: '22'
+      base_distro: jammy
+      base_image: core:jammy
+      multiarch: true
 
 node-passenger:
   versions:
