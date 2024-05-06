@@ -181,6 +181,10 @@ node-passenger:
       base_distro: jammy
       base_image: node:20
       multiarch: true
+    '22':
+      base_distro: jammy
+      base_image: node:22
+      multiarch: true
 node-pm2:
   defaults:
     base_distro: jammy
