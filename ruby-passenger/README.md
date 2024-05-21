@@ -15,6 +15,8 @@ making sure to change the ownership of these files to docker:docker (`RUN chown 
 
 ## Configuration (through Environment Variables)
 
+See phusion passenger docs for more detailed description of certain variables: https://www.phusionpassenger.com/library/config/nginx/reference
+
 ### APP_ROOT_PATH: Application root path
 
 Occasionally you may need to change the root path. This currently defaults to
@@ -72,6 +74,10 @@ the `PASSENGER_MIN_INSTANCES` variable.
 
 The passenger default is 100. We set a default of 100. You may override this
 with the `PASSENGER_MAX_REQUEST_QUEUE_SIZE` variable.
+
+### PASSENGER_MAX_REQUESTS: Maximum number of requests and application process will process before being restarted.
+The passenger default is 0. We set a default of 0. Per the docs "A value of 0 means that 
+there is no maximum." You may override this with the `PASSENGER_MAX_REQUESTS` variable.
 
 ### PASSENGER_STARTUP_TIMEOUT: Passenger startup timeout
 
