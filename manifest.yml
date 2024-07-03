@@ -62,11 +62,11 @@ golang:
     base_image: instructure/core:jammy
   versions:
     '1.21':
-      full_version: 1.21.10
-      package_sha: e330e5d977bf4f3bdc157bc46cf41afa5b13d66c914e12fd6b694ccda65fcf92
+      full_version: 1.21.12
+      package_sha: 121ab58632787e18ae0caa8ae285b581f9470d0f6b3defde9e1600e211f583c5
     '1.22':
-      full_version: 1.22.3
-      package_sha: 8920ea521bad8f6b7bc377b4824982e011c19af27df88a815e3586ea895f1b36
+      full_version: 1.22.5
+      package_sha: 904b924d435eaea086515bc63235b192ea441bd8c9b198c507e85009e6e4c7f0
 java:
   defaults:
     base_image: core:bionic
