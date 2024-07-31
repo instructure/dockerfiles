@@ -239,6 +239,14 @@ rover:
     multiarch: true
   versions:
     'v0.4.8':
+yq:
+  defaults:
+    base_image:
+      name: alpine
+      source: dockerhub
+    multiarch: true
+  versions:
+    '4.44.1':
 ruby:
   defaults:
     base_distro: focal
