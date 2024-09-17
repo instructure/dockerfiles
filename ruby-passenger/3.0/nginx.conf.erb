@@ -69,7 +69,6 @@ http {
     passenger_min_instances <%= ENV.fetch('PASSENGER_MIN_INSTANCES', '1') %>;
     passenger_start_timeout <%= ENV.fetch('PASSENGER_STARTUP_TIMEOUT', '90') %>;
     passenger_max_requests <%= ENV.fetch('PASSENGER_MAX_REQUESTS', '0') %>;
-    passenger_memory_limit <%= ENV.fetch('PASSENGER_MEMORY_LIMIT', '0') %>;
 
     passenger_pre_start <%= URI.parse("http://#{APP_DOMAIN}:#{APP_PORT}").merge(ENV.fetch('CG_INSTANCE_POOL_HEALTH_CHECK_PATH', '/')) %>;
 

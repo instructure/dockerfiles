@@ -79,11 +79,6 @@ with the `PASSENGER_MAX_REQUEST_QUEUE_SIZE` variable.
 The passenger default is 0. We set a default of 0. Per the docs "A value of 0 means that 
 there is no maximum." You may override this with the `PASSENGER_MAX_REQUESTS` variable.
 
-### PASSENGER_MEMORY_LIMIT: The maximum amount of memory that an application process may use, in megabytes.
-Once an application process has surpassed its memory limit, Passenger will allow it to finish processing all of its current requests, then shut the process down. A value of 0 (the default) means that there is no maximum: the application's memory usage will not be checked.
-
-This option is useful if your application is leaking memory. By shutting it down, all of its memory is guaranteed to be freed by the operating system.
-
 ### PASSENGER_STARTUP_TIMEOUT: Passenger startup timeout
 
 The passenger default is 90. You may override this with the
