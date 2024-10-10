@@ -11,6 +11,8 @@
   HTTPS_PORT = ENV.fetch('CG_HTTPS_PORT', LEGACY_PORTS ? '80' : '8443')
   HTTPS_PORT = nil if HTTPS_PORT.empty?
 
+  HSTS_PRELOAD = ENV.fetch('HSTS_PRELOAD', '0') == '1'
+
   APP_PORT = HTTPS_PORT || HTTP_PORT
   REDIRECT_PORT = HTTP_PORT != HTTPS_PORT ? HTTP_PORT : nil
 %>
@@ -113,7 +115,11 @@ http {
         root <%= ENV.fetch('APP_ROOT_PATH', '/usr/src/app/public') %>;
 
         <% if CG_ENVIRONMENT != 'local' %>
-            add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+            <% if HSTS_PRELOAD %>
+                add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
+            <% else %>
+                add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+            <% end % >
 
             set_real_ip_from 10.0.0.0/8;
             real_ip_header X-Forwarded-For;

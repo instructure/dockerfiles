@@ -89,6 +89,11 @@ The passenger default is 90. You may override this with the
 The passenger default is "smart".  You may override this to "direct" if you have
 a reason to suspect the spawn method is causing problems in your application.
 
+### HSTS_PRELOAD
+
+If you want to use HSTS preload use HSTS_PRELOAD=1. The default is 0, turned off.
+For more details check: [HSTS Preload](https://hstspreload.org/#opt-in)
+
 ## Environment Variable Passthrough
 
 One such global configuration that is included by default is an auto-whitelist
