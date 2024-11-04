@@ -22,6 +22,8 @@ making sure to change the ownership of these files to docker:docker (`RUN chown 
 
 ## Configuration (through Environment Variables)
 
+See phusion passenger docs for more detailed description of certain variables: https://www.phusionpassenger.com/library/config/nginx/reference
+
 ### APP_ROOT_PATH: Application root path
 
 Occasionally you may need to change the root path. This currently defaults to
@@ -36,10 +38,9 @@ set and both SSL and `X-Forwarded-For` Will be enabled.
 
 ### NODE_ENV: Passenger application environment
 
-NODE_ENV and RACK_ENV default to production. To override this for development
+NODE_ENV defaults to production. To override this for development
 and test, set the NODE_ENV env var in your `Dockerfile` or `docker-compose.yml`
-file, and that will also override RACK_ENV and the other related vars in
-passenger.
+file.
 
 ### NGINX_WORKER_COUNT: Nginx worker process count
 
@@ -80,10 +81,23 @@ the `PASSENGER_MIN_INSTANCES` variable.
 The passenger default is 100. We set a default of 100. You may override this
 with the `PASSENGER_MAX_REQUEST_QUEUE_SIZE` variable.
 
+### PASSENGER_MAX_REQUESTS: Maximum number of requests and application process will process before being restarted.
+The passenger default is 0. We set a default of 0. Per the docs "A value of 0 means that there is no maximum." You may override this with the `PASSENGER_MAX_REQUESTS` variable.
+
 ### PASSENGER_STARTUP_TIMEOUT: Passenger startup timeout
 
 The passenger default is 90. You may override this with the
 `PASSENGER_STARTUP_TIMEOUT` variable.
+
+### PASSENGER_SPAWN_METHOD: Passenger spawn method
+
+The passenger default is "smart".  You may override this to "direct" if you have
+a reason to suspect the spawn method is causing problems in your application.
+
+### HSTS_PRELOAD
+
+If you want to use HSTS preload use HSTS_PRELOAD=1. The default is 0, turned off.
+For more details check: [HSTS Preload](https://hstspreload.org/#opt-in)
 
 ## Environment Variable Passthrough
 
