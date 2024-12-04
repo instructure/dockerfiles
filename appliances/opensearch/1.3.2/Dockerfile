@@ -4,12 +4,14 @@
 
 ARG OPENSEARCH_VERSION=1.3.2
 
-FROM --platform=${TARGETPLATFORM} opensearchproject/opensearch:$OPENSEARCH_VERSION as builder
+FROM opensearchproject/opensearch:$OPENSEARCH_VERSION AS builder
 
 USER root
 
 RUN yum install -y gcc gcc-c++ make cmake pkg-config wget git
 
+ARG OPENSEARCH_VERSION
+ENV OPENSEARCH_VERSION=$OPENSEARCH_VERSION
 ENV JAVA_HOME=/usr/share/opensearch/jdk
 ENV PATH=$JAVA_HOME/bin:$PATH
 
@@ -33,11 +35,13 @@ ENV PATH=$MVN_HOME/bin:$PATH
 WORKDIR /tmp
 RUN git clone https://github.com/duydo/opensearch-analysis-vietnamese.git
 WORKDIR /tmp/opensearch-analysis-vietnamese
+RUN sed -Ezi "s/(<artifactId>opensearch-analysis-vietnamese<\/artifactId>\n\s*<version>).*(<\/version>)/\1${OPENSEARCH_VERSION}\2/m" pom.xml
 RUN mvn verify clean --fail-never
 RUN mvn --batch-mode -Dmaven.test.skip -e package
 
 FROM opensearchproject/opensearch:$OPENSEARCH_VERSION
-ARG OPENSEARCH_VERSION=1.3.2
+
+ARG OPENSEARCH_VERSION
 ARG COCCOC_INSTALL_PATH=/usr/local
 ENV COCCOC_DICT_PATH=$COCCOC_INSTALL_PATH/share/tokenizer/dicts
 
