@@ -242,7 +242,7 @@ rover:
 yq:
   defaults:
     base_image:
-      name: alpine
+      name: alpine:3.20
       source: dockerhub
     multiarch: true
   versions:

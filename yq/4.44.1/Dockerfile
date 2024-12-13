@@ -1,4 +1,4 @@
-FROM --platform=${TARGETPLATFORM} alpine
+FROM --platform=${TARGETPLATFORM} alpine:3.20
 LABEL maintainer="Instructure"
 
 ENV YQ_VERSION="4.44.1"
