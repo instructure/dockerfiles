@@ -306,6 +306,8 @@ ruby-passenger:
       base_image: ruby:3.2
     '3.3':
       base_image: ruby:3.3
+    '3.4':
+      base_image: ruby:3.4
 
 scala-sbt:
   defaults:
