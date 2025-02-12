@@ -55,6 +55,11 @@ core:
         name: ubuntu:jammy
         source: dockerhub
       multiarch: true
+    noble:
+      base_image:
+        name: ubuntu:noble
+        source: dockerhub
+      multiarch: true
 
 # Packages from https://go.dev/dl/ go<ver>.linux-amd64.tar.gz
 golang:

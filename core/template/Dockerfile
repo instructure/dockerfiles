@@ -3,13 +3,9 @@
 MAINTAINER Instructure
 
 ENV DEBIAN_FRONTEND=noninteractive
-## Create a 'docker' user
 RUN sed -i -e 's/http:\/\/archive\.ubuntu\.com\//http:\/\/us-east-1\.ec2\.archive\.ubuntu\.com\//' /etc/apt/sources.list \
   && sed -i -e 's/http:\/\/ports\.ubuntu\.com\//http:\/\/us-east-1\.ec2\.ports\.ubuntu\.com\//' /etc/apt/sources.list
-RUN addgroup --gid 9999 docker \
- && adduser --uid 9999 --gid 9999 --disabled-password --gecos "Docker User" docker \
- && usermod -L docker \
- && apt-get update \
+RUN apt-get update \
  && apt-get install -y --no-install-recommends \
         apt-transport-https \
         ca-certificates \
@@ -17,6 +13,7 @@ RUN addgroup --gid 9999 docker \
         language-pack-en \
         locales \
         gnupg \
+        adduser \
 <% if flavor == 'fat' -%>
  && apt-get install -y --no-install-recommends \
         build-essential \
@@ -30,7 +27,10 @@ RUN addgroup --gid 9999 docker \
  && mkdir ~/.gnupg && echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf \
 <% end -%>
  && apt-get clean \
- && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
+ && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/ \
+ && addgroup --gid 9999 docker \
+ && adduser --uid 9999 --gid 9999 --disabled-password --gecos "Docker User" docker \
+ && usermod -L docker
 
 ## Ensure UTF-8 locale
 RUN locale-gen en_US.UTF-8
