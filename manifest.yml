@@ -212,6 +212,12 @@ node-pm2:
       base_image: node:20
       base_distro: jammy
       multiarch: true
+node-pm2-libvips:
+  versions:
+    '20':
+      multiarch: true
+      base_image: node-pm2:20
+      libvips_version: 8.16.0
 
 php:
   defaults:
