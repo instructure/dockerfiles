@@ -14,12 +14,14 @@
 # Coordinate with owner(s) of canvadocs before upgrades (currently the Content team)
 appliances/libreoffice:
   defaults:
-    ubuntu_version: bionic
+    ubuntu_version: jammy
   versions:
     '6.2':
       full_version: '6.2.7.1'
     '6.3':
       full_version: '6.3.1.2'
+    '24.8':
+      full_version: '24.8.5.2'
 
 appliances/opensearch:
   versions:

@@ -3,7 +3,7 @@
 # task `rake generate:appliances/libreoffice`
 
 
-FROM instructure/core:bionic
+FROM instructure/core:jammy
 
 USER root
 
