@@ -19,6 +19,7 @@ RUN apt-get clean           \
   libcups2                \
   libgl1-mesa-dri         \
   libgl1-mesa-glx         \
+  libxslt1-dev            \
   libsm6                  \
   fonts-opensymbol        \
   hyphen-fr               \
