@@ -74,6 +74,12 @@ golang:
     '1.22':
       full_version: 1.22.6
       package_sha: 999805bed7d9039ec3da1a53bfbcafc13e367da52aa823cb60b68ba22d44c616
+    '1.24':
+      full_version: 1.24.1
+      package_sha: cb2396bae64183cdccf81a9a6df0aea3bce9511fc21469fb89a0c00470088073
+    '1.23':
+      full_version: 1.23.7
+      package_sha: 4741525e69841f2e22f9992af25df0c1112b07501f61f741c12c6389fcb119f3
 java:
   defaults:
     base_image: core:bionic
