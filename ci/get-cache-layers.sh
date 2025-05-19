@@ -8,7 +8,7 @@ OUTPUT=()
 for manifestDigest in "${MANIFEST_DIGESTS[@]}"; do
   manifestPath=${manifestDigest/:/\/}
 
-  readarray -t manifestLayers < <( cat "blobs/${manifestPath}" | jq -r '.manifests[] | select(.mediaType | contains("layer")) | .digest' | sort -)
+  readarray -t manifestLayers < <( cat "blobs/${manifestPath}" | jq -r '.layers[] | .digest' | sort -)
   OUTPUT+=(${manifestLayers[@]})
 done
 
