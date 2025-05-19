@@ -319,12 +319,24 @@ ruby-passenger:
       base_image: ruby:2.7
     '3.0':
       base_image: ruby:3.0
+    '3.1-jammy':
+      base_image: ruby:3.1-jammy
+      base_distro: jammy
     '3.1':
       base_image: ruby:3.1
+    '3.2-jammy':
+      base_image: ruby:3.2-jammy
+      base_distro: jammy
     '3.2':
       base_image: ruby:3.2
+    '3.3-jammy':
+      base_image: ruby:3.3-jammy
+      base_distro: jammy
     '3.3':
       base_image: ruby:3.3
+    '3.4-jammy':
+      base_image: ruby:3.4-jammy
+      base_distro: jammy
     '3.4':
       base_image: ruby:3.4
 
