@@ -2,7 +2,7 @@
 # To update this file please edit the relevant template and run the generation
 # task `rake generate:python`
 
-FROM instructure/core:bionic
+FROM instructure/core:jammy
 MAINTAINER Instructure Engineering
 USER root
 
@@ -12,7 +12,8 @@ ARG PIP_VERSION=20.1
 ARG PGP_KEY_ID=A035C8C19219BA821ECEA86B64E628F8D684696D
 
 RUN apt-get update && apt-get install -y zlib1g-dev libncurses5-dev libffi-dev libsqlite3-dev\
-                                         libgdbm-dev libnss3-dev libssl-dev libreadline-dev
+                                         libgdbm-dev libnss3-dev libssl-dev libreadline-dev\
+                                         xz-utils build-essential
 
 RUN cd /tmp && \
       curl -fsSLO https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tar.xz && \

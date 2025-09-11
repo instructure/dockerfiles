@@ -239,7 +239,7 @@ php:
 
 python:
   defaults:
-    base_image: instructure/core:bionic
+    base_image: instructure/core:jammy
   versions:
     '3.7':
       python_version: 3.7.5
@@ -251,6 +251,11 @@ python:
       python_build_version: '3.10' # Needs to be a string otherwise 0 is removed but we need it
       pip_version: 20.1
       python_pgp_key_id: A035C8C19219BA821ECEA86B64E628F8D684696D
+    '3.13':
+      python_version: 3.13.2
+      python_build_version: '3.13' # Needs to be a string otherwise 0 is removed but we need it
+      pip_version: 25.2
+      python_pgp_key_id: A821E680E5FA6305
 rover:
   defaults:
     base_image:

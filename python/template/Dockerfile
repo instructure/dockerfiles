@@ -9,7 +9,8 @@ ARG PIP_VERSION=<%= pip_version %>
 ARG PGP_KEY_ID=<%= python_pgp_key_id %>
 
 RUN apt-get update && apt-get install -y zlib1g-dev libncurses5-dev libffi-dev libsqlite3-dev\
-                                         libgdbm-dev libnss3-dev libssl-dev libreadline-dev
+                                         libgdbm-dev libnss3-dev libssl-dev libreadline-dev\
+                                         xz-utils build-essential
 
 RUN cd /tmp && \
       curl -fsSLO https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tar.xz && \

@@ -6,10 +6,10 @@ FROM instructure/core:jammy
 MAINTAINER Instructure Engineering
 USER root
 
-ARG PYTHON_VERSION=3.7.5
-ARG PYTHON_MAJOR_MINOR_VERSION=3.7
-ARG PIP_VERSION=20.1
-ARG PGP_KEY_ID=0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D
+ARG PYTHON_VERSION=3.13.2
+ARG PYTHON_MAJOR_MINOR_VERSION=3.13
+ARG PIP_VERSION=25.2
+ARG PGP_KEY_ID=A821E680E5FA6305
 
 RUN apt-get update && apt-get install -y zlib1g-dev libncurses5-dev libffi-dev libsqlite3-dev\
                                          libgdbm-dev libnss3-dev libssl-dev libreadline-dev\
