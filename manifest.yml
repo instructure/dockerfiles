@@ -204,14 +204,6 @@ node-pm2:
     base_distro: jammy
     base_image: node:20
   versions:
-    '14':
-      base_image: node:14
-      base_distro: focal
-      multiarch: true
-    '16':
-      base_image: node:16
-      base_distro: focal
-      multiarch: true
     '18':
       base_image: node:18
       base_distro: jammy
@@ -220,11 +212,19 @@ node-pm2:
       base_image: node:20
       base_distro: jammy
       multiarch: true
+    '22':
+      base_image: node:22
+      base_distro: jammy
+      multiarch: true
 node-pm2-libvips:
   versions:
     '20':
       multiarch: true
       base_image: node-pm2:20
+      libvips_version: 8.16.0
+    '22':
+      multiarch: true
+      base_image: node-pm2:22
       libvips_version: 8.16.0
 
 php:

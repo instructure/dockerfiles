@@ -3,7 +3,7 @@
 # task `rake generate:node-pm2`
 
 ARG ROOT_PATH=instructure
-FROM --platform=${TARGETPLATFORM} ${ROOT_PATH}/node:20
+FROM --platform=${TARGETPLATFORM} ${ROOT_PATH}/node:22
 MAINTAINER Instructure
 
 USER root
