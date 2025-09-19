@@ -71,15 +71,23 @@ golang:
     '1.21':
       full_version: 1.21.13
       package_sha: 502fc16d5910562461e6a6631fb6377de2322aad7304bf2bcd23500ba9dab4a7
+      package_sha_arm64: 2ca2d70dc9c84feef959eb31f2a5aac33eefd8c97fe48f1548886d737bffabd4
+      multiarch: true
     '1.22':
       full_version: 1.22.6
       package_sha: 999805bed7d9039ec3da1a53bfbcafc13e367da52aa823cb60b68ba22d44c616
+      package_sha_arm64: c15fa895341b8eaf7f219fada25c36a610eb042985dc1a912410c1c90098eaf2
+      multiarch: true
     '1.24':
       full_version: 1.24.3
       package_sha: 3333f6ea53afa971e9078895eaa4ac7204a8c6b5c68c10e6bc9a33e8e391bdd8
+      package_sha_arm64: a463cb59382bd7ae7d8f4c68846e73c4d589f223c589ac76871b66811ded7836
+      multiarch: true
     '1.23':
       full_version: 1.23.9
       package_sha: de03e45d7a076c06baaa9618d42b3b6a0561125b87f6041c6397680a71e5bb26
+      package_sha_arm64: 3dc4dd64bdb0275e3ec65a55ecfc2597009c7c46a1b256eefab2f2172a53a602
+      multiarch: true
 java:
   defaults:
     base_image: core:bionic

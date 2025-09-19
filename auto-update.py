@@ -23,20 +23,30 @@ def update_golang():
 
     for v in new_golang_versions:
         files = v['files']
-        candidates = [f for f in files if f['os']
-                      == 'linux' and f['arch'] == 'amd64']
-        if len(candidates) != 1:
-            msg = f"Expected 1 candidate, got {len(candidates)}: {candidates}"
+
+        # Find AMD64 package
+        amd64_candidates = [f for f in files if f['os'] == 'linux' and f['arch'] == 'amd64']
+        if len(amd64_candidates) != 1:
+            msg = f"Expected 1 AMD64 candidate, got {len(amd64_candidates)}: {amd64_candidates}"
             raise Exception(msg)
 
-        go_file = candidates[0]
+        # Find ARM64 package
+        arm64_candidates = [f for f in files if f['os'] == 'linux' and f['arch'] == 'arm64']
+        if len(arm64_candidates) != 1:
+            msg = f"Expected 1 ARM64 candidate, got {len(arm64_candidates)}: {arm64_candidates}"
+            raise Exception(msg)
+
+        amd64_file = amd64_candidates[0]
+        arm64_file = arm64_candidates[0]
 
         full_version = v['version'][2:]
         minor_version = full_version.rsplit('.', 1)[0]
 
         manifest['golang']['versions'][minor_version] = {
             'full_version': full_version,
-            'package_sha': go_file['sha256']
+            'package_sha': amd64_file['sha256'],
+            'package_sha_arm64': arm64_file['sha256'],
+            'multiarch': True
         }
 
     with open(manifest_file, 'w') as f:

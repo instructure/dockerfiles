@@ -5,10 +5,20 @@ MAINTAINER Instructure
 USER root
 
 ENV GOLANG_VERSION <%= full_version %>
-ENV GOLANG_DOWNLOAD_URL https://storage.googleapis.com/golang/go$GOLANG_VERSION.linux-amd64.tar.gz
-ENV GOLANG_DOWNLOAD_SHA256 <%= package_sha %>
 
-RUN curl -fsSL "$GOLANG_DOWNLOAD_URL" -o golang.tar.gz \
+RUN dpkgArch="$(dpkg --print-architecture)"; \
+  case "$dpkgArch" in \
+    amd64) \
+      export GOLANG_DOWNLOAD_URL="https://storage.googleapis.com/golang/go$GOLANG_VERSION.linux-amd64.tar.gz"; \
+      export GOLANG_DOWNLOAD_SHA256="<%= package_sha %>"; \
+      ;; \
+    arm64) \
+      export GOLANG_DOWNLOAD_URL="https://storage.googleapis.com/golang/go$GOLANG_VERSION.linux-arm64.tar.gz"; \
+      export GOLANG_DOWNLOAD_SHA256="<%= package_sha_arm64 %>"; \
+      ;; \
+    *) echo >&2 "unsupported architecture: $dpkgArch"; exit 1 ;; \
+  esac; \
+  curl -fsSL "$GOLANG_DOWNLOAD_URL" -o golang.tar.gz \
   && echo "$GOLANG_DOWNLOAD_SHA256  golang.tar.gz" | sha256sum -c - \
   && tar -C /usr/local -xzf golang.tar.gz \
   && rm golang.tar.gz
