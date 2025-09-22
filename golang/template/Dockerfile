@@ -1,13 +1,13 @@
 <%= generation_message %>
-FROM <%= base_image %>
+FROM --platform=${TARGETPLATFORM} <%= base_image %>
 MAINTAINER Instructure
 
 USER root
 
+ARG TARGETARCH
 ENV GOLANG_VERSION <%= full_version %>
 
-RUN dpkgArch="$(dpkg --print-architecture)"; \
-  case "$dpkgArch" in \
+RUN case "$TARGETARCH" in \
     amd64) \
       export GOLANG_DOWNLOAD_URL="https://storage.googleapis.com/golang/go$GOLANG_VERSION.linux-amd64.tar.gz"; \
       export GOLANG_DOWNLOAD_SHA256="<%= package_sha %>"; \
@@ -16,7 +16,7 @@ RUN dpkgArch="$(dpkg --print-architecture)"; \
       export GOLANG_DOWNLOAD_URL="https://storage.googleapis.com/golang/go$GOLANG_VERSION.linux-arm64.tar.gz"; \
       export GOLANG_DOWNLOAD_SHA256="<%= package_sha_arm64 %>"; \
       ;; \
-    *) echo >&2 "unsupported architecture: $dpkgArch"; exit 1 ;; \
+    *) echo >&2 "unsupported architecture: $TARGETARCH"; exit 1 ;; \
   esac; \
   curl -fsSL "$GOLANG_DOWNLOAD_URL" -o golang.tar.gz \
   && echo "$GOLANG_DOWNLOAD_SHA256  golang.tar.gz" | sha256sum -c - \
