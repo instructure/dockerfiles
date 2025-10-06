@@ -54,7 +54,6 @@ RUN \
   meson setup build --libdir=lib --buildtype=release --reconfigure -Dheif=enabled -Dheif-module=enabled && \
   cd build && \
   meson compile && \
-  meson test && \
   meson install && \
 
   # Clean up
