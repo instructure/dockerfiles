@@ -5,6 +5,7 @@
 ARG ROOT_PATH=instructure
 FROM --platform=${TARGETPLATFORM} ${ROOT_PATH}/core:focal
 MAINTAINER Instructure
+ENV CACHE_BUST 2025-10-06
 
 ENV RUBY_MAJOR 3.1
 
