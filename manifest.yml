@@ -309,7 +309,9 @@ ruby:
       base_distro: jammy
       base_image: core:jammy
       multiarch: true
+      cache_bust: '2025-10-15'
     '3.2':
+      cache_bust: '2025-10-15'
     '3.3-jammy':
       base_distro: jammy
       base_image: core:jammy
