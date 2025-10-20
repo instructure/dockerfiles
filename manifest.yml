@@ -324,8 +324,10 @@ ruby:
       base_distro: jammy
       base_image: core:jammy
       bundler_version: 2.6.3
+      cache_bust: '2025-10-20'
     '3.4':
       bundler_version: 2.6.3
+      cache_bust: '2025-10-20'
 
 ruby-passenger:
   defaults:
