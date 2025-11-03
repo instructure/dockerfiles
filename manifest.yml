@@ -316,10 +316,10 @@ ruby:
       base_distro: jammy
       base_image: core:jammy
       bundler_version: 2.5.3
-      cache_bust: '2025-10-16'
+      cache_bust: '2025-11-03'
     '3.3':
       bundler_version: 2.5.3
-      cache_bust: '2025-10-16'
+      cache_bust: '2025-11-03'
     '3.4-jammy':
       base_distro: jammy
       base_image: core:jammy
