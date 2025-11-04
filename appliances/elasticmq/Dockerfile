@@ -1,4 +1,4 @@
-FROM --platform=${TARGETPLATFORM} openjdk:11-jre
+FROM --platform=${TARGETPLATFORM} openjdk:11.0.16-jre
 
 #RUN apk add --no-cache curl
 RUN curl -sSLO https://s3-eu-west-1.amazonaws.com/softwaremill-public/elasticmq-server-1.5.7.jar
