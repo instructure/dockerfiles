@@ -47,7 +47,8 @@ http {
           '"request_id": "$request_id", '
           '"request_time": "$request_time", '
           '"status": "$status", '
-          '"time_local": "$time_local" '
+          '"time_local": "$time_local", '
+          '"severity": "INFO" '
           '}';
         access_log /var/log/nginx/access.log combined_json;
     <% else %>
