@@ -136,16 +136,6 @@ java:
       java_version: 17
       flavor: jre
       multiarch: true
-    '19':
-      base_image: core:jammy
-      java_version: 19
-      flavor: jdk
-      multiarch: true
-    '19-jre':
-      base_image: core:jammy
-      java_version: 19
-      flavor: jre
-      multiarch: true
 
 # We are no longer accepting new minor version tags for Node images, simply
 # update the corresponding major version tag (4, 6, 8) to the latest minor.
