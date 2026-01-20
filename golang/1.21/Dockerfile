@@ -12,11 +12,11 @@ ENV GOLANG_VERSION 1.21.13
 
 RUN case "$TARGETARCH" in \
     amd64) \
-      export GOLANG_DOWNLOAD_URL="https://storage.googleapis.com/golang/go$GOLANG_VERSION.linux-amd64.tar.gz"; \
+      export GOLANG_DOWNLOAD_URL="https://go.dev/dl/go$GOLANG_VERSION.linux-amd64.tar.gz"; \
       export GOLANG_DOWNLOAD_SHA256="502fc16d5910562461e6a6631fb6377de2322aad7304bf2bcd23500ba9dab4a7"; \
       ;; \
     arm64) \
-      export GOLANG_DOWNLOAD_URL="https://storage.googleapis.com/golang/go$GOLANG_VERSION.linux-arm64.tar.gz"; \
+      export GOLANG_DOWNLOAD_URL="https://go.dev/dl/go$GOLANG_VERSION.linux-arm64.tar.gz"; \
       export GOLANG_DOWNLOAD_SHA256="2ca2d70dc9c84feef959eb31f2a5aac33eefd8c97fe48f1548886d737bffabd4"; \
       ;; \
     *) echo >&2 "unsupported architecture: $TARGETARCH"; exit 1 ;; \

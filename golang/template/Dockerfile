@@ -9,11 +9,11 @@ ENV GOLANG_VERSION <%= full_version %>
 
 RUN case "$TARGETARCH" in \
     amd64) \
-      export GOLANG_DOWNLOAD_URL="https://storage.googleapis.com/golang/go$GOLANG_VERSION.linux-amd64.tar.gz"; \
+      export GOLANG_DOWNLOAD_URL="https://go.dev/dl/go$GOLANG_VERSION.linux-amd64.tar.gz"; \
       export GOLANG_DOWNLOAD_SHA256="<%= package_sha %>"; \
       ;; \
     arm64) \
-      export GOLANG_DOWNLOAD_URL="https://storage.googleapis.com/golang/go$GOLANG_VERSION.linux-arm64.tar.gz"; \
+      export GOLANG_DOWNLOAD_URL="https://go.dev/dl/go$GOLANG_VERSION.linux-arm64.tar.gz"; \
       export GOLANG_DOWNLOAD_SHA256="<%= package_sha_arm64 %>"; \
       ;; \
     *) echo >&2 "unsupported architecture: $TARGETARCH"; exit 1 ;; \
