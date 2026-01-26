@@ -146,12 +146,6 @@ node:
     npm_version: latest
     yarn_version: latest
   versions:
-    '14':  # Supported until 04/30/2023
-      node_version: '14'
-      npm_version: '9.8.1'
-      base_distro: focal
-      base_image: core:focal
-      multiarch: true
     '16':  # Supported until 04/30/2024
       node_version: '16'
       npm_version: '9.8.1'
@@ -177,10 +171,6 @@ node:
 
 node-passenger:
   versions:
-    '14':
-      base_distro: focal
-      base_image: node:14
-      multiarch: true
     '16':
       base_distro: focal
       base_image: node:16

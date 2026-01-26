@@ -18,6 +18,13 @@ packages that use native extensions will need to install more apt packages,
 such as `node-gyp`. If your app doesn't need any native extensions, you are
 ready to rock!
 
+## Yarn Installation
+
+Yarn is included in all Node images and is installed via `npm install -g yarn`.
+
+This approach avoids dependency on external apt repositories and GPG signing keys
+that can expire, and is more reliable than Corepack which depends on `repo.yarnpkg.com`.
+
 ## Private NPM Repository
 
 All Node images include a convenient wrapper for installing NPM packages from

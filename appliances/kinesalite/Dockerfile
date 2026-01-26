@@ -1,4 +1,4 @@
-FROM --platform=${TARGETPLATFORM} instructure/node:14
+FROM --platform=${TARGETPLATFORM} instructure/node:16
 MAINTAINER Instructure
 
 ENV DATADIR /var/lib/kinesalite

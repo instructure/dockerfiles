@@ -8,18 +8,6 @@ LABEL maintainer="Instructure"
 
 USER root
 
-ENV YARN_VERSION latest
-
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
-  && echo "" \
-  && echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list \
-  && apt-get update \
-  && apt-get install -y --no-install-recommends yarn \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
-
-COPY yarn-private /usr/local/bin
-
 ENV NODE_VERSION 22
 ENV NPM_VERSION latest
 
@@ -41,5 +29,14 @@ RUN apt-get update && \
 
 COPY npm-private /usr/local/bin
 
+
+ENV YARN_VERSION latest
+
+# Install Yarn via npm (more reliable than Corepack which depends on repo.yarnpkg.com)
+RUN npm install -g yarn \
+  && rm -rf /root/.npm/_cacache \
+  && npm cache clean --force
+
+COPY yarn-private /usr/local/bin
 
 USER docker
