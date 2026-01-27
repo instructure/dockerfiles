@@ -268,23 +268,6 @@ ruby:
     rubygems_version: 3.2.6
     multiarch: true
   versions:
-    '2.7-jammy':
-      base_distro: jammy
-      base_image: core:jammy
-      multiarch: true
-    '2.7':
-    '3.0-jammy':
-      base_distro: jammy
-      base_image: core:jammy
-      multiarch: true
-    '3.0':
-    '3.1-jammy':
-      base_distro: jammy
-      base_image: core:jammy
-      multiarch: true
-      cache_bust: '2025-10-06'
-    '3.1':
-      cache_bust: '2025-10-06'
     '3.2-jammy':
       base_distro: jammy
       base_image: core:jammy
@@ -314,15 +297,6 @@ ruby-passenger:
     base_distro: focal
     multiarch: true
   versions:
-    '2.7':
-      base_image: ruby:2.7
-    '3.0':
-      base_image: ruby:3.0
-    '3.1-jammy':
-      base_image: ruby:3.1-jammy
-      base_distro: jammy
-    '3.1':
-      base_image: ruby:3.1
     '3.2-jammy':
       base_image: ruby:3.2-jammy
       base_distro: jammy

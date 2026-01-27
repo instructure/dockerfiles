@@ -1,5 +1,5 @@
 ARG ROOT_PATH=instructure
-FROM --platform=${TARGETPLATFORM} ${ROOT_PATH}/ruby:2.7
+FROM --platform=${TARGETPLATFORM} ${ROOT_PATH}/ruby:3.2
 MAINTAINER Instructure
 
 USER root
