@@ -22,7 +22,6 @@ appliances/libreoffice:
       full_version: '6.3.1.2'
     '24.8':
       full_version: '24.8.5.2'
-
 appliances/opensearch:
   versions:
     '1.3.2':
@@ -33,6 +32,7 @@ appliances/debugging:
   versions:
     bionic: {}
     focal: {}
+    noble: {}
 
 core:
   defaults:
@@ -78,15 +78,15 @@ golang:
       package_sha: 999805bed7d9039ec3da1a53bfbcafc13e367da52aa823cb60b68ba22d44c616
       package_sha_arm64: c15fa895341b8eaf7f219fada25c36a610eb042985dc1a912410c1c90098eaf2
       multiarch: true
-    '1.24':
-      full_version: 1.24.3
-      package_sha: 3333f6ea53afa971e9078895eaa4ac7204a8c6b5c68c10e6bc9a33e8e391bdd8
-      package_sha_arm64: a463cb59382bd7ae7d8f4c68846e73c4d589f223c589ac76871b66811ded7836
-      multiarch: true
     '1.23':
       full_version: 1.23.9
       package_sha: de03e45d7a076c06baaa9618d42b3b6a0561125b87f6041c6397680a71e5bb26
       package_sha_arm64: 3dc4dd64bdb0275e3ec65a55ecfc2597009c7c46a1b256eefab2f2172a53a602
+      multiarch: true
+    '1.24':
+      full_version: 1.24.3
+      package_sha: 3333f6ea53afa971e9078895eaa4ac7204a8c6b5c68c10e6bc9a33e8e391bdd8
+      package_sha_arm64: a463cb59382bd7ae7d8f4c68846e73c4d589f223c589ac76871b66811ded7836
       multiarch: true
 java:
   defaults:
@@ -133,6 +133,16 @@ java:
       multiarch: true
     '17-jre-focal':
       base_image: core:focal
+      java_version: 17
+      flavor: jre
+      multiarch: true
+    '17-noble':
+      base_image: core:noble
+      java_version: 17
+      flavor: jdk
+      multiarch: true
+    '17-jre-noble':
+      base_image: core:noble
       java_version: 17
       flavor: jre
       multiarch: true
@@ -275,6 +285,10 @@ ruby:
       cache_bust: '2025-10-15'
     '3.2':
       cache_bust: '2025-10-15'
+    '3.2-noble':
+      base_distro: noble
+      base_image: core:noble
+      multiarch: true
     '3.3-jammy':
       base_distro: jammy
       base_image: core:jammy
@@ -283,6 +297,10 @@ ruby:
     '3.3':
       bundler_version: 2.5.3
       cache_bust: '2025-11-03'
+    '3.3-noble':
+      base_distro: noble
+      base_image: core:noble
+      bundler_version: 2.5.3
     '3.4-jammy':
       base_distro: jammy
       base_image: core:jammy
@@ -291,6 +309,10 @@ ruby:
     '3.4':
       bundler_version: 2.6.3
       cache_bust: '2026-01-12'
+    '3.4-noble':
+      base_distro: noble
+      base_image: core:noble
+      bundler_version: 2.6.3
 
 ruby-passenger:
   defaults:
