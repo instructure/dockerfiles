@@ -324,16 +324,25 @@ ruby-passenger:
       base_distro: jammy
     '3.2':
       base_image: ruby:3.2
+    '3.2-noble':
+      base_image: ruby:3.2-noble
+      base_distro: noble
     '3.3-jammy':
       base_image: ruby:3.3-jammy
       base_distro: jammy
     '3.3':
       base_image: ruby:3.3
+    '3.3-noble':
+      base_image: ruby:3.3-noble
+      base_distro: noble
     '3.4-jammy':
       base_image: ruby:3.4-jammy
       base_distro: jammy
     '3.4':
       base_image: ruby:3.4
+    '3.4-noble':
+      base_image: ruby:3.4-noble
+      base_distro: noble
 
 scala-sbt:
   defaults:
