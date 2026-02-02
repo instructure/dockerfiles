@@ -5,7 +5,7 @@ MAINTAINER Instructure
 USER root
 
 # Install Nginx with Passenger from official repository
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CAC40B2F7 \
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CAC40B2F7 D870AB033FB45BD1 \
     && apt-get install -y apt-transport-https ca-certificates \
     && echo deb https://oss-binaries.phusionpassenger.com/apt/passenger <%= base_distro %> main > /etc/apt/sources.list.d/passenger.list
 
