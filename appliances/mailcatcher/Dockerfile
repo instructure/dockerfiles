@@ -7,7 +7,7 @@ RUN apt-get update \
   && apt-get install -y g++
 
 USER docker
-RUN gem install mailcatcher -v 0.8.0
+RUN gem install mailcatcher -v 0.10.0
 
 EXPOSE 1025 8080
 
