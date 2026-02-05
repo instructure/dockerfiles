@@ -391,25 +391,9 @@ corretto:
   defaults:
     base_image: core:jammy
   versions:
-    '17':
-      base_image: core:jammy
-      java_version: 17
-      multiarch: true
-    '20':
-      base_image: core:jammy
-      java_version: 20
-      multiarch: true
     '21':
       base_image: core:jammy
       java_version: 21
-      multiarch: true
-    '22':
-      base_image: core:jammy
-      java_version: 22
-      multiarch: true
-    '24':
-      base_image: core:jammy
-      java_version: 24
       multiarch: true
     '25':
       base_image: core:jammy
