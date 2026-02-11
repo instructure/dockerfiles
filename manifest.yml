@@ -179,6 +179,24 @@ node:
       base_image: core:jammy
       multiarch: true
 
+node-oreo:
+  defaults:
+    base_distro: noble
+    base_image: core:noble
+    npm_version: latest
+    yarn_version: latest
+  versions:
+    '20':  # Supported until 04/30/2026
+      node_version: '20'
+      base_distro: noble
+      base_image: core:noble
+      multiarch: true
+    '22': # Supported until 04/30/2027
+      node_version: '22'
+      base_distro: noble
+      base_image: core:noble
+      multiarch: true
+
 node-passenger:
   versions:
     '16':
