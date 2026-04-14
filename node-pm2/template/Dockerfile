@@ -5,11 +5,9 @@ MAINTAINER Instructure
 USER root
 
 # Install Nginx
-RUN  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CAC40B2F7 \
-  && apt-get install -y apt-transport-https ca-certificates \
-  && apt-get update \
+RUN  apt-get update \
   && apt-get install -y --no-install-recommends \
-  nginx-extras=1.18.0-6ubuntu14.7 <% unless base_distro == "xenial" %>libnginx-mod-http-headers-more-filter<% end %> \
+  nginx <% unless base_distro == "xenial" %>libnginx-mod-http-headers-more-filter<% end %> \
   ruby \
   sudo \
   supervisor \
