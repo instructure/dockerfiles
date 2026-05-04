@@ -5,9 +5,9 @@ LABEL org.opencontainers.image.authors="Instructure"
 USER root
 
 # Install Nginx with Passenger from official repository
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D870AB033FB45BD1 \
-    && apt-get install -y apt-transport-https ca-certificates \
-    && echo deb https://oss-binaries.phusionpassenger.com/apt/passenger <%= base_distro %> main > /etc/apt/sources.list.d/passenger.list
+RUN curl https://oss-binaries.phusionpassenger.com/auto-software-signing-gpg-key.txt | gpg --dearmor -o /etc/apt/trusted.gpg.d/phusion.gpg \
+  && curl https://oss-binaries.phusionpassenger.com/auto-software-signing-gpg-key-2025.txt | gpg --dearmor -o /etc/apt/trusted.gpg.d/phusion-2025.gpg \
+  && echo deb https://oss-binaries.phusionpassenger.com/apt/passenger <%= base_distro %> main > /etc/apt/sources.list.d/passenger.list
 
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \

@@ -3,7 +3,7 @@
 # task `rake generate:ruby-passenger`
 
 ARG ROOT_PATH=instructure
-FROM --platform=${TARGETPLATFORM} ${ROOT_PATH}/ruby:3.2-noble
+FROM --platform=${TARGETPLATFORM} ${ROOT_PATH}/ruby:3.4-resolute
 LABEL org.opencontainers.image.authors="Instructure"
 
 USER root
@@ -11,7 +11,7 @@ USER root
 # Install Nginx with Passenger from official repository
 RUN curl https://oss-binaries.phusionpassenger.com/auto-software-signing-gpg-key.txt | gpg --dearmor -o /etc/apt/trusted.gpg.d/phusion.gpg \
   && curl https://oss-binaries.phusionpassenger.com/auto-software-signing-gpg-key-2025.txt | gpg --dearmor -o /etc/apt/trusted.gpg.d/phusion-2025.gpg \
-  && echo deb https://oss-binaries.phusionpassenger.com/apt/passenger noble main > /etc/apt/sources.list.d/passenger.list
+  && echo deb https://oss-binaries.phusionpassenger.com/apt/passenger resolute main > /etc/apt/sources.list.d/passenger.list
 
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \

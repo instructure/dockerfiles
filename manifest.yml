@@ -401,6 +401,9 @@ ruby-passenger:
     '3.4-noble':
       base_image: ruby:3.4-noble
       base_distro: noble
+    '3.4-resolute':
+      base_image: ruby:3.4-resolute
+      base_distro: resolute
 
 scala-sbt:
   defaults:
