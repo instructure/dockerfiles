@@ -360,6 +360,10 @@ ruby:
       base_distro: noble
       base_image: core:noble
       bundler_version: 2.6.3
+    '3.4-resolute':
+      base_distro: resolute
+      base_image: core:resolute
+      bundler_version: 2.6.3
 
 ruby-passenger:
   defaults:
