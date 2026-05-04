@@ -62,6 +62,11 @@ core:
         name: ubuntu:noble
         source: dockerhub
       multiarch: true
+    resolute:
+      base_image:
+        name: ubuntu:resolute
+        source: dockerhub
+      multiarch: true
 
 # Packages from https://go.dev/dl/ go<ver>.linux-amd64.tar.gz
 golang:
