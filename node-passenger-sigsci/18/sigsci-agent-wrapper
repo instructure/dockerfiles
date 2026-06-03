@@ -1,0 +1,9 @@
+#!/bin/bash
+set -e
+
+if [ -z "${SIGSCI_ACCESSKEYID}" ] || [ -z "${SIGSCI_SECRETACCESSKEY}" ]; then
+  echo "sigsci-agent: SIGSCI_ACCESSKEYID/SIGSCI_SECRETACCESSKEY not set; WAF disabled. (Set SIGSCI_REQUIRED=1 to enforce keys at boot.)" >&2
+  exec sleep infinity
+fi
+
+exec /usr/sbin/sigsci-agent

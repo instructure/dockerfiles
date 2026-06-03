@@ -1,0 +1,3 @@
+<% if !ENV['SIGSCI_ACCESSKEYID'].to_s.empty? -%>
+load_module /usr/lib/nginx/modules/ngx_http_fastly_module.so;
+<% end -%>

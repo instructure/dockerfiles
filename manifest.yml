@@ -232,6 +232,20 @@ node-passenger:
       base_distro: jammy
       base_image: node:22
       multiarch: true
+node-passenger-sigsci:
+  versions:
+    '18':
+      base_distro: jammy
+      base_image: node-passenger:18
+      multiarch: true
+    '20':
+      base_distro: jammy
+      base_image: node-passenger:20
+      multiarch: true
+    '22':
+      base_distro: jammy
+      base_image: node-passenger:22
+      multiarch: true
 node-pm2:
   defaults:
     base_distro: jammy
@@ -404,6 +418,34 @@ ruby-passenger:
     '3.4-resolute':
       base_image: ruby:3.4-resolute
       base_distro: resolute
+
+ruby-passenger-sigsci:
+  defaults:
+    multiarch: true
+  versions:
+    '3.1-jammy':
+      base_image: ruby-passenger:3.1-jammy
+      base_distro: jammy
+    '3.2-jammy':
+      base_image: ruby-passenger:3.2-jammy
+      base_distro: jammy
+    '3.2-noble':
+      base_image: ruby-passenger:3.2-noble
+      base_distro: noble
+    '3.3-jammy':
+      base_image: ruby-passenger:3.3-jammy
+      base_distro: jammy
+    '3.3-noble':
+      base_image: ruby-passenger:3.3-noble
+      base_distro: noble
+    '3.4-jammy':
+      base_image: ruby-passenger:3.4-jammy
+      base_distro: jammy
+    '3.4-noble':
+      base_image: ruby-passenger:3.4-noble
+      base_distro: noble
+    # focal (3.x) and resolute omitted: Fastly's focal module pins an older nginx
+    # revision than Ubuntu ships, and there's no module for 26.04 yet.
 
 scala-sbt:
   defaults:
