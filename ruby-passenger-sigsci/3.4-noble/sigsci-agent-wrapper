@@ -6,4 +6,5 @@ if [ -z "${SIGSCI_ACCESSKEYID}" ] || [ -z "${SIGSCI_SECRETACCESSKEY}" ]; then
   exec sleep infinity
 fi
 
+export SIGSCI_SERVER_HOSTNAME="${SIGSCI_SERVER_HOSTNAME:-${CG_APP_NAME:-unknown}-${CG_INSTANCE_POOL_NAME:-na}-${CG_ENVIRONMENT_FILENAME:-na}-$(hostname)}"
 exec /usr/sbin/sigsci-agent
