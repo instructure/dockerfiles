@@ -56,6 +56,9 @@ RUN \
   meson compile && \
   meson install && \
 
+  # Refresh the dynamic linker cache so libvips in /usr/local/lib is discoverable
+  ldconfig && \
+
   # Clean up
   # having yarn install sharp requires at least one of these
   #apt-get remove -y curl automake build-essential && \

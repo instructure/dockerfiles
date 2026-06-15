@@ -277,6 +277,10 @@ node-pm2-libvips:
       multiarch: true
       base_image: node-pm2:22
       libvips_version: 8.16.0
+    '24':
+      multiarch: true
+      base_image: node-pm2:24
+      libvips_version: 8.16.0
 
 php:
   defaults:

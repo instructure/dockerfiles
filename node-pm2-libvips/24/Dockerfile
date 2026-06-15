@@ -1,5 +1,9 @@
-<%= generation_message %>
-<%= from_image(base_image) %>
+# GENERATED FILE, DO NOT MODIFY!
+# To update this file please edit the relevant template and run the generation
+# task `rake generate:node-pm2-libvips`
+
+ARG ROOT_PATH=instructure
+FROM --platform=${TARGETPLATFORM} ${ROOT_PATH}/node-pm2:24
 MAINTAINER Instructure
 
 USER root
@@ -44,9 +48,9 @@ RUN \
 # Build libvips
 WORKDIR /tmp
 RUN \
-  curl -L -O https://github.com/libvips/libvips/releases/download/v<%= libvips_version %>/vips-<%= libvips_version %>.tar.xz && \
-  tar vxJf vips-<%= libvips_version %>.tar.xz && \
-  cd vips-<%= libvips_version %> && \
+  curl -L -O https://github.com/libvips/libvips/releases/download/v8.16.0/vips-8.16.0.tar.xz && \
+  tar vxJf vips-8.16.0.tar.xz && \
+  cd vips-8.16.0 && \
   meson setup build --libdir=lib --buildtype=release --reconfigure -Dheif=enabled -Dheif-module=enabled && \
   cd build && \
   meson compile && \
