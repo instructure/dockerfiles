@@ -263,6 +263,10 @@ node-pm2:
       base_image: node:22
       base_distro: jammy
       multiarch: true
+    '24':
+      base_image: node:24
+      base_distro: jammy
+      multiarch: true
 node-pm2-libvips:
   versions:
     '20':
