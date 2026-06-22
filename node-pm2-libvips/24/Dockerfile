@@ -48,9 +48,9 @@ RUN \
 # Build libvips
 WORKDIR /tmp
 RUN \
-  curl -L -O https://github.com/libvips/libvips/releases/download/v8.16.0/vips-8.16.0.tar.xz && \
-  tar vxJf vips-8.16.0.tar.xz && \
-  cd vips-8.16.0 && \
+  curl -L -O https://github.com/libvips/libvips/releases/download/v8.18.3/vips-8.18.3.tar.xz && \
+  tar vxJf vips-8.18.3.tar.xz && \
+  cd vips-8.18.3 && \
   meson setup build --libdir=lib --buildtype=release --reconfigure -Dheif=enabled -Dheif-module=enabled && \
   cd build && \
   meson compile && \
