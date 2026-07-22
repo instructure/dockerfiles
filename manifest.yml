@@ -22,6 +22,8 @@ appliances/libreoffice:
       full_version: '6.3.1.2'
     '24.8':
       full_version: '24.8.5.2'
+    '26.2':
+      full_version: '26.2.4.1'
 appliances/opensearch:
   versions:
     '1.3.2':
