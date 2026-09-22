@@ -6,7 +6,7 @@ ENV NGINX_STOPWAITSECS=10
 
 USER root
 
-RUN curl -fsSL https://apt.security.fastly.com/release/gpgkey \
+RUN curl -fsSL https://apt.security.fastly.com/release/fastly.apt.asc \
   | gpg --dearmor -o /usr/share/keyrings/sigsci.gpg \
   && echo "deb [signed-by=/usr/share/keyrings/sigsci.gpg] https://apt.security.fastly.com/release/ubuntu/ <%= base_distro %> main" \
   > /etc/apt/sources.list.d/sigsci.list

@@ -177,6 +177,7 @@ node:
       multiarch: true
     '20':  # Supported until 04/30/2026
       node_version: '20'
+      npm_version: '10.9.2'
       base_distro: jammy
       base_image: core:jammy
       multiarch: true

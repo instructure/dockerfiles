@@ -9,7 +9,7 @@ LABEL maintainer="Instructure"
 USER root
 
 ENV NODE_VERSION 20
-ENV NPM_VERSION latest
+ENV NPM_VERSION 10.9.2
 
 RUN mkdir -p /usr/src/app && chown docker:docker /usr/src/app
 WORKDIR /usr/src/app
