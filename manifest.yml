@@ -441,6 +441,15 @@ ruby-passenger:
     '3.4-resolute':
       base_image: ruby:3.4-resolute
       base_distro: resolute
+    '4.0-jammy':
+      base_image: ruby:4.0-jammy
+      base_distro: jammy
+    '4.0-noble':
+      base_image: ruby:4.0-noble
+      base_distro: noble
+    '4.0-resolute':
+      base_image: ruby:4.0-resolute
+      base_distro: resolute
 
 ruby-passenger-sigsci:
   defaults:
@@ -466,6 +475,12 @@ ruby-passenger-sigsci:
       base_distro: jammy
     '3.4-noble':
       base_image: ruby-passenger:3.4-noble
+      base_distro: noble
+    '4.0-jammy':
+      base_image: ruby-passenger:4.0-jammy
+      base_distro: jammy
+    '4.0-noble':
+      base_image: ruby-passenger:4.0-noble
       base_distro: noble
     # focal (3.x) and resolute omitted: Fastly's focal module pins an older nginx
     # revision than Ubuntu ships, and there's no module for 26.04 yet.

@@ -1,0 +1,10 @@
+#!/bin/bash
+set -e
+
+if [ -z "${SIGSCI_ACCESSKEYID}" ] || [ -z "${SIGSCI_SECRETACCESSKEY}" ]; then
+  echo "sigsci-agent: SIGSCI_ACCESSKEYID/SIGSCI_SECRETACCESSKEY not set; WAF disabled. (Set SIGSCI_REQUIRED=1 to enforce keys at boot.)" >&2
+  exec sleep infinity
+fi
+
+export SIGSCI_SERVER_HOSTNAME="${SIGSCI_SERVER_HOSTNAME:-${CG_APP_NAME:-unknown}-${CG_INSTANCE_POOL_NAME:-na}-${CG_ENVIRONMENT_FILENAME:-na}-$(hostname)}"
+exec /usr/sbin/sigsci-agent

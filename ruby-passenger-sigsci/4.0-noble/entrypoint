@@ -1,0 +1,22 @@
+#!/bin/bash
+set -e
+
+if [ "${SIGSCI_REQUIRED:-0}" = "1" ]; then
+  if [ -z "${SIGSCI_ACCESSKEYID}" ] || [ -z "${SIGSCI_SECRETACCESSKEY}" ]; then
+    >&2 echo "FATAL: SIGSCI_REQUIRED=1 but SIGSCI_ACCESSKEYID/SIGSCI_SECRETACCESSKEY are not set."
+    exit 1
+  fi
+fi
+
+for file in /usr/src/nginx/{,**/}*.erb; do
+  if [ -f "$file" ]; then
+    if [ ! -e "${file%.*}" ]; then
+      erb -T- "$file" > "${file%.*}"
+      echo "${file%.*}: generated." >&2
+    else
+      >&2 echo "${file%.*}: SKIPPED! refusing to overwrite existing file."
+    fi
+  fi
+done
+
+exec supervisord -c /usr/src/supervisord/supervisord.conf

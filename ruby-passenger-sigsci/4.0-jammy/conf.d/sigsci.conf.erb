@@ -1,0 +1,5 @@
+<% if !ENV['SIGSCI_ACCESSKEYID'].to_s.empty? -%>
+sigsci_agent_host <%= ENV.fetch('SIGSCI_RPC_ADDRESS', 'unix:/var/run/sigsci.sock') %>;
+sigsci_agent_timeout <%= ENV.fetch('SIGSCI_AGENT_TIMEOUT', '100') %>;
+sigsci_enabled on;
+<% end -%>
