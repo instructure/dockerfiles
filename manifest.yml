@@ -389,6 +389,18 @@ ruby:
       base_distro: resolute
       base_image: core:resolute
       bundler_version: 2.6.3
+    '4.0-jammy':
+      base_distro: jammy
+      base_image: core:jammy
+      bundler_version: 4.0.20
+    '4.0-noble':
+      base_distro: noble
+      base_image: core:noble
+      bundler_version: 4.0.20
+    '4.0-resolute':
+      base_distro: resolute
+      base_image: core:resolute
+      bundler_version: 4.0.20
 
 ruby-passenger:
   defaults:
