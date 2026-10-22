@@ -187,12 +187,14 @@ node:
       base_distro: jammy
       base_image: core:jammy
       multiarch: true
+      cache_bust: '2026-10-22'
     '24': # Supported until 04/30/2028
       node_version: '24'
       npm_version: '11.11.0'
       base_distro: jammy
       base_image: core:jammy
       multiarch: true
+      cache_bust: '2026-10-22'
 
 node-oreo:
   defaults:
@@ -211,11 +213,13 @@ node-oreo:
       base_distro: noble
       base_image: core:noble
       multiarch: true
+      cache_bust: '2026-10-22'
     '24': # Supported until 04/30/2028
       node_version: '24'
       base_distro: noble
       base_image: core:noble
       multiarch: true
+      cache_bust: '2026-10-22'
 
 node-passenger:
   versions:

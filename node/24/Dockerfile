@@ -8,6 +8,8 @@ LABEL maintainer="Instructure"
 
 USER root
 
+ENV CACHE_BUST 2026-10-22
+
 ENV NODE_VERSION 24
 ENV NPM_VERSION 11.11.0
 

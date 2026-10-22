@@ -3,6 +3,10 @@
 LABEL maintainer="Instructure"
 
 USER root
+<% if cache_bust -%>
+
+ENV CACHE_BUST <%= cache_bust %>
+<% end -%>
 
 # Install Node.js from NodeSource, jq, and enable corepack for pnpm
 RUN mkdir -p /etc/apt/keyrings && \

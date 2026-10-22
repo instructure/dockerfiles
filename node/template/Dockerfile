@@ -3,6 +3,10 @@
 LABEL maintainer="Instructure"
 
 USER root
+<% if cache_bust -%>
+
+ENV CACHE_BUST <%= cache_bust %>
+<% end -%>
 
 <%= Template.render_into_dockerfile("templates/node_install.Dockerfile", node_version: node_version, npm_version: npm_version, base_distro: base_distro) %>
 

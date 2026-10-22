@@ -8,6 +8,8 @@ LABEL maintainer="Instructure"
 
 USER root
 
+ENV CACHE_BUST 2026-10-22
+
 # Install Node.js from NodeSource, jq, and enable corepack for pnpm
 RUN mkdir -p /etc/apt/keyrings && \
   curl -fsSL --retry 5 --retry-all-errors https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key -o /etc/apt/keyrings/nodesource.asc && \
