@@ -287,7 +287,7 @@ node-pm2-libvips:
     '24':
       multiarch: true
       base_image: node-pm2:24
-      libvips_version: 8.18.3
+      libvips_version: 8.18.7
 
 php:
   defaults:
