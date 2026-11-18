@@ -16,6 +16,7 @@ RUN wget -O- https://apt.corretto.aws/corretto.key | gpg --dearmor -o /usr/share
 RUN wget -O- https://apt.corretto.aws/corretto.key | apt-key add - && \
     add-apt-repository 'deb https://apt.corretto.aws stable main'
 <% end -%>
+ADD https://apt.corretto.aws/dists/stable/InRelease /tmp/corretto-InRelease
 RUN apt-get update && \
     apt-get install -y --no-install-recommends java-<%= java_version %>-amazon-corretto-jdk && \
     apt-get clean && \
