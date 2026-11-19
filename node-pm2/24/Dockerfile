@@ -9,6 +9,8 @@ MAINTAINER Instructure
 USER root
 
 # Install Nginx
+ADD http://security.ubuntu.com/ubuntu/dists/jammy-security/InRelease /tmp/ubuntu-security-InRelease
+ADD http://ports.ubuntu.com/ubuntu-ports/dists/jammy-security/InRelease /tmp/ubuntu-ports-security-InRelease
 RUN  apt-get update \
   && apt-get install -y --no-install-recommends \
   nginx libnginx-mod-http-headers-more-filter \

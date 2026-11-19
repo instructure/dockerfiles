@@ -9,6 +9,8 @@ RUN curl https://oss-binaries.phusionpassenger.com/auto-software-signing-gpg-key
   && curl https://oss-binaries.phusionpassenger.com/auto-software-signing-gpg-key-2025.txt | gpg --dearmor -o /etc/apt/trusted.gpg.d/phusion-2025.gpg \
   && echo deb https://oss-binaries.phusionpassenger.com/apt/passenger <%= base_distro %> main > /etc/apt/sources.list.d/passenger.list
 
+ADD http://security.ubuntu.com/ubuntu/dists/<%= base_distro %>-security/InRelease /tmp/ubuntu-security-InRelease
+ADD http://ports.ubuntu.com/ubuntu-ports/dists/<%= base_distro %>-security/InRelease /tmp/ubuntu-ports-security-InRelease
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
     nginx-extras \

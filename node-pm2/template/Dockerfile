@@ -5,6 +5,8 @@ MAINTAINER Instructure
 USER root
 
 # Install Nginx
+ADD http://security.ubuntu.com/ubuntu/dists/<%= base_distro %>-security/InRelease /tmp/ubuntu-security-InRelease
+ADD http://ports.ubuntu.com/ubuntu-ports/dists/<%= base_distro %>-security/InRelease /tmp/ubuntu-ports-security-InRelease
 RUN  apt-get update \
   && apt-get install -y --no-install-recommends \
   nginx <% unless base_distro == "xenial" %>libnginx-mod-http-headers-more-filter<% end %> \

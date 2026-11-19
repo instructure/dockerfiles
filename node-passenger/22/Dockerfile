@@ -13,6 +13,8 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D870AB033F
     && apt-get install -y apt-transport-https ca-certificates \
     && echo deb https://oss-binaries.phusionpassenger.com/apt/passenger jammy main > /etc/apt/sources.list.d/passenger.list
 
+ADD http://security.ubuntu.com/ubuntu/dists/jammy-security/InRelease /tmp/ubuntu-security-InRelease
+ADD http://ports.ubuntu.com/ubuntu-ports/dists/jammy-security/InRelease /tmp/ubuntu-ports-security-InRelease
 RUN  apt-get update \
   && apt-get install -y --no-install-recommends \
     nginx-extras \
